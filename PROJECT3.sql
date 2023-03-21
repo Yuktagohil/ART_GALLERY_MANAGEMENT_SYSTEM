@@ -1,11 +1,3 @@
-/*BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE USERS';
-EXCEPTION
-WHEN OTHERS
-THEN NULL;
-END;
-/
-
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE USER_ROLE';
 EXCEPTION
@@ -15,6 +7,16 @@ END;
 /
 
 BEGIN
+EXECUTE IMMEDIATE 'DROP TABLE USERS';
+EXCEPTION
+WHEN OTHERS
+THEN NULL;
+END;
+/
+
+
+
+/*BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE CONTACT';
 EXCEPTION
 WHEN OTHERS
@@ -54,6 +56,11 @@ THEN NULL;
 END;
 /
 
+Create table USER_ROLE(
+RoleID integer NOT NULL PRIMARY KEY,
+RoleName varchar(10) NOT NULL
+);
+
 Create table SHIPPER(
 ShipperID integer NOT NULL PRIMARY KEY,
 CompanyName varchar(45) NOT NULL,
@@ -68,9 +75,18 @@ ExhibitionStartDateTime TIMESTAMP NOT NULL,
 ExhibitionEndDateTime TIMESTAMP NOT NULL,
 ExhibitionStatus varchar(10) NOT NULL
 );
+COMMIT;
 
+truncate table USER_ROLE;
+truncate table USERS;
 truncate table SHIPPER;
-truncate table Online_Exhibition;
+truncate table ONLINE_EXHIBITION;
+
+--truncate table USER_ROLE
+insert into USER_ROLE values (1,'Admin');
+insert into USER_ROLE values (2,'Artist');
+insert into USER_ROLE values (3,'Customer');
+COMMIT;
 
 insert into SHIPPER VALUES(1, 'FedEx Corp', '5857643569','fedex@gmail.com');
 insert into SHIPPER VALUES(2, 'UPS Inc', '6788943251','usps@gmail.com');
