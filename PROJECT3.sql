@@ -20,7 +20,7 @@ EXCEPTION
 WHEN OTHERS
 THEN NULL;
 END;
-/
+/*/
 
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE ART_CATEGORY';
@@ -28,7 +28,7 @@ EXCEPTION
 WHEN OTHERS
 THEN NULL;
 END;
-/
+
 
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE ARTWORK';
@@ -36,7 +36,7 @@ EXCEPTION
 WHEN OTHERS
 THEN NULL;
 END;
-/*/
+
 
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE SHIPPER';
@@ -82,5 +82,26 @@ insert into SHIPPER VALUES(7, 'Schneider', '8006106511','schneider@gmail.com');
 insert into SHIPPER VALUES(8, 'Landstar System', '8008729400','landstar@gmail.com');
 insert into SHIPPER VALUES(9, 'Old Dominion Freight Line', '8008729412','global.compliance@odfl.com');
 insert into SHIPPER VALUES(10, 'TFI International', '8008729413','tfi@gmail.com');
+
+Create table ART_CATEGORY(
+ArtCategoryID integer NOT NULL  PRIMARY KEY,
+ArtCategory varchar(45) NOT NULL,
+);
+
+Create table ARTWORK(
+UserID integer NOT NULL,
+ArtCategoryID integer NOT NULL,
+ExhibitionID integer,
+OrderItemsID integer NOT NULL,
+Name varchar(45) NOT NULL,
+Description varchar(80) NOT NULL,
+Amount number NOT NULL,
+Status varchar(45) NOT NULL,
+ArtworkImage BLOB NOT NULL,
+FOREIGN KEY (UserID) REFERENCES USERS (UserID),
+FOREIGN KEY (ArtCategoryID) REFERENCES ART_CATEGORY (ArtCategoryID),
+FOREIGN KEY (ExhibitionID) REFERENCES ONLINE_EXHIBITION (ExhibitionID),
+FOREIGN KEY (OrderItemsID) REFERENCES ORDER_ITEMS (OrderItemsID),
+);
 
 
