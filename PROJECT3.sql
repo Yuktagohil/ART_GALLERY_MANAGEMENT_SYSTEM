@@ -61,6 +61,20 @@ RoleID integer NOT NULL PRIMARY KEY,
 RoleName varchar(10) NOT NULL
 );
 
+Create table USERS(
+UserID INTEGER NOT NULL PRIMARY KEY,
+RoleID INTEGER NOT NULL,
+CONSTRAINT fk_roleid
+FOREIGN KEY (RoleID)
+REFERENCES USER_ROLE(RoleID),
+EmailID VARCHAR(45) NOT NULL,
+UserName VARCHAR(20) NOT NULL,
+Password VARCHAR(20) NOT NULL,
+FirstName VARCHAR(45) NOT NULL,
+LastName VARCHAR(45) NOT NULL,
+Speciality VARCHAR(20),
+Nationality VARCHAR(30));
+
 Create table SHIPPER(
 ShipperID integer NOT NULL PRIMARY KEY,
 CompanyName varchar(45) NOT NULL,
@@ -87,6 +101,16 @@ insert into USER_ROLE values (1,'Admin');
 insert into USER_ROLE values (2,'Artist');
 insert into USER_ROLE values (3,'Customer');
 COMMIT;
+
+--truncate table USERS;
+insert into USERS values (1,1,'artgalleryadmin@artgallery.com','admin','ArtLoverAdmin2023','Admin','Admin','','');           
+insert into USERS values (2,2,'sillyartist@artgallery.com','Solomon25','SillySal23','Solomon','Williams','Sculpture','Australian');
+insert into USERS values (3,2,'caseym15@artgallery.com','Caseycool','Paint66Love','Casey','Miller','Painting','German');
+insert into USERS values (4,2,'antonio12@artgallery.com','JoieLePot','imperfect34Pot','Antonio','Conte','Pottery','Italian');
+insert into USERS values (5,2,'Adamcruz18@artgallery.com','Adam18','Anime72Nation','Adam','Cruz','Digital','American');
+insert into USERS values (6,3,'Annie90miles@artgallery.com','AnnMiles','BitterSweetArt1990','Annie','Miles','','');
+COMMIT;
+
 
 insert into SHIPPER VALUES(1, 'FedEx Corp', '5857643569','fedex@gmail.com');
 insert into SHIPPER VALUES(2, 'UPS Inc', '6788943251','usps@gmail.com');
