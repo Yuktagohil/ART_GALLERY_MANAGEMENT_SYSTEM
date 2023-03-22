@@ -7,7 +7,7 @@ EXCEPTION
 WHEN OTHERS
 THEN dbms_output.put_line('Objects not found');
 END;
-/
+/ 
 
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE USERS CASCADE CONSTRAINTS';
@@ -43,7 +43,7 @@ END;
 /
 
 BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE SHIPPER';
+EXECUTE IMMEDIATE 'DROP TABLE SHIPPER CASCADE CONSTRAINTS';
 EXCEPTION
 WHEN OTHERS
 THEN NULL;
@@ -102,8 +102,6 @@ ExhibitionStartDateTime DATE NOT NULL,
 ExhibitionEndDateTime DATE NOT NULL,
 ExhibitionStatus varchar(10) NOT NULL
 );
-COMMIT;
-
 
 Create table ART_CATEGORY(
 ArtCategoryID integer NOT NULL PRIMARY KEY,
@@ -125,11 +123,13 @@ FOREIGN KEY (ArtCategoryID) REFERENCES ART_CATEGORY (ArtCategoryID),
 FOREIGN KEY (ExhibitionID) REFERENCES ONLINE_EXHIBITION (ExhibitionID)
 --FOREIGN KEY (OrderItemsID) REFERENCES ORDER_ITEMS (OrderItemsID)
 );
+COMMIT;
 
 truncate table USERS;
 truncate table USER_ROLE;
 truncate table ARTWORK;
 truncate table ART_CATEGORY;
+truncate table CONTACT;
 truncate table SHIPPER;
 truncate table ONLINE_EXHIBITION;
 
@@ -254,6 +254,16 @@ insert into ONLINE_EXHIBITION VALUES(14, 16, TO_DATE('2023/04/25 14:02:44', 'yyy
 TO_DATE('2023/04/30 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
 insert into ONLINE_EXHIBITION VALUES(15, 20, TO_DATE('2023/03/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/03/29 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
+insert into ONLINE_EXHIBITION VALUES(16, 22, TO_DATE('2023/02/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/02/27 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
+insert into ONLINE_EXHIBITION VALUES(17, 23, TO_DATE('2023/01/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/01/29 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
+insert into ONLINE_EXHIBITION VALUES(18, 25, TO_DATE('2023/03/26 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/03/29 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
+insert into ONLINE_EXHIBITION VALUES(19, 27, TO_DATE('2023/02/13 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/02/19 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
+insert into ONLINE_EXHIBITION VALUES(20, 28, TO_DATE('2023/03/03 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/03/09 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
 COMMIT;
 
 insert into ART_CATEGORY VALUES(1, 'Painting');
@@ -276,7 +286,7 @@ insert into ARTWORK VALUES(8, 4, 4, 8, 'Migrant Mother', 'A photograph of a dest
 insert into ARTWORK VALUES(9, 5, 5, 9, 'Sketch of Dream', 'This artwork is a black and white pencil drawing of a surreal landscape', 126, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(10, 6, 6, 10, 'Swedish Landscape', 'a large-scale tapestry depicting the rolling hills and forests of Sweden', 85, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp')); 
 insert into ARTWORK VAlUES(11, 6, 3, 11, 'Scared Cows', 'a series of tapestries featuring colorful, abstracted depictions of cows', 115, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(12, 7, 4, 12, 'Honeycomb Bowl', ' a colorful glass vessel featuring a textured surface created by fusing and shaping glass threads', 210, 'AVailable', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(12, 7, 4, 12, 'Honeycomb Bowl', ' a colorful glass vessel featuring a textured surface created by fusing and shaping glass threads', 210, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(13, 7, 4, 13, 'Sea Pod', 'a whimsical glass sculpture inspired by the shape and texture of sea creatures', 184, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(14, 1, 2, 14, 'The Leaf and the Fire', 'an abstract painting featuring bold, gestural brushstrokes and a muted color palette', 55, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(15, 3, 1, 15, 'The Many Faces of Ebola', 'a series of digital prints exploring the visual language of medical imaging', 75, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
@@ -284,10 +294,11 @@ COMMIT;
 
 --list of upcoming exhibitions of an artist
 CREATE OR REPLACE VIEW ARTIST_UPCOMING_EXHIBITIONS AS
-SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,ONLINE_EXHIBITION.ExhibitionStatus,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
 FROM ONLINE_EXHIBITION
 JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
 WHERE USERS.FirstName = 'Thomas' AND USERS.LastName = 'Shelby' AND ONLINE_EXHIBITION.ExhibitionStartDateTime > SYSDATE;
+COMMIT;
 
 --list of all upcoming exhibtions
 CREATE OR REPLACE VIEW ALL_UPCOMING_EXHIBITIONS AS
@@ -295,28 +306,31 @@ SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS FirstN
 FROM ONLINE_EXHIBITION
 JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
 WHERE ONLINE_EXHIBITION.ExhibitionStartDateTime > SYSDATE;
+COMMIT;
 
 --list of users based on userrole (rolename can be Artist,Customer or Admin)
 CREATE OR REPLACE VIEW USERPROFILE_BASED_ON_USERROLE AS
 SELECT UserID,FirstName,LastName,EmailID,USER_ROLE.RoleName from USERS JOIN USER_ROLE ON USERS.ROLEID = USER_ROLE.ROLEID
 WHERE USER_ROLE.RoleName = 'Artist';
+COMMIT;
 
---list of upcoming exhibitions of an artist
+--list of active exhibitions of an artist
 CREATE OR REPLACE VIEW ARTIST_ACTIVE_EXHIBITIONS AS
-SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,ONLINE_EXHIBITION.ExhibitionStatus,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
 FROM ONLINE_EXHIBITION
 JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
-WHERE USERS.FirstName = 'Solomon' AND USERS.LastName = 'Williams' AND ONLINE_EXHIBITION.ExhibitionStartDateTime <= SYSDATE;
+WHERE USERS.FirstName = 'Solomon' AND USERS.LastName = 'Williams' AND ONLINE_EXHIBITION.ExhibitionStartDateTime <= SYSDATE AND ONLINE_EXHIBITION.ExhibitionEndDateTime >= SYSDATE;
+COMMIT;
 
 --list of all active exhibtions
 CREATE OR REPLACE VIEW ALL_ACTIVE_EXHIBITIONS AS
-SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,ONLINE_EXHIBITION.ExhibitionStatus,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
 FROM ONLINE_EXHIBITION
 JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
-WHERE ONLINE_EXHIBITION.ExhibitionStartDateTime <= SYSDATE;
+WHERE ONLINE_EXHIBITION.ExhibitionStartDateTime <= SYSDATE AND ONLINE_EXHIBITION.ExhibitionEndDateTime >= SYSDATE;
 COMMIT;
 
---list of unsold artwork details
+--list of artist unsold artwork details
 CREATE OR REPLACE VIEW ARTIST_UNSOLD_ARTWORK AS
 SELECT ARTWORK.Name, ARTWORK.Description, ARTWORK.Amount 
 FROM ARTWORK
@@ -324,4 +338,10 @@ JOIN USERS ON USERS.UserID = Artwork.UserID
 where USERS.FirstName = 'Maria' AND USERS.LastName = 'Garcia';
 COMMIT;
 
-
+--list of all unsold artwork details
+CREATE OR REPLACE VIEW ALL_UNSOLD_ARTWORK AS
+SELECT USERS.FirstName as ARTIST_FIRST_NAME,Users.LastName AS ARTIST_LAST_NAME,ARTWORK.Name,ARTWORK.Amount 
+FROM ARTWORK
+JOIN USERS ON USERS.UserID = Artwork.UserID
+where ARTWORK.Status = 'Available';
+COMMIT;
