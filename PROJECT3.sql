@@ -1,5 +1,5 @@
 BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE USER_ROLE';
+EXECUTE IMMEDIATE 'DROP TABLE USERS';
 EXCEPTION
 WHEN OTHERS
 THEN NULL;
@@ -7,7 +7,7 @@ END;
 /
 
 BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE USERS';
+EXECUTE IMMEDIATE 'DROP TABLE USER_ROLE';
 EXCEPTION
 WHEN OTHERS
 THEN NULL;
@@ -84,15 +84,15 @@ EmailID varchar(45) NOT NULL
 
 Create table ONLINE_EXHIBITION(
 ExhibitionID integer NOT NULL PRIMARY KEY,
-UserId integer REFERENCES DEV1.USERS(UserId),
-ExhibitionStartDateTime TIMESTAMP NOT NULL,
-ExhibitionEndDateTime TIMESTAMP NOT NULL,
+UserId integer REFERENCES USERS(UserId),
+ExhibitionStartDateTime DATE NOT NULL,
+ExhibitionEndDateTime DATE NOT NULL,
 ExhibitionStatus varchar(10) NOT NULL
 );
 COMMIT;
 
-truncate table USER_ROLE;
 truncate table USERS;
+truncate table USER_ROLE;
 truncate table SHIPPER;
 truncate table ONLINE_EXHIBITION;
 
@@ -122,5 +122,22 @@ insert into SHIPPER VALUES(7, 'Schneider', '8006106511','schneider@gmail.com');
 insert into SHIPPER VALUES(8, 'Landstar System', '8008729400','landstar@gmail.com');
 insert into SHIPPER VALUES(9, 'Old Dominion Freight Line', '8008729412','global.compliance@odfl.com');
 insert into SHIPPER VALUES(10, 'TFI International', '8008729413','tfi@gmail.com');
+COMMIT;
 
-
+insert into Online_Exhibition VALUES(1, 2, TO_DATE('2023/05/03 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/05/06 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
+insert into Online_Exhibition VALUES(2, 3, TO_DATE('2023/03/21 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/03/26 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
+insert into Online_Exhibition VALUES(3, 3, TO_DATE('2023/04/28 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/05/02 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
+insert into Online_Exhibition VALUES(4, 2, TO_DATE('2023/03/20 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/04/05 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
+insert into Online_Exhibition VALUES(5, 4, TO_DATE('2023/05/20 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/05/25 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
+insert into Online_Exhibition VALUES(6, 5, TO_DATE('2023/03/18 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/03/25 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
+insert into Online_Exhibition VALUES(7, 4, TO_DATE('2023/06/25 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/06/30 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
+insert into Online_Exhibition VALUES(8, 5, TO_DATE('2023/05/04 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/05/08 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
+COMMIT;
