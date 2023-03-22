@@ -1,16 +1,20 @@
+SET SERVEROUTPUT ON;
+
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE USER_ROLE CASCADE CONSTRAINTS';
+dbms_output.put_line('Objects dropped');
 EXCEPTION
 WHEN OTHERS
-THEN NULL;
+THEN dbms_output.put_line('Objects not found');
 END;
 /
 
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE USERS CASCADE CONSTRAINTS';
+dbms_output.put_line('Objects dropped');
 EXCEPTION
 WHEN OTHERS
-THEN NULL;
+THEN dbms_output.put_line('Objects not found');
 END;
 /
 
@@ -72,7 +76,17 @@ LastName varchar(45) NOT NULL,
 Speciality varchar(45),
 Nationality varchar(45));
 
-
+CREATE table CONTACT(
+ContactID int NOT NULL PRIMARY KEY,
+UserID int REFERENCES USERS (UserID),
+ContactNumber varchar(10) UNIQUE NOT NULL,
+AddressLine1 varchar(45) NOT NULL,
+AddressLine2 varchar(45) NOT NULL,
+City varchar(45) NOT NULL,
+State varchar(45) NOT NULL,
+Country varchar(45) NOT NULL,
+ZipCode integer NOT NULL
+);
 
 Create table SHIPPER(
 ShipperID integer NOT NULL PRIMARY KEY,
@@ -83,7 +97,7 @@ EmailID varchar(45) NOT NULL
 
 Create table ONLINE_EXHIBITION(
 ExhibitionID integer NOT NULL PRIMARY KEY,
-UserId integer REFERENCES USERS(UserId),
+UserID integer REFERENCES USERS(UserId),
 ExhibitionStartDateTime DATE NOT NULL,
 ExhibitionEndDateTime DATE NOT NULL,
 ExhibitionStatus varchar(10) NOT NULL
@@ -158,6 +172,45 @@ insert into USERS values (29,2,'mullaisrinivasan@artgallery.com','mullaisri85','
 insert into USERS values (30,3,'duss.jason4@artgallery.com','jasonduss','Jasonwill63Can','Jason','Dussault','Mosaic','Canadian');
 COMMIT;
 
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (1,1, 8572639860, '1575 Tremont street', 'APT 2', 'Boston', 'MA', 'USA', 02129);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (2,2, 8575689968, 'Roxbury crossing', 'APT 3', 'Boston', 'MA', 'USA', 02689);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (3,2, 6975698560, '15 Malden', 'APT 8', 'Los angeles', 'CA', 'USA', 5972);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (4,2, 5698742635, '1575 mango Street', 'APT 9', 'San Antonio', 'TX', 'USA', 8975);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (5,2, 5697895620, '857 Hungtionton Ave', 'Boylston', 'Boston', 'MA', 'USA', 5698);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (6,2, 5987895640, 'Newburg street', 'Dorchester', 'Dallas', 'TX', 'USA', 0219);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (7,2, 6987453026, '160 Alpine road', 'Brookline', 'Philadelphia', 'PA', 'USA', 2101);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (8,2, 5697854120, '12 Saint Fr. RD', 'Dorchester', 'San Diego', 'CA', 'USA', 9878);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (9,2, 5669842635, '60 Spine Road', 'Cambriegde', 'Dallas', 'TX', 'USA', 1203);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (10,2, 5656942635, '23 Brookline', 'Newport', 'Boston', 'MA', 'USA', 06897);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (11,3, 5698785063, '15 Cawfield street', 'Dorchester', 'Houston', 'TX', 'USA', 56890);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (12,3, 5695692635, '36 Washignton street', 'Nubian', 'Chicago', 'IL', 'USA', 06923);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (13,3, 8975692031, 'Apple Street', 'Dustun', 'Phoenix', 'AZ', 'USA', 03689);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (15,3, 6987894120, 'Manhatten street', 'George_mason RD', 'San Jose', 'CS', 'USA', 02369);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (16,3, 4895201698, 'Area 51', 'Washington square', 'Colrado', 'CO', 'USA', 03215);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (17,3, 6587420135, 'Swiss Street', 'Hartford', 'Buffalo', 'NY', 'USA', 04265);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (18,3, 369750359, 'Phoenix street', 'Virginia', 'Hollywood', 'FL', 'USA', 03698);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (19,3, 3697851026, 'Virginia street', 'Enterprise RD', 'Kansas', 'KS', 'USA', 01597);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (20,3, 6987562100, 'Mission Hill', 'Park Drive', 'Wichita', 'KS', 'USA', 06986);
+COMMIT;
 
 insert into SHIPPER VALUES(1, 'FedEx Corp', '5857643569','fedex@gmail.com');
 insert into SHIPPER VALUES(2, 'UPS Inc', '6788943251','usps@gmail.com');
@@ -229,3 +282,26 @@ insert into ARTWORK VALUES(14, 1, 2, 14, 'The Leaf and the Fire', 'an abstract p
 insert into ARTWORK VALUES(15, 3, 1, 15, 'The Many Faces of Ebola', 'a series of digital prints exploring the visual language of medical imaging', 75, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 COMMIT;
 
+insert into ARTWORK VALUES(1, 1, 1, 1, 'The Banjo Lesson', 'A Painting depicting an elderly man teaching a young boy how to play the banjo', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(2, 1, 1, 2, 'Autumnal Equinox', 'A Painting depicting changing colors of autumn leaves against blue sky', 99, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(3, 2, 2, 3, 'The Kiss', 'This sculpture portrays a couple in a romantic embrace', 140, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(4, 2, 1, 4, 'Lamentation', 'A series of larger than life bronze sculptures of human figures', 75, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(5, 3, 3, 5, 'Digital Nirvana', 'This artwork features a surreal landscape of a digital world', 37, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(6, 3, 2, 6, 'Junction', 'A digital simulation of a highway interchange in Texas', 55, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(7, 4, 7, 7, 'Fleeting Moment', 'This photograph captures a moment of stillness in a bustling city street', 115, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(8, 4, 4, 8, 'Migrant Mother', 'A photograph of a destitute mother and her children during the Great Depression', 75, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(9, 5, 5, 9, 'Sketch of Dream', 'This artwork is a black and white pencil drawing of a surreal landscape', 126, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(10, 6, 6, 10, 'Swedish Landscape', 'a large-scale tapestry depicting the rolling hills and forests of Sweden', 85, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp')); 
+insert into ARTWORK VAlUES(11, 6, 3, 11, 'Scared Cows', 'a series of tapestries featuring colorful, abstracted depictions of cows', 115, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(12, 7, 4, 12, 'Honeycomb Bowl', ' a colorful glass vessel featuring a textured surface created by fusing and shaping glass threads', 210, 'AVailable', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(13, 7, 4, 13, 'Sea Pod', 'a whimsical glass sculpture inspired by the shape and texture of sea creatures', 184, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(14, 1, 2, 14, 'The Leaf and the Fire', 'an abstract painting featuring bold, gestural brushstrokes and a muted color palette', 55, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(15, 3, 1, 15, 'The Many Faces of Ebola', 'a series of digital prints exploring the visual language of medical imaging', 75, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+COMMIT;
+
+--list of upcoming exhibitions of an artist
+CREATE OR REPLACE VIEW ARTIST_UPCOMING_EXHIBITIONS AS
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+FROM ONLINE_EXHIBITION
+JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
+WHERE USERS.FirstName = 'Thomas' AND USERS.LastName = 'Shelby' AND ONLINE_EXHIBITION.ExhibitionStartDateTime > SYSDATE;
