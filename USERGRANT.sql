@@ -1,4 +1,4 @@
-Drop user urbandusters;
+Drop user urbandusters CASCADE;
 
 Create user urbandusters identified by DmddProject3;
 
