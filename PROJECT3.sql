@@ -1,16 +1,20 @@
+SET SERVEROUTPUT ON;
+
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE USER_ROLE CASCADE CONSTRAINTS';
+dbms_output.put_line('Objects dropped');
 EXCEPTION
 WHEN OTHERS
-THEN NULL;
+THEN dbms_output.put_line('Objects not found');
 END;
 /
 
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE USERS CASCADE CONSTRAINTS';
+dbms_output.put_line('Objects dropped');
 EXCEPTION
 WHEN OTHERS
-THEN NULL;
+THEN dbms_output.put_line('Objects not found');
 END;
 /
 
