@@ -7,7 +7,7 @@ EXCEPTION
 WHEN OTHERS
 THEN dbms_output.put_line('Objects not found');
 END;
-/
+/ 
 
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE USERS CASCADE CONSTRAINTS';
@@ -43,7 +43,7 @@ END;
 /
 
 BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE SHIPPER';
+EXECUTE IMMEDIATE 'DROP TABLE SHIPPER CASCADE CONSTRAINTS';
 EXCEPTION
 WHEN OTHERS
 THEN NULL;
@@ -102,8 +102,6 @@ ExhibitionStartDateTime DATE NOT NULL,
 ExhibitionEndDateTime DATE NOT NULL,
 ExhibitionStatus varchar(10) NOT NULL
 );
-COMMIT;
-
 
 Create table ART_CATEGORY(
 ArtCategoryID integer NOT NULL PRIMARY KEY,
@@ -126,11 +124,13 @@ FOREIGN KEY (ArtCategoryID) REFERENCES ART_CATEGORY (ArtCategoryID),
 FOREIGN KEY (ExhibitionID) REFERENCES ONLINE_EXHIBITION (ExhibitionID)
 --FOREIGN KEY (OrderItemsID) REFERENCES ORDER_ITEMS (OrderItemsID)
 );
+COMMIT;
 
 truncate table USERS;
 truncate table USER_ROLE;
 truncate table ARTWORK;
 truncate table ART_CATEGORY;
+truncate table CONTACT;
 truncate table SHIPPER;
 truncate table ONLINE_EXHIBITION;
 
@@ -255,6 +255,16 @@ insert into ONLINE_EXHIBITION VALUES(14, 16, TO_DATE('2023/04/25 14:02:44', 'yyy
 TO_DATE('2023/04/30 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
 insert into ONLINE_EXHIBITION VALUES(15, 20, TO_DATE('2023/03/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/03/29 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
+insert into ONLINE_EXHIBITION VALUES(16, 22, TO_DATE('2023/02/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/02/27 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
+insert into ONLINE_EXHIBITION VALUES(17, 23, TO_DATE('2023/01/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/01/29 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
+insert into ONLINE_EXHIBITION VALUES(18, 25, TO_DATE('2023/03/26 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/03/29 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
+insert into ONLINE_EXHIBITION VALUES(19, 27, TO_DATE('2023/02/13 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/02/19 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
+insert into ONLINE_EXHIBITION VALUES(20, 28, TO_DATE('2023/03/03 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/03/09 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
 COMMIT;
 
 insert into ART_CATEGORY VALUES(1, 'Painting');
@@ -309,16 +319,54 @@ COMMIT;
 
 --list of upcoming exhibitions of an artist
 CREATE OR REPLACE VIEW ARTIST_UPCOMING_EXHIBITIONS AS
-SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,ONLINE_EXHIBITION.ExhibitionStatus,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
 FROM ONLINE_EXHIBITION
 JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
 WHERE USERS.FirstName = 'Thomas' AND USERS.LastName = 'Shelby' AND ONLINE_EXHIBITION.ExhibitionStartDateTime > SYSDATE;
 COMMIT;
 
---list of unsold artwork details
+--list of all upcoming exhibtions
+CREATE OR REPLACE VIEW ALL_UPCOMING_EXHIBITIONS AS
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+FROM ONLINE_EXHIBITION
+JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
+WHERE ONLINE_EXHIBITION.ExhibitionStartDateTime > SYSDATE;
+COMMIT;
+
+--list of users based on userrole (rolename can be Artist,Customer or Admin)
+CREATE OR REPLACE VIEW USERPROFILE_BASED_ON_USERROLE AS
+SELECT UserID,FirstName,LastName,EmailID,USER_ROLE.RoleName from USERS JOIN USER_ROLE ON USERS.ROLEID = USER_ROLE.ROLEID
+WHERE USER_ROLE.RoleName = 'Artist';
+COMMIT;
+
+--list of active exhibitions of an artist
+CREATE OR REPLACE VIEW ARTIST_ACTIVE_EXHIBITIONS AS
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,ONLINE_EXHIBITION.ExhibitionStatus,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+FROM ONLINE_EXHIBITION
+JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
+WHERE USERS.FirstName = 'Solomon' AND USERS.LastName = 'Williams' AND ONLINE_EXHIBITION.ExhibitionStartDateTime <= SYSDATE AND ONLINE_EXHIBITION.ExhibitionEndDateTime >= SYSDATE;
+COMMIT;
+
+--list of all active exhibtions
+CREATE OR REPLACE VIEW ALL_ACTIVE_EXHIBITIONS AS
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,ONLINE_EXHIBITION.ExhibitionStatus,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+FROM ONLINE_EXHIBITION
+JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
+WHERE ONLINE_EXHIBITION.ExhibitionStartDateTime <= SYSDATE AND ONLINE_EXHIBITION.ExhibitionEndDateTime >= SYSDATE;
+COMMIT;
+
+--list of artist unsold artwork details
 CREATE OR REPLACE VIEW ARTIST_UNSOLD_ARTWORK AS
 SELECT ARTWORK.ArtworkID, ARTWORK.Name, ARTWORK.Description, ARTWORK.Amount 
 FROM ARTWORK
 JOIN USERS ON USERS.UserID = ARTWORK.UserID
 where USERS.FirstName = 'Maria' AND USERS.LastName = 'Garcia' AND ARTWORK.Status='Not Available';
+COMMIT;
+
+--list of all unsold artwork details
+CREATE OR REPLACE VIEW ALL_UNSOLD_ARTWORK AS
+SELECT USERS.FirstName as ARTIST_FIRST_NAME,Users.LastName AS ARTIST_LAST_NAME,ARTWORK.Name,ARTWORK.Amount 
+FROM ARTWORK
+JOIN USERS ON USERS.UserID = Artwork.UserID
+where ARTWORK.Status = 'Available';
 COMMIT;
