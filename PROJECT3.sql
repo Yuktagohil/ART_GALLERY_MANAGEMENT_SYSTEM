@@ -288,3 +288,14 @@ SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS FirstN
 FROM ONLINE_EXHIBITION
 JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
 WHERE USERS.FirstName = 'Thomas' AND USERS.LastName = 'Shelby' AND ONLINE_EXHIBITION.ExhibitionStartDateTime > SYSDATE;
+COMMIT;
+
+--list of unsold artwork details
+CREATE OR REPLACE VIEW ARTIST_UNSOLD_ARTWORK AS
+SELECT ARTWORK.Name, ARTWORK.Description, ARTWORK.Amount 
+FROM ARTWORK
+JOIN USERS ON USERS.UserID = Artwork.UserID
+where USERS.FirstName = 'Maria' AND USERS.LastName = 'Garcia';
+COMMIT;
+
+
