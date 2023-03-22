@@ -1,5 +1,9 @@
 BEGIN
+<<<<<<< HEAD
 EXECUTE IMMEDIATE 'DROP TABLE USERS';
+=======
+EXECUTE IMMEDIATE 'DROP TABLE USER_ROLE CASCADE CONSTRAINTS';
+>>>>>>> 6af36c330411edb56451918bf911dec71a04466e
 EXCEPTION
 WHEN OTHERS
 THEN NULL;
@@ -7,38 +11,16 @@ END;
 /
 
 BEGIN
+<<<<<<< HEAD
 EXECUTE IMMEDIATE 'DROP TABLE USER_ROLE';
+=======
+EXECUTE IMMEDIATE 'DROP TABLE USERS CASCADE CONSTRAINTS';
+>>>>>>> 6af36c330411edb56451918bf911dec71a04466e
 EXCEPTION
 WHEN OTHERS
 THEN NULL;
 END;
 /
-
-
-
-/*BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE CONTACT';
-EXCEPTION
-WHEN OTHERS
-THEN NULL;
-END;
-/
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE ART_CATEGORY';
-EXCEPTION
-WHEN OTHERS
-THEN NULL;
-END;
-/
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE ARTWORK';
-EXCEPTION
-WHEN OTHERS
-THEN NULL;
-END;
-/*/
 
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE SHIPPER';
@@ -55,25 +37,24 @@ WHEN OTHERS
 THEN NULL;
 END;
 /
-
+  
 Create table USER_ROLE(
 RoleID integer NOT NULL PRIMARY KEY,
 RoleName varchar(10) NOT NULL
 );
 
 Create table USERS(
-UserID INTEGER NOT NULL PRIMARY KEY,
+UserID integer NOT NULL PRIMARY KEY,
 RoleID INTEGER NOT NULL,
-CONSTRAINT fk_roleid
 FOREIGN KEY (RoleID)
 REFERENCES USER_ROLE(RoleID),
-EmailID VARCHAR(45) NOT NULL,
-UserName VARCHAR(20) NOT NULL,
-Password VARCHAR(20) NOT NULL,
-FirstName VARCHAR(45) NOT NULL,
-LastName VARCHAR(45) NOT NULL,
-Speciality VARCHAR(20),
-Nationality VARCHAR(30));
+EmailID varchar(45) NOT NULL,
+UserName varchar(20) NOT NULL,
+Password varchar(20) NOT NULL,
+FirstName varchar(45) NOT NULL,
+LastName varchar(45) NOT NULL,
+Speciality varchar(20),
+Nationality varchar(30));
 
 Create table SHIPPER(
 ShipperID integer NOT NULL PRIMARY KEY,
@@ -84,9 +65,15 @@ EmailID varchar(45) NOT NULL
 
 Create table ONLINE_EXHIBITION(
 ExhibitionID integer NOT NULL PRIMARY KEY,
+<<<<<<< HEAD
 UserId integer REFERENCES USERS(UserId),
 ExhibitionStartDateTime DATE NOT NULL,
 ExhibitionEndDateTime DATE NOT NULL,
+=======
+UserId integer REFERENCES ramya.USERS(UserId),
+ExhibitionStartDateTime TIMESTAMP NOT NULL,
+ExhibitionEndDateTime TIMESTAMP NOT NULL,
+>>>>>>> 6af36c330411edb56451918bf911dec71a04466e
 ExhibitionStatus varchar(10) NOT NULL
 );
 COMMIT;
@@ -109,6 +96,10 @@ insert into USERS values (3,2,'caseym15@artgallery.com','Caseycool','Paint66Love
 insert into USERS values (4,2,'antonio12@artgallery.com','JoieLePot','imperfect34Pot','Antonio','Conte','Pottery','Italian');
 insert into USERS values (5,2,'Adamcruz18@artgallery.com','Adam18','Anime72Nation','Adam','Cruz','Digital','American');
 insert into USERS values (6,3,'Annie90miles@artgallery.com','AnnMiles','BitterSweetArt1990','Annie','Miles','','');
+insert into USERS values (7,3,'maria27g@artgallery.com','Maria27','ArtPopos55','Maria','Garcia','','');
+insert into USERS values (8,3,'alexbrown@artgallery.com','Alex22','BrownSugar22','Alexandar','Brown','','');
+insert into USERS values (9,3,'eric1685@artgallery.com','Eric16','Mission16travel','Eric','Hernandez','','');
+insert into USERS values (10,3,'nancy1229@artgallery.com','Nancy29','LordBlesseth92','Nancy','Kurian','','');
 COMMIT;
 
 
@@ -124,6 +115,7 @@ insert into SHIPPER VALUES(9, 'Old Dominion Freight Line', '8008729412','global.
 insert into SHIPPER VALUES(10, 'TFI International', '8008729413','tfi@gmail.com');
 COMMIT;
 
+<<<<<<< HEAD
 insert into Online_Exhibition VALUES(1, 2, TO_DATE('2023/05/03 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/05/06 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
 insert into Online_Exhibition VALUES(2, 3, TO_DATE('2023/03/21 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
@@ -141,3 +133,5 @@ TO_DATE('2023/06/30 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
 insert into Online_Exhibition VALUES(8, 5, TO_DATE('2023/05/04 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/05/08 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
 COMMIT;
+=======
+>>>>>>> 6af36c330411edb56451918bf911dec71a04466e
