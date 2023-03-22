@@ -15,7 +15,7 @@ END;
 /
 
 BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE CONTACT';
+EXECUTE IMMEDIATE 'DROP TABLE CONTACT CASCADE CONSTRAINTS';
 EXCEPTION
 WHEN OTHERS
 THEN NULL;
@@ -23,20 +23,20 @@ END;
 /
 
 BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE ART_CATEGORY';
+EXECUTE IMMEDIATE 'DROP TABLE ART_CATEGORY CASCADE CONSTRAINTS';
 EXCEPTION
 WHEN OTHERS
 THEN NULL;
 END;
-
+/
 
 BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE ARTWORK';
+EXECUTE IMMEDIATE 'DROP TABLE ARTWORK CASCADE CONSTRAINTS';
 EXCEPTION
 WHEN OTHERS
 THEN NULL;
 END;
-
+/
 
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE SHIPPER';
@@ -47,7 +47,7 @@ END;
 /
 
 BEGIN
-EXECUTE IMMEDIATE 'DROP TABLE ONLINE_EXHIBITION';
+EXECUTE IMMEDIATE 'DROP TABLE ONLINE_EXHIBITION CASCADE CONSTRAINTS';
 EXCEPTION
 WHEN OTHERS
 THEN NULL;
@@ -72,6 +72,8 @@ LastName varchar(45) NOT NULL,
 Speciality varchar(20),
 Nationality varchar(30));
 
+
+
 Create table SHIPPER(
 ShipperID integer NOT NULL PRIMARY KEY,
 CompanyName varchar(45) NOT NULL,
@@ -88,8 +90,31 @@ ExhibitionStatus varchar(10) NOT NULL
 );
 COMMIT;
 
+
+Create table ART_CATEGORY(
+ArtCategoryID integer NOT NULL PRIMARY KEY,
+ArtCategory varchar(45) NOT NULL
+);
+
+Create table ARTWORK(
+UserID integer NOT NULL,
+ArtCategoryID integer NOT NULL,
+ExhibitionID integer,
+OrderItemsID integer NOT NULL,
+Name varchar(45) NOT NULL,
+Description varchar(80) NOT NULL,
+Amount number NOT NULL,
+Status varchar(45) NOT NULL,
+ArtworkImage BLOB NOT NULL,
+FOREIGN KEY (UserID) REFERENCES USERS (UserID),
+FOREIGN KEY (ArtCategoryID) REFERENCES ART_CATEGORY (ArtCategoryID),
+FOREIGN KEY (ExhibitionID) REFERENCES ONLINE_EXHIBITION (ExhibitionID)
+);
+
 truncate table USERS;
 truncate table USER_ROLE;
+truncate table ARTWORK;
+truncate table ART_CATEGORY;
 truncate table SHIPPER;
 truncate table ONLINE_EXHIBITION;
 
@@ -153,25 +178,10 @@ insert into ONLINE_EXHIBITION VALUES(8, 5, TO_DATE('2023/05/04 14:02:44', 'yyyy/
 TO_DATE('2023/05/08 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
 COMMIT;
 
-Create table ART_CATEGORY(
-ArtCategoryID integer NOT NULL  PRIMARY KEY,
-ArtCategory varchar(45) NOT NULL,
-);
-
-Create table ARTWORK(
-UserID integer NOT NULL,
-ArtCategoryID integer NOT NULL,
-ExhibitionID integer,
-OrderItemsID integer NOT NULL,
-Name varchar(45) NOT NULL,
-Description varchar(80) NOT NULL,
-Amount number NOT NULL,
-Status varchar(45) NOT NULL,
-ArtworkImage BLOB NOT NULL,
-FOREIGN KEY (UserID) REFERENCES USERS (UserID),
-FOREIGN KEY (ArtCategoryID) REFERENCES ART_CATEGORY (ArtCategoryID),
-FOREIGN KEY (ExhibitionID) REFERENCES ONLINE_EXHIBITION (ExhibitionID),
-FOREIGN KEY (OrderItemsID) REFERENCES ORDER_ITEMS (OrderItemsID),
-);
-
+insert into ART_CATEGORY VALUES(1, 'Painting');
+insert into ART_CATEGORY VALUES(2, 'Sculpture');
+insert into ART_CATEGORY VALUES(3, 'DigitalArt');
+insert into ART_CATEGORY VALUES(4, 'Photography');
+insert into ART_CATEGORY VALUES(5, 'Drawing');
+COMMIT;
 
