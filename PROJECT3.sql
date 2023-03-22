@@ -77,15 +77,25 @@ COMMIT;
 
 --truncate table USERS;
 insert into USERS values (1,1,'artgalleryadmin@artgallery.com','admin','ArtLoverAdmin2023','Admin','Admin','','');           
-insert into USERS values (2,2,'sillyartist@artgallery.com','Solomon25','SillySal23','Solomon','Williams','Sculpture','Australian');
-insert into USERS values (3,2,'caseym15@artgallery.com','Caseycool','Paint66Love','Casey','Miller','Painting','German');
-insert into USERS values (4,2,'antonio12@artgallery.com','JoieLePot','imperfect34Pot','Antonio','Conte','Pottery','Italian');
-insert into USERS values (5,2,'Adamcruz18@artgallery.com','Adam18','Anime72Nation','Adam','Cruz','Digital','American');
-insert into USERS values (6,3,'Annie90miles@artgallery.com','AnnMiles','BitterSweetArt1990','Annie','Miles','','');
-insert into USERS values (7,3,'maria27g@artgallery.com','Maria27','ArtPopos55','Maria','Garcia','','');
-insert into USERS values (8,3,'alexbrown@artgallery.com','Alex22','BrownSugar22','Alexandar','Brown','','');
-insert into USERS values (9,3,'eric1685@artgallery.com','Eric16','Mission16travel','Eric','Hernandez','','');
-insert into USERS values (10,3,'nancy1229@artgallery.com','Nancy29','LordBlesseth92','Nancy','Kurian','','');
+insert into USERS values (2,2,'sillyartist@artgallery.com','solomon25','SillySal23','Solomon','Williams','Sculpture','Australian');
+insert into USERS values (3,2,'caseym15@artgallery.com','caseycool','Paint66Love','Casey','Miller','Painting','German');
+insert into USERS values (4,2,'antonio12@artgallery.com','joielepot','imperfect34Pot','Antonio','Conte','Pottery','Italian');
+insert into USERS values (5,2,'adamcruz18@artgallery.com','adam18','Anime72Nation','Adam','Cruz','Digital','American');
+insert into USERS values (6,3,'annie90miles@artgallery.com','annmiles','BitterSweetArt1990','Annie','Miles','','');
+insert into USERS values (7,3,'maria27g@artgallery.com','maria27','ArtPopos55','Maria','Garcia','','');
+insert into USERS values (8,3,'alexbrown@artgallery.com','alex22','BrownSugar22','Alexandar','Brown','','');
+insert into USERS values (9,3,'eric1685@artgallery.com','eric16','Mission16travel','Eric','Hernandez','','');
+insert into USERS values (10,3,'nancy1229@artgallery.com','nancy29','LordBlesseth92','Nancy','Kurian','','');
+insert into USERS values (11,3,'vineeth.krishnan@artgallery.com','vinukrishnan','VinuK30mallu','Vineeth','Krishnan','','');
+insert into USERS values (12,2,'thomas.shelby@artgallery.com','tomshelby','Coast23Love','Thomas','Shelby','Sketching','Scandinavian');
+insert into USERS values (13,2,'cooper.sheldon@artgallery.com','sheldon7mo','MoLove8Shel','Sheldon','Cooper','Mosaic','Brazilian');
+insert into USERS values (14,3,'hart.casie@artgallery.com','hart5ca','Belief1hart','Casie','hart','','');
+insert into USERS values (15,3,'lock.simone@artgallery.com','lockesi85','Key2Locke','Simone','Locke','','');
+insert into USERS values (16,2,'hardway.paige@artgallery.com','paigeway','Therasa4ever','Paige','Hardaway','Tapestry','Irish');
+insert into USERS values (17,3,'dobrev.nina@artgallery.com','nina22dob','Sweet89Little','Nina','Dobrev','','');
+insert into USERS values (18,2,'raja.zahid@artgallery.com','rajazahid','dragonlair69','Zahid','Raja','GlassArt','Moroccan');
+insert into USERS values (19,3,'gerard.marcel@artgallery.com','gerardmarc','Pro27gerard','Marcel','Gerard','','');
+insert into USERS values (20,2,'gardener.samuel@artgallery.com','gardenersam','Penguin4Sam','Samuel','Gardener','Sketching','American');
 COMMIT;
 
 
