@@ -83,7 +83,7 @@ EmailID varchar(45) NOT NULL
 
 Create table ONLINE_EXHIBITION(
 ExhibitionID integer NOT NULL PRIMARY KEY,
-UserId integer REFERENCES USERS(UserId),
+UserID integer REFERENCES USERS(UserId),
 ExhibitionStartDateTime DATE NOT NULL,
 ExhibitionEndDateTime DATE NOT NULL,
 ExhibitionStatus varchar(10) NOT NULL
@@ -209,3 +209,9 @@ insert into ART_CATEGORY VALUES(4, 'Photography');
 insert into ART_CATEGORY VALUES(5, 'Drawing');
 COMMIT;
 
+--list of upcoming exhibitions of an artist
+CREATE OR REPLACE VIEW ARTIST_UPCOMING_EXHIBITIONS AS
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+FROM ONLINE_EXHIBITION
+JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
+WHERE USERS.FirstName = 'Thomas' AND USERS.LastName = 'Shelby' AND ONLINE_EXHIBITION.ExhibitionStartDateTime > SYSDATE;
