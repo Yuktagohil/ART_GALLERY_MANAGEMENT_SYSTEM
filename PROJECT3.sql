@@ -172,6 +172,7 @@ insert into USERS values (29,2,'mullaisrinivasan@artgallery.com','mullaisri85','
 insert into USERS values (30,3,'duss.jason4@artgallery.com','jasonduss','Jasonwill63Can','Jason','Dussault','Mosaic','Canadian');
 COMMIT;
 
+--insert values in table contact
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
 VALUES (1,1, 8572639860, '1575 Tremont street', 'APT 2', 'Boston', 'MA', 'USA', 02129);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
@@ -212,6 +213,7 @@ INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2
 VALUES (20,3, 6987562100, 'Mission Hill', 'Park Drive', 'Wichita', 'KS', 'USA', 06986);
 COMMIT;
 
+--insert values in table contact
 insert into SHIPPER VALUES(1, 'FedEx Corp', '5857643569','fedex@gmail.com');
 insert into SHIPPER VALUES(2, 'UPS Inc', '6788943251','usps@gmail.com');
 insert into SHIPPER VALUES(3, 'XPO Logistics', '8007552728','trailerinfo@xpo.com');
@@ -224,6 +226,7 @@ insert into SHIPPER VALUES(9, 'Old Dominion Freight Line', '8008729412','global.
 insert into SHIPPER VALUES(10, 'TFI International', '8008729413','tfi@gmail.com');
 COMMIT;
 
+--insert values in table online_exhibition
 insert into ONLINE_EXHIBITION VALUES(1, 2, TO_DATE('2023/05/03 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/05/06 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
 insert into ONLINE_EXHIBITION VALUES(2, 3, TO_DATE('2023/03/21 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
@@ -266,6 +269,7 @@ insert into ONLINE_EXHIBITION VALUES(20, 28, TO_DATE('2023/03/03 14:02:44', 'yyy
 TO_DATE('2023/03/09 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
 COMMIT;
 
+--insert values in table artcategory
 insert into ART_CATEGORY VALUES(1, 'Painting');
 insert into ART_CATEGORY VALUES(2, 'Sculpture');
 insert into ART_CATEGORY VALUES(3, 'DigitalArt');
@@ -275,6 +279,7 @@ insert into ART_CATEGORY VALUES(6, 'Tapestry');
 insert into ART_CATEGORY VALUES(7, 'GlassArt');
 COMMIT;
 
+--insert values in table srtwork
 insert into ARTWORK VALUES(1, 1, 1, 1, 'The Banjo Lesson', 'A Painting depicting an elderly man teaching a young boy how to play the banjo', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(2, 1, 1, 2, 'Autumnal Equinox', 'A Painting depicting changing colors of autumn leaves against blue sky', 99, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(3, 2, 2, 3, 'The Kiss', 'This sculpture portrays a couple in a romantic embrace', 140, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
@@ -290,6 +295,14 @@ insert into ARTWORK VALUES(12, 7, 4, 12, 'Honeycomb Bowl', ' a colorful glass ve
 insert into ARTWORK VALUES(13, 7, 4, 13, 'Sea Pod', 'a whimsical glass sculpture inspired by the shape and texture of sea creatures', 184, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(14, 1, 2, 14, 'The Leaf and the Fire', 'an abstract painting featuring bold, gestural brushstrokes and a muted color palette', 55, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(15, 3, 1, 15, 'The Many Faces of Ebola', 'a series of digital prints exploring the visual language of medical imaging', 75, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+COMMIT;
+
+--update exhibition status in table online exhibition based on current date
+Update ONLINE_EXHIBITION OE SET OE.ExhibitionStatus = 'Completed' WHERE OE.ExhibitionStartDateTime < SYSDATE AND OE.ExhibitionEndDateTime < SYSDATE;
+COMMIT;
+Update ONLINE_EXHIBITION OE SET OE.ExhibitionStatus = 'Active'  WHERE OE.ExhibitionStartDateTime <= SYSDATE AND OE.ExhibitionEndDateTime >= SYSDATE;
+COMMIT;
+Update ONLINE_EXHIBITION OE SET OE.ExhibitionStatus = 'Upcoming'  WHERE OE.ExhibitionStartDateTime > SYSDATE;
 COMMIT;
 
 --list of upcoming exhibitions of an artist
