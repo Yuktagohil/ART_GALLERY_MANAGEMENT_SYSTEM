@@ -161,18 +161,22 @@ ArtCategory varchar(45) NOT NULL
 Create table ARTWORK(
 ArtworkID integer NOT NULL PRIMARY KEY,
 UserID integer NOT NULL,
+FOREIGN KEY (UserID) 
+REFERENCES USERS (UserID),
 ArtCategoryID integer NOT NULL,
+FOREIGN KEY (ArtCategoryID) 
+REFERENCES ART_CATEGORY (ArtCategoryID),
 ExhibitionID integer,
+FOREIGN KEY (ExhibitionID) 
+REFERENCES ONLINE_EXHIBITION (ExhibitionID),
 OrderItemsID integer,
+FOREIGN KEY (OrderItemsID) 
+REFERENCES ORDER_ITEMS (OrderItemsID),
 Name varchar(45) NOT NULL,
 Description varchar(200) NOT NULL,
 Amount number NOT NULL,
 Status varchar(45) NOT NULL,
-ArtworkImage BLOB NOT NULL,
-FOREIGN KEY (UserID) REFERENCES USERS (UserID),
-FOREIGN KEY (ArtCategoryID) REFERENCES ART_CATEGORY (ArtCategoryID),
-FOREIGN KEY (ExhibitionID) REFERENCES ONLINE_EXHIBITION (ExhibitionID),
-FOREIGN KEY (OrderItemsID) REFERENCES ORDER_ITEMS (OrderItemsID)
+ArtworkImage BLOB NOT NULL
 );
 COMMIT;
 
@@ -264,6 +268,28 @@ INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2
 VALUES (19,3, 3697851026, 'Virginia street', 'Enterprise RD', 'Kansas', 'KS', 'USA', 01597);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
 VALUES (20,3, 6987562100, 'Mission Hill', 'Park Drive', 'Wichita', 'KS', 'USA', 06986);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (21,3, 3697895620, 'Mission Main', 'Dudely street', 'indianapolis', 'IN', 'USA', 03689);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (22,3, 5698795210, 'Columbia Rd', 'Blue hill', 'Lowell', 'MA', 'USA', 12368);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (23,3, 7894561230, 'Becon street', 'Strand Theater', 'New Orleans', 'LA', 'USA', 35974);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (24,3, 5789641203, 'Cooliegde Corner', 'Brookline', 'San Francisco', 'CA', 'USA', 57896);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (25,3, 5687410239, 'Tappan Street', 'clevanland Circle', 'Tucson', 'AZ', 'USA', 23697);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (26,3, 4597852013, 'Cambriedge', 'Bird St', 'Yonkers', 'NY', 'USA', 56974);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (27,3, 6574520139, 'Mass Avenue', 'Saint francis St', 'Montgomery', 'AL', 'USA', 60210);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (28,3, 4578956210, 'Fields Corner', '19 St', 'Detroit', 'MI', 'USA', 44597);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (29,3, 1267894560, 'Albama St', 'Rodester Ave', 'Greeley', 'CO', 'USA', 21382);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (30,3, 4578568920, 'Flemingo Circle', 'Red cherry Ave', 'Enterprise', 'NV', 'USA', 56875);
+INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
+VALUES (31,3, 5742368901, 'Oberoi Rd', 'Huntington Ave', 'joliet', 'IL', 'USA', 12345);
 COMMIT;
 
 --insert values in table shipper
@@ -322,7 +348,7 @@ insert into ONLINE_EXHIBITION VALUES(20, 18, TO_DATE('2023/03/03 14:02:44', 'yyy
 TO_DATE('2023/03/09 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
 COMMIT;
 
---insert values in table order
+--inser values in table orders
 INSERT INTO ORDERS
 VALUES (1, 1, 3, 476523654824, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '123 XYZ street', TO_DATE('20-MAR-2023 12:33:44', 'DD-MON-YYYY HH24:MI:SS'), 30);
 INSERT INTO ORDERS
@@ -461,7 +487,7 @@ insert into ART_CATEGORY VALUES(9, 'Wood Sculpture');
 insert into ART_CATEGORY VALUES(10, 'Pottery');
 COMMIT;
 
---insert values in table artcategory
+--insert values in table artwork
 insert into ARTWORK VALUES(1,2, 2, 1, 1, 'The Banjo Lesson', 'A Painting depicting an elderly man teaching a young boy how to play the banjo', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(2,3, 1, 2, 2, 'Autumnal Equinox', 'A Painting depicting changing colors of autumn leaves against blue sky', 99, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(3,4, 10, 5, 3, 'Dreamy Garden', 'A pottery piece with a whimsical design of flowers and vines', 140, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
@@ -524,10 +550,20 @@ insert into ARTWORK VALUES(59, 11, 4, 7, 1, 'The Abandoned Building', 'This phot
 insert into ARTWORK VALUES(60, 8, 5, 7, 1, 'Cityscape', 'This sketch captures the bustling energy and architectural details of a cityscape, with fine lines and careful attention to perspective', 300, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(61, 17, 4, 8, 1, 'Old Man and His Dog', 'This photograph features an elderly man walking with his dog, with both figures captured in a moment of contemplation and reflection', 250, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(62, 24, 3, 8, 1, 'The Hidden City', 'This digital artwork features a fantastical cityscape hidden among the clouds, with sweeping curves and intricate details', 99, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-/*insert into ARTWORK VALUES(63, 18, 1, 8, 1,);
-insert into ARTWORK VALUES(64, 9, 1, 11, 1,);
-insert into ARTWORK VALUES(65, 10, 1, 11, 1,);
-insert into ARTWORK VALUES(66, 5, 1, 11, 1,);*/
+insert into ARTWORK VALUES(63, 18, 5, 8, 1, 'Nostalgia', 'This sketch depicts a young woman gazing out a window with a wistful expression', 167, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(64, 9, 5, 11, 1, 'The Dancer', 'This sketch features a dancer in motion, captured in mid-leap', 139, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(65, 10, 4, 11, 1, 'The Lonely Tree', 'This photograph features a solitary tree on a vast desert landscape', 275, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(66, 5, 4, 11, 1, 'The Lost City', 'This photograph captures the ruins of an ancient city, slowly being overtaken by nature', 221, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(67, 6, 3, 18, 1, 'Frost', 'A digital painting of a winter forest, featuring intricate details of ice crystals and snow-covered trees.', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(68, 15, 7, 19, 1, 'Seafoam', 'A delicate glass sculpture of a seashell, with intricate details that capture the beauty of the natural world', 75, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(69, 26, 7, 18, 1, 'Celestial Bodies', 'A series of glass orbs in various sizes and colors, each one representing a different planet or celestial body in our solar system', 300, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(70, 12, 6, 20, 1, 'Waves', 'A large-scale tapestry that depicts the ebb and flow of ocean waves, with layers of blues and greens that create a sense of movement', 250, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(71, 22, 6, 19, 1, 'Moonlit Garden', 'A tapestry that captures the beauty of a nighttime garden, with delicate flowers and vines illuminated by the light of the moon', 275, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(72, 18, 3, 20, 1, 'The Phoenix', 'A vibrant glass sculpture of a bird in flight, with swirling colors that evoke the mythical creatures fiery rebirth', 85, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(73, 5, 3, NULL, 1, 'The Electric Garden', 'a digital painting featuring a surreal landscape with glowing flowers and swirling vines', 115, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(74, 1, 3, NULL, 1, 'Code Dreams', 'a digital painting of a woman dreaming in code, with lines of programming language flowing around her', 143, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(75, 17, 2, NULL, 1, 'The Whispere', 'a bronze sculpture of a woman with flowing hair, leaning in to listen to a small bird perched on her hand', 275, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(76, 13, 4, NULL, 1, 'Elysium', 'A glass sculpture that features a series of overlapping, translucent layers that create a sense of depth and movement', 140, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 COMMIT;
 
 --update exhibition status in table online exhibition based on current date
@@ -584,6 +620,14 @@ JOIN USERS ON USERS.UserID = ARTWORK.UserID
 where USERS.FirstName = 'Maria' AND USERS.LastName = 'Garcia' AND ARTWORK.Status='Not Available';
 COMMIT;
 
+--list of active exhibition artworks
+CREATE OR REPLACE VIEW ACTIVE_EXHIBITION_ARTWORK AS
+SELECT ARTWORK.ArtworkID, ARTWORK.Name, ARTWORK.Description, ARTWORK.Amount, ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id
+FROM ARTWORK
+JOIN ONLINE_EXHIBITION ON ONLINE_EXHIBITION.ExhibitionID = ARTWORK.ExhibitionID
+WHERE ONLINE_EXHIBITION.ExhibitionStatus = 'Active';
+COMMIT;
+
 --list of all unsold artwork details
 CREATE OR REPLACE VIEW ALL_UNSOLD_ARTWORK AS
 SELECT USERS.FirstName as ARTIST_FIRST_NAME,Users.LastName AS ARTIST_LAST_NAME,ARTWORK.Name,ARTWORK.Amount 
@@ -591,3 +635,12 @@ FROM ARTWORK
 JOIN USERS ON USERS.UserID = Artwork.UserID
 where ARTWORK.Status = 'Available';
 COMMIT;
+
+--artwork info
+CREATE OR REPLACE VIEW ARTWORK_INFO AS 
+SELECT ARTWORK.ArtworkID, ARTWORK.Name,ARTWORK.Description,ARTWORK.Status,ARTWORK.Amount
+FROM ARTWORK
+JOIN USERS ON USERS.UserID = ARTWORK.UserID
+Where ARTWORK.Status = 'Available';
+COMMIT;
+
