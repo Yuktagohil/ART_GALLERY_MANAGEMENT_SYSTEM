@@ -139,7 +139,7 @@ truncate table CONTACT;
 truncate table SHIPPER;
 truncate table ONLINE_EXHIBITION;
 
---Insert values in table USER_ROLE
+--insert values in table USER_ROLE
 insert into USER_ROLE values (1,'Admin');
 insert into USER_ROLE values (2,'Artist');
 insert into USER_ROLE values (3,'Customer');
@@ -289,6 +289,7 @@ insert into ART_CATEGORY VALUES(10, 'Sketching');
 insert into ART_CATEGORY VALUES(11, 'Pottery');
 COMMIT;
 
+--insert values in table artcategory
 insert into ARTWORK VALUES(1,2, 2, 1, 1, 'The Banjo Lesson', 'A Painting depicting an elderly man teaching a young boy how to play the banjo', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(2,3, 1, 2, 2, 'Autumnal Equinox', 'A Painting depicting changing colors of autumn leaves against blue sky', 99, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(3,4, 11, 5, 3, 'Dreamy Garden', 'A pottery piece with a whimsical design of flowers and vines', 140, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
