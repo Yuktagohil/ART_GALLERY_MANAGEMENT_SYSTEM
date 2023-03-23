@@ -132,7 +132,7 @@ Create table ORDERS(
         TransactionMethod varchar(45) NOT NULL,
         TransactionStatus varchar(45) NOT NULL,
         OrderStatus varchar(45) NOT NULL,
-        ShippingStatus varchar(45) NOT NULL,
+        ShippingStatus varchar(80) NOT NULL,
         ShippingAddress varchar(45) NOT NULL,
         OrderTimeDate TIMESTAMP NOT NULL,
         TotalAmount number NOT NULL,
@@ -317,43 +317,43 @@ TO_DATE('2023/03/09 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
 COMMIT;
 
 INSERT INTO ORDERS
-VALUES (1, 1, 3, 4, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '123 XYZ street', TO_DATE('20-MAR-2023 12:33:44', 'DD-MON-YYYY HH24:MI:SS'), 30);
+VALUES (1, 1, 3, 476523654824, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '123 XYZ street', TO_DATE('20-MAR-2023 12:33:44', 'DD-MON-YYYY HH24:MI:SS'), 30);
 
 INSERT INTO ORDERS
-VALUES (2, 2, 4, 5, 'net banking', 'complete', 'Confirmed', 'Shipped', '345 MNO street', TO_DATE('01-MAR-2023 13:30:00', 'DD-MON-YYYY HH24:MI:SS'), 35);
+VALUES (2, 2, 4, 567252464393, 'net banking', 'complete', 'Confirmed', 'Shipped', '345 MNO street', TO_DATE('01-MAR-2023 13:30:00', 'DD-MON-YYYY HH24:MI:SS'), 35);
 
 INSERT INTO ORDERS
-VALUES (3, 3, 3, 5, 'wire transfer', 'complete', 'Confirmed', 'Transit', '123 MNP street', TO_DATE('09-MAR-2023 12:54:40', 'DD-MON-YYYY HH24:MI:SS'), 60);
+VALUES (3, 3, 3, 545475937224, 'wire transfer', 'complete', 'Confirmed', 'Transit', '123 MNP street', TO_DATE('09-MAR-2023 12:54:40', 'DD-MON-YYYY HH24:MI:SS'), 60);
 
 INSERT INTO ORDERS
-VALUES (4, 4, 4, 5, 'debit', 'complete', 'Confirmed', 'Shipped', '1 BC street', TO_DATE('08-MAR-2023 12:34:45', 'DD-MON-YYYY HH24:MI:SS'), 20);
+VALUES (4, 4, 4, 527877595957, 'debit', 'complete', 'Confirmed', 'Shipped', '1 BC street', TO_DATE('08-MAR-2023 12:34:45', 'DD-MON-YYYY HH24:MI:SS'), 20);
 
 INSERT INTO ORDERS
-VALUES (5, 5, 1, 4, 'wire transfer', 'complete', 'Confirmed', 'Transit', '30 ABC street', TO_DATE('07-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 45);
+VALUES (5, 5, 1, 492865850176, 'wire transfer', 'complete', 'Confirmed', 'Transit', '30 ABC street', TO_DATE('07-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 45);
 
 INSERT INTO ORDERS
-VALUES (6, 6, 1, 4, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '40 ION street', TO_DATE('20-MAR-2023 16:33:44', 'DD-MON-YYYY HH24:MI:SS'), 150);
+VALUES (6, 6, 1, 401636848464, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('20-MAR-2023 16:33:44', 'DD-MON-YYYY HH24:MI:SS'), 150);
 
 INSERT INTO ORDERS
-VALUES (7, 7, 3, 3, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('16-MAR-2023 19:06:00', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (7, 7, 3, 3045975648585, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('16-MAR-2023 19:06:00', 'DD-MON-YYYY HH24:MI:SS'), 59);
 
 INSERT INTO ORDERS
-VALUES (8, 8, 1, 4, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '40 ION street', TO_DATE('19-MAR-2023 09:00:06', 'DD-MON-YYYY HH24:MI:SS'), 150);
+VALUES (8, 8, 1, 4874500235552, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('19-MAR-2023 09:00:06', 'DD-MON-YYYY HH24:MI:SS'), 150);
 
 INSERT INTO ORDERS
-VALUES (9, 9, 3, 3, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('09-MAR-2023 07:33:40', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (9, 9, 3, 3858060877590, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('09-MAR-2023 07:33:40', 'DD-MON-YYYY HH24:MI:SS'), 59);
 
 INSERT INTO ORDERS
-VALUES (10, 10, 3, 4, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '9 NULL street',TO_DATE('21-MAR-2023 23:45:09', 'DD-MON-YYYY HH24:MI:SS'), 60);
+VALUES (10, 10, 3, 476567598877, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '9 NULL street',TO_DATE('21-MAR-2023 23:45:09', 'DD-MON-YYYY HH24:MI:SS'), 60);
 
 INSERT INTO ORDERS
-VALUES (11, 11, 3, 5, 'debit', 'complete', 'Confirmed', 'Shipped', '8 ADC street', TO_DATE('08-MAR-2023 03:30:44', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (11, 11, 3, 554685972838, 'debit', 'complete', 'Confirmed', 'Shipped', '8 ADC street', TO_DATE('08-MAR-2023 03:30:44', 'DD-MON-YYYY HH24:MI:SS'), 59);
 
 INSERT INTO ORDERS
 VALUES (12, 12, 3, 3, 'net banking', 'complete', 'Confirmed', 'Shipped', '79 PEAK street', TO_DATE('20-MAR-2023 00:30:44', 'DD-MON-YYYY HH24:MI:SS'), 78);
 
 INSERT INTO ORDERS
-VALUES (13, 13, 2, 3, 'debit', 'complete', 'Confirmed', 'Shipped', '134 SEEP street', TO_DATE('09-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 90);
+VALUES (13, 13, 2, 3, 'debit', 'complete', 'Confirmed', 'Preparing to be Shipped', '134 SEEP street', TO_DATE('09-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 90);
 INSERT INTO ORDERS
 VALUES (14, 14, 3, 1, 'credit', 'complete', 'Confirmed', 'Shipped', '143 LOVE street',TO_DATE('22-MAR-2023 20:30:44', 'DD-MON-YYYY HH24:MI:SS'), 98);
 
@@ -384,7 +384,7 @@ INSERT INTO ORDERS
 VALUES (23, 23, 1, 4, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '40 BEAN street', TO_DATE('16-MAR-2023 09:20:06', 'DD-MON-YYYY HH24:MI:SS'), 60);
 
 INSERT INTO ORDERS
-VALUES (24, 24, 3, 3, 'debit', 'complete', 'Confirmed', 'Shipped', '98 SOLD street', TO_DATE('04-MAR-2023 17:40:40', 'DD-MON-YYYY HH24:MI:SS'), 49);
+VALUES (24, 24, 3, 3, 'debit', 'complete', 'Confirmed', 'Preparing to be Shipped', '98 SOLD street', TO_DATE('04-MAR-2023 17:40:40', 'DD-MON-YYYY HH24:MI:SS'), 49);
 
 INSERT INTO ORDERS
 VALUES (25, 25, 3, 4, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '56 HARVARD street',TO_DATE('21-MAR-2023 20:45:09', 'DD-MON-YYYY HH24:MI:SS'), 40);
@@ -488,44 +488,44 @@ insert into ARTWORK VALUES(5,16, 6, 12, 5, 'Mystical Forest', 'A tapestry with a
 insert into ARTWORK VALUES(6,13, 8, 10, 6, 'The Underwater World', 'A mosaic artwork depicting an ocean scene with fish and plants', 55, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(7,3, 1, 2, 7, 'Reflections', 'A landscape painting of a serene lake surrounded by mountains', 115, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(8,12, 5, 5, 8, 'The Power of Nature', 'A sketch of a tree with a sense of strength and resilience', 75, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(9,20, 5, 17, 9, 'Sketch of Dream', 'This artwork is a black and white pencil drawing of a surreal landscape', 126, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(10,21, 1, 16, 10, 'The Lonely Sailor', 'A portrait painting of a sailor standing on a rocky shore', 85, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp')); 
+insert into ARTWORK VALUES(9,20, 5, 17, 4, 'Sketch of Dream', 'This artwork is a black and white pencil drawing of a surreal landscape', 126, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(10,21, 1, 16, 3, 'The Lonely Sailor', 'A portrait painting of a sailor standing on a rocky shore', 85, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp')); 
 insert into ARTWORK VAlUES(11,24, 6, 11, 11, 'Scared Cows', 'a series of tapestries featuring colorful, abstracted depictions of cows', 115, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(12,4, 10, 5, 12, 'Timeless Tradition', 'A pottery piece with a classic design inspired by traditional pottery', 210, 'AVailable', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(13,30, 8, NULL, 13, 'Renaissance Beauty', 'A mosaic artwork depicting a classical portrait of a woman with intricate details', 184, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(13,30, 8, NULL, 6, 'Renaissance Beauty', 'A mosaic artwork depicting a classical portrait of a woman with intricate details', 184, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(14,12, 5, 9, 14, 'The Leaf and the Fire', 'an abstract sketching featuring bold, gestural brushstrokes and a muted color palette', 55, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(15,30, 8, 14, 15, 'Beneath the Waves', 'A mosaic artwork depicting an underwater scene with fish and coral', 250, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(16,4, 10, 5, 15, 'Rustic Charm', 'A pottery piece with a rustic and natural texture', 275, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(17,5, 3, 6, 15, 'Digital Dreamscape', 'A digital painting of a dreamlike landscape with surreal colors and shapes', 110, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(18,13, 8, 10, 15, 'The Dance of Life', 'A mosaic artwork with a vibrant design of swirling colors and figures', 199, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(19,26, 9, 15, 15, 'Spirit of the Forest', 'A wood sculpture depicting a tree with a sense of life and energy', 142, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(19,26, 9, 15, 1, 'Spirit of the Forest', 'A wood sculpture depicting a tree with a sense of life and energy', 142, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(20,2, 2, 1, 15, 'Cosmic Ocean', 'A sculpture of a swirling galaxy made from wire and lights', 139, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(21,5, 3, 6, 15, 'Pixelated Paradise', 'A digital artwork with a retro, pixelated aesthetic of a tropical island scene', 135, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(22,21, 1, NULL, 15, 'A Beautiful Mess', 'An abstract painting with vibrant colors and dynamic brushstrokes', 150, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(22,21, 1, NULL, NULL, 'A Beautiful Mess', 'An abstract painting with vibrant colors and dynamic brushstrokes', 150, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(23,30, 8, 14, 15, 'The Enchanted Forest', 'A mosaic artwork depicting a magical forest with trees and animals', 99, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(24,18, 7, 13, 15, 'Underwater Garden', 'A glass sculpture of a coral reef with vibrant colors and intricate details', 75, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(25,3, 1, 2, 15, 'The Garden of Dreams', 'A surrealistic painting with fantastical imagery of plants and animals', 55, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(26,21, 1, 16, 15, 'Dark Horizons', 'A moody painting of a stormy sea with dark clouds overhead', 89, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(26,21, 1, 16, 2, 'Dark Horizons', 'A moody painting of a stormy sea with dark clouds overhead', 89, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(27,13, 8, 10, 15, 'Celestial Wonder', 'A mosaic artwork with an abstract design of stars and planets', 85, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(28,24, 3, 11, 15, 'Rustic Charm', 'A tapestry with a cozy design of a cabin in the woods with trees and animals', 150, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(29,18, 7, 13, 15, 'Rainbow Vortex', 'A glass sculpture of a swirling vortex with multiple colors and patterns', 221, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(30,26, 9, NULL, 15, 'The Beauty of Chaos', 'A wood sculpture with a chaotic design of intersecting shapes and forms', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(30,26, 9, NULL, NULL, 'The Beauty of Chaos', 'A wood sculpture with a chaotic design of intersecting shapes and forms', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(31,2, 2, 1, 15, 'Glimmering Sea', 'A sculpture of a school of fish made from polished metal', 175, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(32,16, 6, 12, 15, 'Spectral Symphony', 'A tapestry with a colorful abstract design reminiscent of stained glass windows', 95, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(33,24, 3, 11, 15, 'Tribal Rhythms', 'A tapestry with a bold pattern inspired by tribal designs in black and white', 80, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(34,18, 7, 13, 15, 'Light and Shadow', 'A glass sculpture of an important technique to represent illusory space in painting', 214, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(35,20, 5, 17, 15, 'Inner Turmoil', 'A sketch of a person struggling with inner conflict with expressive lines and shading', 160, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(35,20, 5, 17, NULL, 'Inner Turmoil', 'A sketch of a person struggling with inner conflict with expressive lines and shading', 160, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(36,16, 6, 12, 15, 'Floral Serenity', 'A tapestry with a peaceful design of flowers and leaves in soft colors', 123, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(37,26, 9, 15, 15, 'Nature Symphony', 'A wood sculpture depicting a forest with a sense of harmony and balance', 65, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(37,26, 9, 15, 1, 'Nature Symphony', 'A wood sculpture depicting a forest with a sense of harmony and balance', 65, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(38,12, 5, 9, 15, 'The City at Night', 'A sketch of a city skyline at night with a sense of energy and excitement', 143, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(39,20, 5, NULL, 15, 'The Wonder of Wildlife', 'A sketch of an animal with a sense of curiosity and wildness', 120, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(39,20, 5, NULL, 5, 'The Wonder of Wildlife', 'A sketch of an animal with a sense of curiosity and wildness', 120, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(40,30, 8, 14, 15, 'Alexander Mosaic', 'A famous Roman mosaic depicting the Battle of Issus between Alexander the Great', 184, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(41,26, 9, 15, 15, 'Dainichi Nyorai', 'A wooden sculpture of the Buddhist deity Dainichi Nyorai', 104, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(42,21, 1, 16, 15, 'The Creation of Adam', 'A fresco painting by Michelangelo depicting the biblical scene of God creating Adam', 120, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(43,20, 5, 17, 15, 'The Human Condition', 'A sketch depicting a figure standing in front of a painting of a landscape', 95, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(41,26, 9, 15, NULL, 'Dainichi Nyorai', 'A wooden sculpture of the Buddhist deity Dainichi Nyorai', 104, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(42,21, 1, 16, 2, 'The Creation of Adam', 'A fresco painting by Michelangelo depicting the biblical scene of God creating Adam', 120, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(43,20, 5, 17, NULL, 'The Human Condition', 'A sketch depicting a figure standing in front of a painting of a landscape', 95, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(44,18, 7, 18, 15, 'Waterfall Chandelier', 'A grand chandelier made of crystal glass beads that simulate a waterfall', 50, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(45,30, 8, 19, 15, 'Islamic Mosaic Art', 'A rich tradition of mosaic,featuring intricate geometric patterns and calligraphy', 250, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(46,18, 7, 20, 15, 'The Four Seasons', 'A series of stained-glass windows depicting scenes from the four seasons', 220, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(45,30, 8, 19, NULL, 'Islamic Mosaic Art', 'A rich tradition of mosaic,featuring intricate geometric patterns and calligraphy', 250, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(46,18, 7, 20, 7, 'The Four Seasons', 'A series of stained-glass windows depicting scenes from the four seasons', 220, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(47,2, 2, NULL, 15, 'Venus de Milo', 'An ancient Greek statue believed to depict the goddess Aphrodite', 120, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(48,16, 6, NULL, 15, 'The Lady and the Unicorn', 'A series of six tapestries from the late Middle Ages depicting a lady and a unicorn', 100, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(49,24, 6, NULL, 15, 'Autumn Landscape', 'a large tapestry that features a range of colors and textures, evoking the rich colors of fall foliage', 300, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
