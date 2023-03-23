@@ -585,7 +585,15 @@ FROM ORDERS
 JOIN SHIPPER ON ORDERS.ShipperID = SHIPPER.ShipperID;
 COMMIT;
 
---artwork info
+--list of all unshipped orders
+CREATE OR REPLACE VIEW UNSHIPPED_ORDER_INFO AS
+SELECT ORDERS.OrderID, Orders.ShipperID, Orders.ShippingStatus, SHIPPER.CompanyName as SHIPPER_COMPANY, SHIPPER.EmailID as SHIPPER_EMAIL , SHIPPER.ContactNumber as SHIPPER_CONTACT
+FROM ORDERS
+JOIN SHIPPER ON ORDERS.ShipperID = SHIPPER.ShipperID
+WHERE Orders.ShippingStatus='Preparing to be Shipped';
+COMMIT;
+
+--list of available artwork in onlineartgallery
 CREATE OR REPLACE VIEW ARTWORK_INFO AS 
 SELECT ARTWORK.ArtworkID, ARTWORK.Name,ARTWORK.Description,ARTWORK.Status,ARTWORK.Amount
 FROM ARTWORK
@@ -594,5 +602,4 @@ Where ARTWORK.Status = 'Available';
 COMMIT;
 
 
-select * from artwork order by orderitemsid;
 
