@@ -316,6 +316,7 @@ insert into ONLINE_EXHIBITION VALUES(20, 18, TO_DATE('2023/03/03 14:02:44', 'yyy
 TO_DATE('2023/03/09 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
 COMMIT;
 
+--inser values in table ordeers
 INSERT INTO ORDERS
 VALUES (1, 1, 3, 4, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '123 XYZ street', TO_DATE('20-MAR-2023 12:33:44', 'DD-MON-YYYY HH24:MI:SS'), 30);
 
@@ -404,6 +405,7 @@ INSERT INTO ORDERS
 VALUES (30, 30, 3, 1, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MOND street', TO_DATE('10-MAR-2023 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 60);
 COMMIT;
 
+--insert values in table orderitems
 INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID)
 VALUES(1,1);
 INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID)
@@ -479,6 +481,7 @@ insert into ART_CATEGORY VALUES(9, 'Wood Sculpture');
 insert into ART_CATEGORY VALUES(10, 'Pottery');
 COMMIT;
 
+--insert values in table artwork
 insert into ARTWORK VALUES(1,2, 2, 1, 1, 'The Banjo Lesson', 'A Painting depicting an elderly man teaching a young boy how to play the banjo', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(2,3, 1, 2, 2, 'Autumnal Equinox', 'A Painting depicting changing colors of autumn leaves against blue sky', 99, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(3,4, 10, 5, 3, 'Dreamy Garden', 'A pottery piece with a whimsical design of flowers and vines', 140, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
@@ -541,10 +544,20 @@ insert into ARTWORK VALUES(59, 11, 4, 7, 1, 'The Abandoned Building', 'This phot
 insert into ARTWORK VALUES(60, 8, 5, 7, 1, 'Cityscape', 'This sketch captures the bustling energy and architectural details of a cityscape, with fine lines and careful attention to perspective', 300, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(61, 17, 4, 8, 1, 'Old Man and His Dog', 'This photograph features an elderly man walking with his dog, with both figures captured in a moment of contemplation and reflection', 250, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(62, 24, 3, 8, 1, 'The Hidden City', 'This digital artwork features a fantastical cityscape hidden among the clouds, with sweeping curves and intricate details', 99, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-/*insert into ARTWORK VALUES(63, 18, 1, 8, 1,);
-insert into ARTWORK VALUES(64, 9, 1, 11, 1,);
-insert into ARTWORK VALUES(65, 10, 1, 11, 1,);
-insert into ARTWORK VALUES(66, 5, 1, 11, 1,);*/
+insert into ARTWORK VALUES(63, 18, 5, 8, 1, 'Nostalgia', 'This sketch depicts a young woman gazing out a window with a wistful expression', 167, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(64, 9, 5, 11, 1, 'The Dancer', 'This sketch features a dancer in motion, captured in mid-leap', 139, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(65, 10, 4, 11, 1, 'The Lonely Tree', 'This photograph features a solitary tree on a vast desert landscape', 275, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(66, 5, 4, 11, 1, 'The Lost City', 'This photograph captures the ruins of an ancient city, slowly being overtaken by nature', 221, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(67, 6, 3, 18, 1, 'Frost', 'A digital painting of a winter forest, featuring intricate details of ice crystals and snow-covered trees.', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(68, 15, 7, 19, 1, 'Seafoam', 'A delicate glass sculpture of a seashell, with intricate details that capture the beauty of the natural world', 75, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(69, 26, 7, 18, 1, 'Celestial Bodies', 'A series of glass orbs in various sizes and colors, each one representing a different planet or celestial body in our solar system', 300, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(70, 12, 6, 20, 1, 'Waves', 'A large-scale tapestry that depicts the ebb and flow of ocean waves, with layers of blues and greens that create a sense of movement', 250, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(71, 22, 6, 19, 1, 'Moonlit Garden', 'A tapestry that captures the beauty of a nighttime garden, with delicate flowers and vines illuminated by the light of the moon', 275, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(72, 18, 3, 20, 1, 'The Phoenix', 'A vibrant glass sculpture of a bird in flight, with swirling colors that evoke the mythical creatures fiery rebirth', 85, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(73, 5, 3, NULL, 1, 'The Electric Garden', 'a digital painting featuring a surreal landscape with glowing flowers and swirling vines', 115, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(74, 1, 3, NULL, 1, 'Code Dreams', 'a digital painting of a woman dreaming in code, with lines of programming language flowing around her', 143, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(75, 17, 2, NULL, 1, 'The Whispere', 'a bronze sculpture of a woman with flowing hair, leaning in to listen to a small bird perched on her hand', 275, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(76, 13, 4, NULL, 1, 'Elysium', 'A glass sculpture that features a series of overlapping, translucent layers that create a sense of depth and movement', 140, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 COMMIT;
 
 --update exhibition status in table online exhibition based on current date
@@ -602,6 +615,14 @@ JOIN USERS ON USERS.UserID = ARTWORK.UserID
 where USERS.FirstName = 'Maria' AND USERS.LastName = 'Garcia' AND ARTWORK.Status='Not Available';
 COMMIT;
 
+--list of active exhibition artworks
+CREATE OR REPLACE VIEW ACTIVE_EXHIBITION_ARTWORK AS
+SELECT ARTWORK.ArtworkID, ARTWORK.Name, ARTWORK.Description, ARTWORK.Amount, ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id
+FROM ARTWORK
+JOIN ONLINE_EXHIBITION ON ONLINE_EXHIBITION.ExhibitionID = ARTWORK.ExhibitionID
+WHERE ONLINE_EXHIBITION.ExhibitionStatus = 'Active';
+COMMIT;
+
 --list of all unsold artwork details
 CREATE OR REPLACE VIEW ALL_UNSOLD_ARTWORK AS
 SELECT USERS.FirstName as ARTIST_FIRST_NAME,Users.LastName AS ARTIST_LAST_NAME,ARTWORK.Name,ARTWORK.Amount 
@@ -609,3 +630,12 @@ FROM ARTWORK
 JOIN USERS ON USERS.UserID = Artwork.UserID
 where ARTWORK.Status = 'Available';
 COMMIT;
+
+--artwork info
+CREATE OR REPLACE VIEW ARTWORK_INFO AS 
+SELECT ARTWORK.ArtworkID, ARTWORK.Name,ARTWORK.Description,ARTWORK.Status,ARTWORK.Amount
+FROM ARTWORK
+JOIN USERS ON USERS.UserID = ARTWORK.UserID
+Where ARTWORK.Status = 'Available';
+COMMIT;
+
