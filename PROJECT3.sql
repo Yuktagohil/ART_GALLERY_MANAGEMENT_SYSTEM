@@ -352,65 +352,91 @@ COMMIT;
 
 --inser values in table orders
 INSERT INTO ORDERS
-VALUES (1, 1, 3, 476523654824, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '123 XYZ street', TO_DATE('20-MAR-2023 12:33:44', 'DD-MON-YYYY HH24:MI:SS'), 30);
+VALUES (1, 6, 3, 476523654824, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '123 XYZ street', TO_DATE('20-MAR-2023 12:33:44', 'DD-MON-YYYY HH24:MI:SS'), 30);
+
 INSERT INTO ORDERS
-VALUES (2, 2, 4, 567252464393, 'net banking', 'complete', 'Confirmed', 'Shipped', '345 MNO street', TO_DATE('01-MAR-2023 13:30:00', 'DD-MON-YYYY HH24:MI:SS'), 35);
+VALUES (2, 7, 4, 567252464393, 'net banking', 'complete', 'Confirmed', 'Shipped', '345 MNO street', TO_DATE('01-MAR-2023 13:30:00', 'DD-MON-YYYY HH24:MI:SS'), 35);
+
 INSERT INTO ORDERS
-VALUES (3, 3, 3, 545475937224, 'wire transfer', 'complete', 'Confirmed', 'Transit', '123 MNP street', TO_DATE('09-MAR-2023 12:54:40', 'DD-MON-YYYY HH24:MI:SS'), 60);
+VALUES (3, 8, 3, 545475937224, 'wire transfer', 'complete', 'Confirmed', 'Transit', '123 MNP street', TO_DATE('09-MAR-2023 12:54:40', 'DD-MON-YYYY HH24:MI:SS'), 60);
+
 INSERT INTO ORDERS
-VALUES (4, 4, 4, 527877595957, 'debit', 'complete', 'Confirmed', 'Shipped', '1 BC street', TO_DATE('08-MAR-2023 12:34:45', 'DD-MON-YYYY HH24:MI:SS'), 20);
+VALUES (4, 9, 4, 527877595957, 'debit', 'complete', 'Confirmed', 'Shipped', '1 BC street', TO_DATE('08-MAR-2023 12:34:45', 'DD-MON-YYYY HH24:MI:SS'), 20);
+
 INSERT INTO ORDERS
-VALUES (5, 5, 1, 492865850176, 'wire transfer', 'complete', 'Confirmed', 'Transit', '30 ABC street', TO_DATE('07-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 45);
+VALUES (5, 10, 1, 492865850176, 'wire transfer', 'complete', 'Confirmed', 'Transit', '30 ABC street', TO_DATE('07-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 45);
+
 INSERT INTO ORDERS
-VALUES (6, 6, 1, 401636848464, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('20-MAR-2023 16:33:44', 'DD-MON-YYYY HH24:MI:SS'), 150);
+VALUES (6, 11, 1, 401636848464, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('20-MAR-2023 16:33:44', 'DD-MON-YYYY HH24:MI:SS'), 150);
+
 INSERT INTO ORDERS
-VALUES (7, 7, 3, 3045975648585, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('16-MAR-2023 19:06:00', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (7, 14, 3, 3045975648585, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('16-MAR-2023 19:06:00', 'DD-MON-YYYY HH24:MI:SS'), 59);
+
 INSERT INTO ORDERS
-VALUES (8, 8, 1, 4874500235552, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('19-MAR-2023 09:00:06', 'DD-MON-YYYY HH24:MI:SS'), 150);
+VALUES (8, 15, 1, 4874500235552, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('19-MAR-2023 09:00:06', 'DD-MON-YYYY HH24:MI:SS'), 150);
+
 INSERT INTO ORDERS
-VALUES (9, 9, 3, 3858060877590, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('09-MAR-2023 07:33:40', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (9, 17, 3, 3858060877590, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('09-MAR-2023 07:33:40', 'DD-MON-YYYY HH24:MI:SS'), 59);
+
 INSERT INTO ORDERS
-VALUES (10, 10, 3, 476567598877, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '9 NULL street',TO_DATE('21-MAR-2023 23:45:09', 'DD-MON-YYYY HH24:MI:SS'), 60);
+VALUES (10, 19, 3, 476567598877, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '9 NULL street',TO_DATE('21-MAR-2023 23:45:09', 'DD-MON-YYYY HH24:MI:SS'), 60);
+
 INSERT INTO ORDERS
-VALUES (11, 11, 3, 554685972838, 'debit', 'complete', 'Confirmed', 'Shipped', '8 ADC street', TO_DATE('08-MAR-2023 03:30:44', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (11, 22, 3, 554685972838, 'debit', 'complete', 'Confirmed', 'Shipped', '8 ADC street', TO_DATE('08-MAR-2023 03:30:44', 'DD-MON-YYYY HH24:MI:SS'), 59);
+
 INSERT INTO ORDERS
-VALUES (12, 12, 3, 3, 'net banking', 'complete', 'Confirmed', 'Shipped', '79 PEAK street', TO_DATE('20-MAR-2023 00:30:44', 'DD-MON-YYYY HH24:MI:SS'), 78);
+VALUES (12, 23, 3, 3, 'net banking', 'complete', 'Confirmed', 'Shipped', '79 PEAK street', TO_DATE('20-MAR-2023 00:30:44', 'DD-MON-YYYY HH24:MI:SS'), 78);
+
 INSERT INTO ORDERS
-VALUES (13, 13, 2, 3, 'debit', 'complete', 'Confirmed', 'Preparing to be Shipped', '134 SEEP street', TO_DATE('09-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 90);
+VALUES (13, 25, 2, 3, 'debit', 'complete', 'Confirmed', 'Preparing to be Shipped', '134 SEEP street', TO_DATE('09-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 90);
 INSERT INTO ORDERS
-VALUES (14, 14, 3, 1, 'credit', 'complete', 'Confirmed', 'Shipped', '143 LOVE street',TO_DATE('22-MAR-2023 20:30:44', 'DD-MON-YYYY HH24:MI:SS'), 98);
+VALUES (14, 27, 3, 1, 'credit', 'complete', 'Confirmed', 'Shipped', '143 LOVE street',TO_DATE('22-MAR-2023 20:30:44', 'DD-MON-YYYY HH24:MI:SS'), 98);
+
 INSERT INTO ORDERS
-VALUES (15, 15, 3, 1, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-MAR-2023 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+VALUES (15, 28, 3, 1, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-MAR-2023 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 INSERT INTO ORDERS
-VALUES (16, 16, 3, 4, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '234 XYZ street', TO_DATE('08-MAR-2023 10:33:44', 'DD-MON-YYYY HH24:MI:SS'), 60);
+VALUES (16, 29, 3, 4, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '234 XYZ street', TO_DATE('08-MAR-2023 10:33:44', 'DD-MON-YYYY HH24:MI:SS'), 60);
+
 INSERT INTO ORDERS
-VALUES (17, 17, 4, 5, 'net banking', 'complete', 'Confirmed', 'Shipped', '345 PQR street', TO_DATE('02-MAR-2023 15:30:00', 'DD-MON-YYYY HH24:MI:SS'), 90);
+VALUES (17, 6, 4, 5, 'net banking', 'complete', 'Confirmed', 'Shipped', '345 PQR street', TO_DATE('02-MAR-2023 15:30:00', 'DD-MON-YYYY HH24:MI:SS'), 90);
+
 INSERT INTO ORDERS
-VALUES (18, 18, 3, 5, 'wire transfer', 'complete', 'Confirmed', 'Transit', '234 MNP street', TO_DATE('06-MAR-2023 12:50:40', 'DD-MON-YYYY HH24:MI:SS'), 40);
+VALUES (18, 7, 3, 5, 'wire transfer', 'complete', 'Confirmed', 'Transit', '234 MNP street', TO_DATE('06-MAR-2023 12:50:40', 'DD-MON-YYYY HH24:MI:SS'), 40);
+
 INSERT INTO ORDERS
-VALUES (19, 19, 4, 5, 'debit', 'complete', 'Confirmed', 'Shipped', '1 BEC street', TO_DATE('08-MAR-2023 12:34:00', 'DD-MON-YYYY HH24:MI:SS'), 100);
+VALUES (19, 8, 4, 5, 'debit', 'complete', 'Confirmed', 'Shipped', '1 BEC street', TO_DATE('08-MAR-2023 12:34:00', 'DD-MON-YYYY HH24:MI:SS'), 100);
+
 INSERT INTO ORDERS
-VALUES (20, 20, 1, 4, 'wire transfer', 'complete', 'Confirmed', 'Transit', '30 BCD street', TO_DATE('07-MAR-2023 10:40:44', 'DD-MON-YYYY HH24:MI:SS'), 45);
+VALUES (20, 9, 1, 4, 'wire transfer', 'complete', 'Confirmed', 'Transit', '30 BCD street', TO_DATE('07-MAR-2023 10:40:44', 'DD-MON-YYYY HH24:MI:SS'), 45);
+
 INSERT INTO ORDERS
-VALUES (21, 21, 1, 4, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '40 PON street', TO_DATE('03-MAR-2023 18:33:44', 'DD-MON-YYYY HH24:MI:SS'), 100);
+VALUES (21, 10, 1, 4, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '40 PON street', TO_DATE('03-MAR-2023 18:33:44', 'DD-MON-YYYY HH24:MI:SS'), 100);
+
 INSERT INTO ORDERS
-VALUES (22, 22, 3, 3, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MILL street', TO_DATE('10-MAR-2023 19:36:00', 'DD-MON-YYYY HH24:MI:SS'), 50);
+VALUES (22, 11, 3, 3, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MILL street', TO_DATE('10-MAR-2023 19:36:00', 'DD-MON-YYYY HH24:MI:SS'), 50);
+
 INSERT INTO ORDERS
-VALUES (23, 23, 1, 4, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '40 BEAN street', TO_DATE('16-MAR-2023 09:20:06', 'DD-MON-YYYY HH24:MI:SS'), 60);
+VALUES (23, 14, 1, 4, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '40 BEAN street', TO_DATE('16-MAR-2023 09:20:06', 'DD-MON-YYYY HH24:MI:SS'), 60);
+
 INSERT INTO ORDERS
-VALUES (24, 24, 3, 3, 'debit', 'complete', 'Confirmed', 'Preparing to be Shipped', '98 SOLD street', TO_DATE('04-MAR-2023 17:40:40', 'DD-MON-YYYY HH24:MI:SS'), 49);
+VALUES (24, 15, 3, 3, 'debit', 'complete', 'Confirmed', 'Preparing to be Shipped', '98 SOLD street', TO_DATE('04-MAR-2023 17:40:40', 'DD-MON-YYYY HH24:MI:SS'), 49);
+
 INSERT INTO ORDERS
-VALUES (25, 25, 3, 4, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '56 HARVARD street',TO_DATE('21-MAR-2023 20:45:09', 'DD-MON-YYYY HH24:MI:SS'), 40);
+VALUES (25, 15, 3, 4, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '56 HARVARD street',TO_DATE('21-MAR-2023 20:45:09', 'DD-MON-YYYY HH24:MI:SS'), 40);
+
 INSERT INTO ORDERS
-VALUES (26, 26, 3, 5, 'debit', 'complete', 'Confirmed', 'Shipped', '8 BDC street', TO_DATE('08-MAR-2023 13:30:44', 'DD-MON-YYYY HH24:MI:SS'), 67);
+VALUES (26, 17, 3, 5, 'debit', 'complete', 'Confirmed', 'Shipped', '8 BDC street', TO_DATE('08-MAR-2023 13:30:44', 'DD-MON-YYYY HH24:MI:SS'), 67);
+
 INSERT INTO ORDERS
-VALUES (27, 27, 3, 3, 'net banking', 'complete', 'Confirmed', 'Shipped', '79 SELL street', TO_DATE('22-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 70);
+VALUES (27, 19, 3, 3, 'net banking', 'complete', 'Confirmed', 'Shipped', '79 SELL street', TO_DATE('22-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 70);
+
 INSERT INTO ORDERS
-VALUES (28, 28, 2, 3, 'debit', 'complete', 'Confirmed', 'Shipped', '14 SEEP street', TO_DATE('09-MAR-2023 10:39:44', 'DD-MON-YYYY HH24:MI:SS'), 230);
+VALUES (28, 22, 2, 3, 'debit', 'complete', 'Confirmed', 'Shipped', '14 SEEP street', TO_DATE('09-MAR-2023 10:39:44', 'DD-MON-YYYY HH24:MI:SS'), 230);
 INSERT INTO ORDERS
-VALUES (29, 29, 3, 1, 'credit', 'complete', 'Confirmed', 'Shipped', '893 LOVE street',TO_DATE('14-MAR-2023 20:30:44', 'DD-MON-YYYY HH24:MI:SS'), 94);
+VALUES (29, 23, 3, 1, 'credit', 'complete', 'Confirmed', 'Shipped', '893 LOVE street',TO_DATE('14-MAR-2023 20:30:44', 'DD-MON-YYYY HH24:MI:SS'), 94);
+
 INSERT INTO ORDERS
-VALUES (30, 30, 3, 1, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MOND street', TO_DATE('10-MAR-2023 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 60);
+VALUES (30, 25, 3, 1, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MOND street', TO_DATE('10-MAR-2023 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 60);
 COMMIT;
 
 --insert values in table orderitems
