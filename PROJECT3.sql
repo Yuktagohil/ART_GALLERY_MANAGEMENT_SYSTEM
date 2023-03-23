@@ -636,6 +636,13 @@ JOIN USERS ON USERS.UserID = Artwork.UserID
 where ARTWORK.Status = 'Available';
 COMMIT;
 
+--list of all orders and their shipper info
+CREATE OR REPLACE VIEW ORDER_SHIPPER_INFO AS
+SELECT ORDERS.OrderID, Orders.ShipperID, Orders.ShippingStatus, SHIPPER.CompanyName as SHIPPER_COMPANY, SHIPPER.EmailID as SHIPPER_EMAIL , SHIPPER.ContactNumber as SHIPPER_CONTACT
+FROM ORDERS
+JOIN SHIPPER ON ORDERS.ShipperID = SHIPPER.ShipperID;
+COMMIT;
+
 --artwork info
 CREATE OR REPLACE VIEW ARTWORK_INFO AS 
 SELECT ARTWORK.ArtworkID, ARTWORK.Name,ARTWORK.Description,ARTWORK.Status,ARTWORK.Amount
@@ -643,4 +650,5 @@ FROM ARTWORK
 JOIN USERS ON USERS.UserID = ARTWORK.UserID
 Where ARTWORK.Status = 'Available';
 COMMIT;
+
 
