@@ -98,8 +98,10 @@ Speciality varchar(45),
 Nationality varchar(45));
 
 CREATE table CONTACT(
-ContactID int NOT NULL PRIMARY KEY,
-UserID int REFERENCES USERS (UserID),
+ContactID integer NOT NULL PRIMARY KEY,
+UserID integer NOT NULL,
+FOREIGN KEY (UserID)
+REFERENCES USERS (UserID),
 ContactNumber varchar(10) UNIQUE NOT NULL,
 AddressLine1 varchar(45) NOT NULL,
 AddressLine2 varchar(45) NOT NULL,
@@ -118,33 +120,37 @@ EmailID varchar(45) NOT NULL
 
 Create table ONLINE_EXHIBITION(
 ExhibitionID integer NOT NULL PRIMARY KEY,
-UserID integer REFERENCES USERS(UserId),
+UserID integer NOT NULL,
+FOREIGN KEY (UserID)
+REFERENCES USERS(UserId),
 ExhibitionStartDateTime DATE NOT NULL,
 ExhibitionEndDateTime DATE NOT NULL,
 ExhibitionStatus varchar(10) NOT NULL
 );
 
 Create table ORDERS(
-        OrderID integer NOT NULL PRIMARY KEY,
-        UserID integer NOT NULL,
-        ShipperID integer NOT NULL,
-        TransactionID Number NOT NULL,
-        TransactionMethod varchar(45) NOT NULL,
-        TransactionStatus varchar(45) NOT NULL,
-        OrderStatus varchar(45) NOT NULL,
-        ShippingStatus varchar(80) NOT NULL,
-        ShippingAddress varchar(45) NOT NULL,
-        OrderTimeDate TIMESTAMP NOT NULL,
-        TotalAmount number NOT NULL,
-        FOREIGN KEY (UserID) REFERENCES USERS (UserID),
-        FOREIGN KEY (ShipperID) REFERENCES SHIPPER (ShipperID)
+OrderID integer NOT NULL PRIMARY KEY,
+UserID integer NOT NULL,
+FOREIGN KEY (UserID) 
+REFERENCES USERS (UserID),
+ShipperID integer NOT NULL,
+FOREIGN KEY (ShipperID) 
+REFERENCES SHIPPER (ShipperID),
+TransactionID Number NOT NULL,
+TransactionMethod varchar(45) NOT NULL,
+TransactionStatus varchar(45) NOT NULL,
+OrderStatus varchar(45) NOT NULL,
+ShippingStatus varchar(80) NOT NULL,
+ShippingAddress varchar(45) NOT NULL,
+OrderTimeDate TIMESTAMP NOT NULL,
+TotalAmount number NOT NULL
 );
 
 
 Create table ORDER_ITEMS(
-        OrderItemsID integer NOT NULL PRIMARY KEY,
-        OrderID integer NOT NULL,
-        FOREIGN KEY (OrderID) REFERENCES ORDERS (OrderID)
+OrderItemsID integer NOT NULL PRIMARY KEY,
+OrderID integer NOT NULL,
+FOREIGN KEY (OrderID) REFERENCES ORDERS (OrderID)
 );
 
 Create table ART_CATEGORY(
@@ -260,7 +266,7 @@ INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2
 VALUES (20,3, 6987562100, 'Mission Hill', 'Park Drive', 'Wichita', 'KS', 'USA', 06986);
 COMMIT;
 
---insert values in table contact
+--insert values in table shipper
 insert into SHIPPER VALUES(1, 'FedEx Corp', '5857643569','fedex@gmail.com');
 insert into SHIPPER VALUES(2, 'UPS Inc', '6788943251','usps@gmail.com');
 insert into SHIPPER VALUES(3, 'XPO Logistics', '8007552728','trailerinfo@xpo.com');
@@ -316,94 +322,70 @@ insert into ONLINE_EXHIBITION VALUES(20, 18, TO_DATE('2023/03/03 14:02:44', 'yyy
 TO_DATE('2023/03/09 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
 COMMIT;
 
+--insert values in table order
 INSERT INTO ORDERS
 VALUES (1, 1, 3, 476523654824, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '123 XYZ street', TO_DATE('20-MAR-2023 12:33:44', 'DD-MON-YYYY HH24:MI:SS'), 30);
-
 INSERT INTO ORDERS
 VALUES (2, 2, 4, 567252464393, 'net banking', 'complete', 'Confirmed', 'Shipped', '345 MNO street', TO_DATE('01-MAR-2023 13:30:00', 'DD-MON-YYYY HH24:MI:SS'), 35);
-
 INSERT INTO ORDERS
 VALUES (3, 3, 3, 545475937224, 'wire transfer', 'complete', 'Confirmed', 'Transit', '123 MNP street', TO_DATE('09-MAR-2023 12:54:40', 'DD-MON-YYYY HH24:MI:SS'), 60);
-
 INSERT INTO ORDERS
 VALUES (4, 4, 4, 527877595957, 'debit', 'complete', 'Confirmed', 'Shipped', '1 BC street', TO_DATE('08-MAR-2023 12:34:45', 'DD-MON-YYYY HH24:MI:SS'), 20);
-
 INSERT INTO ORDERS
 VALUES (5, 5, 1, 492865850176, 'wire transfer', 'complete', 'Confirmed', 'Transit', '30 ABC street', TO_DATE('07-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 45);
-
 INSERT INTO ORDERS
 VALUES (6, 6, 1, 401636848464, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('20-MAR-2023 16:33:44', 'DD-MON-YYYY HH24:MI:SS'), 150);
-
 INSERT INTO ORDERS
 VALUES (7, 7, 3, 3045975648585, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('16-MAR-2023 19:06:00', 'DD-MON-YYYY HH24:MI:SS'), 59);
-
 INSERT INTO ORDERS
 VALUES (8, 8, 1, 4874500235552, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('19-MAR-2023 09:00:06', 'DD-MON-YYYY HH24:MI:SS'), 150);
-
 INSERT INTO ORDERS
 VALUES (9, 9, 3, 3858060877590, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('09-MAR-2023 07:33:40', 'DD-MON-YYYY HH24:MI:SS'), 59);
-
 INSERT INTO ORDERS
 VALUES (10, 10, 3, 476567598877, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '9 NULL street',TO_DATE('21-MAR-2023 23:45:09', 'DD-MON-YYYY HH24:MI:SS'), 60);
-
 INSERT INTO ORDERS
 VALUES (11, 11, 3, 554685972838, 'debit', 'complete', 'Confirmed', 'Shipped', '8 ADC street', TO_DATE('08-MAR-2023 03:30:44', 'DD-MON-YYYY HH24:MI:SS'), 59);
-
 INSERT INTO ORDERS
 VALUES (12, 12, 3, 3, 'net banking', 'complete', 'Confirmed', 'Shipped', '79 PEAK street', TO_DATE('20-MAR-2023 00:30:44', 'DD-MON-YYYY HH24:MI:SS'), 78);
-
 INSERT INTO ORDERS
 VALUES (13, 13, 2, 3, 'debit', 'complete', 'Confirmed', 'Preparing to be Shipped', '134 SEEP street', TO_DATE('09-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 90);
 INSERT INTO ORDERS
 VALUES (14, 14, 3, 1, 'credit', 'complete', 'Confirmed', 'Shipped', '143 LOVE street',TO_DATE('22-MAR-2023 20:30:44', 'DD-MON-YYYY HH24:MI:SS'), 98);
-
 INSERT INTO ORDERS
 VALUES (15, 15, 3, 1, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-MAR-2023 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 INSERT INTO ORDERS
 VALUES (16, 16, 3, 4, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '234 XYZ street', TO_DATE('08-MAR-2023 10:33:44', 'DD-MON-YYYY HH24:MI:SS'), 60);
-
 INSERT INTO ORDERS
 VALUES (17, 17, 4, 5, 'net banking', 'complete', 'Confirmed', 'Shipped', '345 PQR street', TO_DATE('02-MAR-2023 15:30:00', 'DD-MON-YYYY HH24:MI:SS'), 90);
-
 INSERT INTO ORDERS
 VALUES (18, 18, 3, 5, 'wire transfer', 'complete', 'Confirmed', 'Transit', '234 MNP street', TO_DATE('06-MAR-2023 12:50:40', 'DD-MON-YYYY HH24:MI:SS'), 40);
-
 INSERT INTO ORDERS
 VALUES (19, 19, 4, 5, 'debit', 'complete', 'Confirmed', 'Shipped', '1 BEC street', TO_DATE('08-MAR-2023 12:34:00', 'DD-MON-YYYY HH24:MI:SS'), 100);
-
 INSERT INTO ORDERS
 VALUES (20, 20, 1, 4, 'wire transfer', 'complete', 'Confirmed', 'Transit', '30 BCD street', TO_DATE('07-MAR-2023 10:40:44', 'DD-MON-YYYY HH24:MI:SS'), 45);
-
 INSERT INTO ORDERS
 VALUES (21, 21, 1, 4, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '40 PON street', TO_DATE('03-MAR-2023 18:33:44', 'DD-MON-YYYY HH24:MI:SS'), 100);
-
 INSERT INTO ORDERS
 VALUES (22, 22, 3, 3, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MILL street', TO_DATE('10-MAR-2023 19:36:00', 'DD-MON-YYYY HH24:MI:SS'), 50);
-
 INSERT INTO ORDERS
 VALUES (23, 23, 1, 4, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '40 BEAN street', TO_DATE('16-MAR-2023 09:20:06', 'DD-MON-YYYY HH24:MI:SS'), 60);
-
 INSERT INTO ORDERS
 VALUES (24, 24, 3, 3, 'debit', 'complete', 'Confirmed', 'Preparing to be Shipped', '98 SOLD street', TO_DATE('04-MAR-2023 17:40:40', 'DD-MON-YYYY HH24:MI:SS'), 49);
-
 INSERT INTO ORDERS
 VALUES (25, 25, 3, 4, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '56 HARVARD street',TO_DATE('21-MAR-2023 20:45:09', 'DD-MON-YYYY HH24:MI:SS'), 40);
-
 INSERT INTO ORDERS
 VALUES (26, 26, 3, 5, 'debit', 'complete', 'Confirmed', 'Shipped', '8 BDC street', TO_DATE('08-MAR-2023 13:30:44', 'DD-MON-YYYY HH24:MI:SS'), 67);
-
 INSERT INTO ORDERS
 VALUES (27, 27, 3, 3, 'net banking', 'complete', 'Confirmed', 'Shipped', '79 SELL street', TO_DATE('22-MAR-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 70);
-
 INSERT INTO ORDERS
 VALUES (28, 28, 2, 3, 'debit', 'complete', 'Confirmed', 'Shipped', '14 SEEP street', TO_DATE('09-MAR-2023 10:39:44', 'DD-MON-YYYY HH24:MI:SS'), 230);
 INSERT INTO ORDERS
 VALUES (29, 29, 3, 1, 'credit', 'complete', 'Confirmed', 'Shipped', '893 LOVE street',TO_DATE('14-MAR-2023 20:30:44', 'DD-MON-YYYY HH24:MI:SS'), 94);
-
 INSERT INTO ORDERS
 VALUES (30, 30, 3, 1, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MOND street', TO_DATE('10-MAR-2023 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 60);
 COMMIT;
 
+--insert values in table orderitems
 INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID)
 VALUES(1,1);
 INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID)
@@ -556,7 +538,6 @@ COMMIT;
 Update ONLINE_EXHIBITION OE SET OE.ExhibitionStatus = 'Upcoming'  WHERE OE.ExhibitionStartDateTime > SYSDATE;
 COMMIT;
 
-
 --list of upcoming exhibitions of an artist
 CREATE OR REPLACE VIEW ARTIST_UPCOMING_EXHIBITIONS AS
 SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,ONLINE_EXHIBITION.ExhibitionStatus,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
@@ -567,7 +548,7 @@ COMMIT;
 
 --list of all upcoming exhibtions
 CREATE OR REPLACE VIEW ALL_UPCOMING_EXHIBITIONS AS
-SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS ARTIST_FIRST_NAME,USERS.LastName AS ARTIST_LAST_NAME,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
 FROM ONLINE_EXHIBITION
 JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
 WHERE ONLINE_EXHIBITION.ExhibitionStartDateTime > SYSDATE;
@@ -589,7 +570,7 @@ COMMIT;
 
 --list of all active exhibtions
 CREATE OR REPLACE VIEW ALL_ACTIVE_EXHIBITIONS AS
-SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,ONLINE_EXHIBITION.ExhibitionStatus,USERS.FirstName AS FirstName,USERS.LastName AS LastName,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,ONLINE_EXHIBITION.ExhibitionStatus,USERS.FirstName AS ARTIST_FIRST_NAME,USERS.LastName AS ARTIST_LAST_NAME,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
 FROM ONLINE_EXHIBITION
 JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
 WHERE ONLINE_EXHIBITION.ExhibitionStartDateTime <= SYSDATE AND ONLINE_EXHIBITION.ExhibitionEndDateTime >= SYSDATE;
