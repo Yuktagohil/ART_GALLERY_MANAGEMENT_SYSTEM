@@ -118,7 +118,8 @@ EmailID varchar(45) NOT NULL
 
 Create table ONLINE_EXHIBITION(
 ExhibitionID integer NOT NULL PRIMARY KEY,
-UserID integer REFERENCES USERS(UserId),
+UserID integer NOT NULL,
+FOREIGN KEY (UserID) REFERENCES USERS(UserId),
 ExhibitionStartDateTime DATE NOT NULL,
 ExhibitionEndDateTime DATE NOT NULL,
 ExhibitionStatus varchar(10) NOT NULL
@@ -133,8 +134,8 @@ Create table ORDERS(
         TransactionStatus varchar(45) NOT NULL,
         OrderStatus varchar(45) NOT NULL,
         ShippingStatus varchar(80) NOT NULL,
-        ShippingAddress varchar(45) NOT NULL,
-        OrderTimeDate TIMESTAMP NOT NULL,
+        ShippingAddress varchar(150) NOT NULL,
+        OrderDateTime DATE NOT NULL,
         TotalAmount number NOT NULL,
         FOREIGN KEY (UserID) REFERENCES USERS (UserID),
         FOREIGN KEY (ShipperID) REFERENCES SHIPPER (ShipperID)
