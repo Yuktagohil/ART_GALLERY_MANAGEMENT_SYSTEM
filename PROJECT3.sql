@@ -259,19 +259,19 @@ insert into ONLINE_EXHIBITION VALUES(12, 16, TO_DATE('2023/03/18 14:02:44', 'yyy
 TO_DATE('2023/03/21 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
 insert into ONLINE_EXHIBITION VALUES(13, 18, TO_DATE('2023/05/14 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/05/18 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
-insert into ONLINE_EXHIBITION VALUES(14, 16, TO_DATE('2023/04/25 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+insert into ONLINE_EXHIBITION VALUES(14, 30, TO_DATE('2023/04/25 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/04/30 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
-insert into ONLINE_EXHIBITION VALUES(15, 20, TO_DATE('2023/03/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+insert into ONLINE_EXHIBITION VALUES(15, 26, TO_DATE('2023/03/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/03/29 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
-insert into ONLINE_EXHIBITION VALUES(16, 22, TO_DATE('2023/02/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+insert into ONLINE_EXHIBITION VALUES(16, 21, TO_DATE('2023/02/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/02/27 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
-insert into ONLINE_EXHIBITION VALUES(17, 23, TO_DATE('2023/01/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+insert into ONLINE_EXHIBITION VALUES(17, 20, TO_DATE('2023/01/23 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/01/29 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
-insert into ONLINE_EXHIBITION VALUES(18, 25, TO_DATE('2023/03/26 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+insert into ONLINE_EXHIBITION VALUES(18, 18, TO_DATE('2023/03/26 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/03/29 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
-insert into ONLINE_EXHIBITION VALUES(19, 27, TO_DATE('2023/02/13 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+insert into ONLINE_EXHIBITION VALUES(19, 30, TO_DATE('2023/02/13 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/02/19 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
-insert into ONLINE_EXHIBITION VALUES(20, 28, TO_DATE('2023/03/03 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+insert into ONLINE_EXHIBITION VALUES(20, 18, TO_DATE('2023/03/03 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/03/09 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Completed');
 COMMIT;
 
@@ -283,26 +283,13 @@ insert into ART_CATEGORY VALUES(4, 'Photography');
 insert into ART_CATEGORY VALUES(5, 'Drawing');
 insert into ART_CATEGORY VALUES(6, 'Tapestry');
 insert into ART_CATEGORY VALUES(7, 'GlassArt');
+insert into ART_CATEGORY VALUES(8, 'Mosaic');
+insert into ART_CATEGORY VALUES(9, 'Wood Sculpture');
+insert into ART_CATEGORY VALUES(10, 'Sketching');
 COMMIT;
 
-<<<<<<< HEAD
+
 --insert values in table srtwork
-insert into ARTWORK VALUES(1, 1, 1, 1, 'The Banjo Lesson', 'A Painting depicting an elderly man teaching a young boy how to play the banjo', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(2, 1, 1, 2, 'Autumnal Equinox', 'A Painting depicting changing colors of autumn leaves against blue sky', 99, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(3, 2, 2, 3, 'The Kiss', 'This sculpture portrays a couple in a romantic embrace', 140, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(4, 2, 1, 4, 'Lamentation', 'A series of larger than life bronze sculptures of human figures', 75, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(5, 3, 3, 5, 'Digital Nirvana', 'This artwork features a surreal landscape of a digital world', 37, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(6, 3, 2, 6, 'Junction', 'A digital simulation of a highway interchange in Texas', 55, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(7, 4, 7, 7, 'Fleeting Moment', 'This photograph captures a moment of stillness in a bustling city street', 115, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(8, 4, 4, 8, 'Migrant Mother', 'A photograph of a destitute mother and her children during the Great Depression', 75, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(9, 5, 5, 9, 'Sketch of Dream', 'This artwork is a black and white pencil drawing of a surreal landscape', 126, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(10, 6, 6, 10, 'Swedish Landscape', 'a large-scale tapestry depicting the rolling hills and forests of Sweden', 85, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp')); 
-insert into ARTWORK VAlUES(11, 6, 3, 11, 'Scared Cows', 'a series of tapestries featuring colorful, abstracted depictions of cows', 115, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(12, 7, 4, 12, 'Honeycomb Bowl', ' a colorful glass vessel featuring a textured surface created by fusing and shaping glass threads', 210, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(13, 7, 4, 13, 'Sea Pod', 'a whimsical glass sculpture inspired by the shape and texture of sea creatures', 184, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(14, 1, 2, 14, 'The Leaf and the Fire', 'an abstract painting featuring bold, gestural brushstrokes and a muted color palette', 55, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(15, 3, 1, 15, 'The Many Faces of Ebola', 'a series of digital prints exploring the visual language of medical imaging', 75, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-=======
 insert into ARTWORK VALUES(1,2, 1, 1, 1, 'The Banjo Lesson', 'A Painting depicting an elderly man teaching a young boy how to play the banjo', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(2,3, 1, 2, 2, 'Autumnal Equinox', 'A Painting depicting changing colors of autumn leaves against blue sky', 99, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(3,4, 2, 3, 3, 'Dreamy Garden', 'A pottery piece with a whimsical design of flowers and vines', 140, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
@@ -342,7 +329,15 @@ insert into ARTWORK VALUES(36,16, 3, 7, 15, 'Floral Serenity', 'A tapestry with 
 insert into ARTWORK VALUES(37,26, 3, 12, 15, 'Nature Symphony', 'A wood sculpture depicting a forest with a sense of harmony and balance', 65, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(38,12, 3, 5, 15, 'The City at Night', 'A sketch of a city skyline at night with a sense of energy and excitement', 143, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(39,20, 3, 9, 15, 'The Wonder of Wildlife', 'A sketch of an animal with a sense of curiosity and wildness', 120, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
->>>>>>> d4c269b07776e3af3b103d9889f4b14acc3f845d
+insert into ARTWORK VALUES(40,30, 8, 14, 15, 'Alexander Mosaic', 'A famous Roman mosaic depicting the Battle of Issus between Alexander the Great and the Persian king Darius III', 184, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(41,26, 9, 15, 15, 'Dainichi Nyorai', 'A wooden sculpture of the Buddhist deity Dainichi Nyorai, located in the Todai-ji temple in Nara, Japan, carved in the 8th century and one of the largest wooden sculptures in the world', 104, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(42,21, 1, 16, 15, 'The Creation of Adam', 'A fresco painting by Michelangelo depicting the biblical scene of God creating Adam, located on the ceiling of the Sistine Chapel in Rome', 120, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(43,20, 10, 17, 15, 'The Human Condition', 'A sketch depicting a figure standing in front of a painting of a landscape, commenting on the relationship between art and reality', 95, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(44,18, 7, 18, 15, 'Waterfall Chandelier', 'A grand chandelier made of crystal glass beads that simulate a waterfall, named after the empress Maria Theresa of Austria who commissioned the first one in the 18th century', 50, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(45,30, 8, 19, 15, 'Islamic Mosaic Art', 'A rich tradition of mosaic art in Islamic cultures, featuring intricate geometric patterns and calligraphy in a variety of materials such as marble, stone, and glazed tiles', 250, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(46,18, 7, 20, 15, 'The Four Seasons', 'A series of stained-glass windows depicting scenes from the four seasons with bright colors and symbolic imagery', 220, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(47,2, 2, NULL, 15, 'Venus de Milo', 'An ancient Greek statue believed to depict the goddess Aphrodite, now missing its arms and standing at 6.5 feet tall', 120, 'Not Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(48,16, 6, NULL, 15, 'The Lady and the Unicorn', 'A series of six tapestries from the late Middle Ages depicting a lady and a unicorn in various settings', 100, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 COMMIT;
 
 --update exhibition status in table online exhibition based on current date
