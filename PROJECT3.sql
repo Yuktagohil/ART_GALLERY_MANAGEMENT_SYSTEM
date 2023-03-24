@@ -572,7 +572,7 @@ COMMIT;
 
 --list of all unsold artwork details
 CREATE OR REPLACE VIEW ALL_UNSOLD_ARTWORK AS
-SELECT USERS.FirstName as ARTIST_FIRST_NAME,Users.LastName AS ARTIST_LAST_NAME,ARTWORK.Name,ARTWORK.Amount 
+SELECT USERS.FirstName as ARTIST_FIRST_NAME,Users.LastName AS ARTIST_LAST_NAME,ARTWORK.Name,ARTWORK.Status,ARTWORK.Amount 
 FROM ARTWORK
 JOIN USERS ON USERS.UserID = Artwork.UserID
 where ARTWORK.Status = 'Available';
@@ -595,15 +595,15 @@ COMMIT;
 
 --list of available artwork in onlineartgallery
 CREATE OR REPLACE VIEW GALLERY_ARTWORK_INFO AS 
-SELECT ARTWORK.ArtworkID, ARTWORK.Name,ARTWORK.Description,ARTWORK.Status,ARTWORK.Amount
+SELECT USERS.FirstName AS ARTIST_FIRSTNAME,USERS.LastName AS ARTIST_LASTNAME, ARTWORK.ExhibitionID, ARTWORK.ArtworkID, ARTWORK.Name,ARTWORK.Description,ARTWORK.Status,ARTWORK.Amount
 FROM ARTWORK
 JOIN USERS ON USERS.UserID = ARTWORK.UserID
-Where ARTWORK.Status = 'Available' and ExhibitionID is NULL;
+Where ARTWORK.Status = 'Available' and ARTWORK.ExhibitionID is NULL;
 COMMIT;
 
 --list of all order detail of a particular customer
 CREATE OR REPLACE VIEW CUSTOMER_ORDER AS
-SELECT ORDERS.OrderID, ORDERS.ShipperID, ORDERS.OrderDateTime, ORDERS.TransactionID, ORDERS.Transactionstatus, ORDERS.OrderStatus, ORDERS.ShippingStatus
+SELECT USERS.FirstName,USERS.LastName,ORDERS.OrderID, ORDERS.ShipperID, ORDERS.OrderDateTime, ORDERS.TransactionID, ORDERS.Transactionstatus, ORDERS.OrderStatus, ORDERS.ShippingStatus
 FROM ORDERS
 JOIN USERS ON USERS.UserID = ORDERS.UserID
 WHERE USERS.FirstName = 'Annie' and USERS.LastName='Miles';
@@ -616,6 +616,4 @@ FROM ONLINE_EXHIBITION
 JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
 WHERE USERS.FirstName = 'Solomon' and USERS.LastName='Williams';
 COMMIT;
-
-
 
