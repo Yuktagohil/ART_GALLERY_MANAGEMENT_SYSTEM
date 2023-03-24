@@ -601,5 +601,12 @@ JOIN USERS ON USERS.UserID = ARTWORK.UserID
 Where ARTWORK.Status = 'Available' and ExhibitionID is NULL;
 COMMIT;
 
-select * from GALLERY_ARTWORK_INFO;
+--list of all order detail of a particular customer
+CREATE OR REPLACE VIEW CUSTOMER_ORDER AS
+SELECT ORDERS.OrderID, ORDERS.ShipperID, ORDERS.OrderTimeDate, ORDERS.TransactionID, ORDERS.Transactionstatus, ORDERS.OrderStatus, ORDERS.ShippingStatus
+FROM ORDERS
+JOIN USERS ON USERS.UserID = ORDERS.UserID
+WHERE USERS.FirstName = 'Annie' and USERS.LastName='Miles';
+
+select * from CUSTOMER_ORDER;
 
