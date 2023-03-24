@@ -144,7 +144,7 @@ TransactionStatus varchar(45) NOT NULL,
 OrderStatus varchar(45) NOT NULL,
 ShippingStatus varchar(80) NOT NULL,
 ShippingAddress varchar(150) NOT NULL,
-OrderDateTime TIMESTAMP NOT NULL,
+OrderDateTime DATE NOT NULL,
 TotalAmount number NOT NULL
 );
 
@@ -608,5 +608,11 @@ FROM ORDERS
 JOIN USERS ON USERS.UserID = ORDERS.UserID
 WHERE USERS.FirstName = 'Annie' and USERS.LastName='Miles';
 
-select * from CUSTOMER_ORDER;
+--list of all online exhibition of an artist
+CREATE OR REPLACE VIEW ARTIST_EXHIBITION AS
+SELECT ONLINE_EXHIBITION.ExhibitionID, ONLINE_EXHIBITION.ExhibitionStatus,USERS.FirstName AS ARTIST_FIRST_NAME, USERS.LastName AS ARTIST_LAST_NAME
+FROM ONLINE_EXHIBITION
+JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
+WHERE USERS.FirstName = 'Solomon' and USERS.LastName='Williams';
+select * from ARTIST_EXHIBITION;
 
