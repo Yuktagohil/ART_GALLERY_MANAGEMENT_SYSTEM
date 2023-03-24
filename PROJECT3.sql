@@ -143,8 +143,8 @@ TransactionMethod varchar(45) NOT NULL,
 TransactionStatus varchar(45) NOT NULL,
 OrderStatus varchar(45) NOT NULL,
 ShippingStatus varchar(80) NOT NULL,
-ShippingAddress varchar(45) NOT NULL,
-OrderTimeDate TIMESTAMP NOT NULL,
+ShippingAddress varchar(150) NOT NULL,
+OrderDateTime TIMESTAMP NOT NULL,
 TotalAmount number NOT NULL
 );
 
@@ -603,7 +603,7 @@ COMMIT;
 
 --list of all order detail of a particular customer
 CREATE OR REPLACE VIEW CUSTOMER_ORDER AS
-SELECT ORDERS.OrderID, ORDERS.ShipperID, ORDERS.OrderTimeDate, ORDERS.TransactionID, ORDERS.Transactionstatus, ORDERS.OrderStatus, ORDERS.ShippingStatus
+SELECT ORDERS.OrderID, ORDERS.ShipperID, ORDERS.OrderDateTime, ORDERS.TransactionID, ORDERS.Transactionstatus, ORDERS.OrderStatus, ORDERS.ShippingStatus
 FROM ORDERS
 JOIN USERS ON USERS.UserID = ORDERS.UserID
 WHERE USERS.FirstName = 'Annie' and USERS.LastName='Miles';
