@@ -594,12 +594,12 @@ WHERE Orders.ShippingStatus='Preparing to be Shipped';
 COMMIT;
 
 --list of available artwork in onlineartgallery
-CREATE OR REPLACE VIEW ARTWORK_INFO AS 
+CREATE OR REPLACE VIEW GALLERY_ARTWORK_INFO AS 
 SELECT ARTWORK.ArtworkID, ARTWORK.Name,ARTWORK.Description,ARTWORK.Status,ARTWORK.Amount
 FROM ARTWORK
 JOIN USERS ON USERS.UserID = ARTWORK.UserID
-Where ARTWORK.Status = 'Available';
+Where ARTWORK.Status = 'Available' and ExhibitionID is NULL;
 COMMIT;
 
-
+select * from GALLERY_ARTWORK_INFO;
 
