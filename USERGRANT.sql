@@ -6,6 +6,6 @@ grant connect to urbandusters;
 
 grant resource to urbandusters;
 
-alter user urbandusters quota 20M on data;
+alter user urbandusters quota 100M on data;
 
 grant create view to urbandusters;

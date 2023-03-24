@@ -526,7 +526,7 @@ COMMIT;
 
 --list of all upcoming exhibtions
 CREATE OR REPLACE VIEW ALL_UPCOMING_EXHIBITIONS AS
-SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,USERS.FirstName AS ARTIST_FIRST_NAME,USERS.LastName AS ARTIST_LAST_NAME,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,ONLINE_EXHIBITION.ExhibitionStatus,USERS.FirstName AS ARTIST_FIRST_NAME,USERS.LastName AS ARTIST_LAST_NAME,ONLINE_EXHIBITION.ExhibitionStartDateTime AS Start_Date, ONLINE_EXHIBITION.ExhibitionEndDateTime AS End_Date
 FROM ONLINE_EXHIBITION
 JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
 WHERE ONLINE_EXHIBITION.ExhibitionStartDateTime > SYSDATE;
@@ -556,15 +556,15 @@ COMMIT;
 
 --list of artist unsold artwork details
 CREATE OR REPLACE VIEW ARTIST_UNSOLD_ARTWORK AS
-SELECT ARTWORK.ArtworkID, ARTWORK.Name, ARTWORK.Description, ARTWORK.Amount 
+SELECT USERS.FirstName,USERS.LastName,ARTWORK.ArtworkID, ARTWORK.Name, ARTWORK.Status,ARTWORK.Description, ARTWORK.Amount 
 FROM ARTWORK
 JOIN USERS ON USERS.UserID = ARTWORK.UserID
-where USERS.FirstName = 'Maria' AND USERS.LastName = 'Garcia' AND ARTWORK.Status='Not Available';
+where USERS.FirstName = 'Fiona' AND USERS.LastName = 'Hutchinson' AND ARTWORK.Status='Available';
 COMMIT;
 
 --list of active exhibition artworks
 CREATE OR REPLACE VIEW ACTIVE_EXHIBITION_ARTWORK AS
-SELECT ARTWORK.ArtworkID, ARTWORK.Name, ARTWORK.Description, ARTWORK.Amount, ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id
+SELECT ONLINE_EXHIBITION.ExhibitionID AS Exhibition_id,ONLINE_EXHIBITION.ExhibitionStatus as Exhibition_status,ARTWORK.ArtworkID, ARTWORK.Name, ARTWORK.Description, ARTWORK.Amount
 FROM ARTWORK
 JOIN ONLINE_EXHIBITION ON ONLINE_EXHIBITION.ExhibitionID = ARTWORK.ExhibitionID
 WHERE ONLINE_EXHIBITION.ExhibitionStatus = 'Active';
@@ -607,6 +607,7 @@ SELECT ORDERS.OrderID, ORDERS.ShipperID, ORDERS.OrderDateTime, ORDERS.Transactio
 FROM ORDERS
 JOIN USERS ON USERS.UserID = ORDERS.UserID
 WHERE USERS.FirstName = 'Annie' and USERS.LastName='Miles';
+COMMIT;
 
 --list of all online exhibition of an artist
 CREATE OR REPLACE VIEW ARTIST_EXHIBITION AS
@@ -614,5 +615,7 @@ SELECT ONLINE_EXHIBITION.ExhibitionID, ONLINE_EXHIBITION.ExhibitionStatus,USERS.
 FROM ONLINE_EXHIBITION
 JOIN USERS ON USERS.UserID = ONLINE_EXHIBITION.UserID
 WHERE USERS.FirstName = 'Solomon' and USERS.LastName='Williams';
-select * from ARTIST_EXHIBITION;
+COMMIT;
+
+
 
