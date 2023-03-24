@@ -15,10 +15,10 @@
 
 Artists can register online with the art gallery to become a member and upload their artworks in digital format. Our online application provides customers/art lovers the comfort of enjoying art from anywhere. It also exposes international arts and artists to art lovers. Exhibitions can be held online where the artists can exhibit their artworks and people can buy the artwork. Art lovers can buy the artwork from the gallery via online transaction and from anywhere in the world.</p>
 
-<h1>2.   PROBLEM STATEMENT </h1>
+<h2>2.   PROBLEM STATEMENT </h2>
 <p>Offline art gallery management has space limitations and will be limited to artists and location which curbs the artist’s exposure. An online platform can overcome this issue where art lovers can browse the arts in their own time from the comfort of anywhere in the world. It also exposes the art enthusiasts to diverse kinds of art and international artists.</p>
 
-<h1>3.   OBJECTIVES</h1>
+<h2>3.   OBJECTIVES</h2>
 <ul>
 <li>Our application provides a centralized platform for diverse kinds of artists around the world to connect with their admirers.</li>
 <li>To promote artists and their work internationally.</li>
@@ -28,7 +28,7 @@ Artists can register online with the art gallery to become a member and upload t
 <li>It will help to overcome the manual errors and make a computerized system.</li>
 </ul>
  
-<h4>Business Rules:</h4>
+<h2>Business Rules:</h2>
 <ul>
 <li>Each user should be registered member of the online art gallery</li>
 <li>Each user can have only one of the three user roles (Admin, Artist, Customer)</li>
@@ -46,4 +46,10 @@ Artists can register online with the art gallery to become a member and upload t
 <li>Each artwork can be associated with only one order</li>
 <li>Once order is placed by a customer, it cannot be cancelled</li>
 <li>Each shipper will have zero or many orders to be shipped</li>
+</ul>
+
+<h4>Instructions to run the script:</h2>
+<ul>
+<li>Initially run the USERGRANT.sql file in Admin – This allows the admin to create the user and grant accesses to the user</li>
+<li>Now run the PROJECT3.sql file under the user created – Use the credentials given by admin in USERGRANT.sql to login as the user </li>
 </ul>
