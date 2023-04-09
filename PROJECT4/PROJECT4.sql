@@ -81,6 +81,33 @@ THEN dbms_output.put_line('Objects not found');
 END;
 /
   
+BEGIN
+EXECUTE IMMEDIATE 'DROP SEQUENCE user_role_seq';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/   
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP SEQUENCE users_seq';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/   
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP SEQUENCE contact_seq';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/   
+  
 Create table USER_ROLE(
 RoleID integer NOT NULL PRIMARY KEY,
 RoleName varchar(10) NOT NULL
@@ -204,107 +231,110 @@ alter table contact add constraint contact_constraint CHECK
 (REGEXP_LIKE(ContactNumber, '^0\d{9}|\d{10}$'));
 --exhibitionstatus should be only three values in online_exhibition table
 --emailid syntax in user table should be proper
+CREATE SEQUENCE user_role_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE users_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE contact_seq START WITH 1 INCREMENT BY 1;
 
 --insert values in table USER_ROLE
-insert into USER_ROLE values (1,'Admin');
-insert into USER_ROLE values (2,'Artist');
-insert into USER_ROLE values (3,'Customer');
+insert into USER_ROLE values (user_role_seq.NEXTVAL,'Admin');
+insert into USER_ROLE values (user_role_seq.NEXTVAL,'Artist');
+insert into USER_ROLE values (user_role_seq.NEXTVAL,'Customer');
 COMMIT;
 
 --insert values in table USERS;
-insert into USERS values (1,1,'artgalleryadmin@artgallery.com','admin','ArtLoverAdmin2023','Admin','Admin','','');           
-insert into USERS values (2,2,'sillyartist@artgallery.com','solomon25','SillySal23','Solomon','Williams','Sculpture','Australian');
-insert into USERS values (3,2,'caseym15@artgallery.com','caseycool','Paint66Love','Casey','Miller','Painting','German');
-insert into USERS values (4,2,'conte.antonio12@artgallery.com','joielepot','imperfect34Pot','Antonio','Conte','Pottery','Italian');
-insert into USERS values (5,2,'adamcruz18@artgallery.com','adam18','Anime72Nation','Adam','Cruz','Digital','American');
-insert into USERS values (6,3,'annie90miles@artgallery.com','annmiles','BitterSweetArt1990','Annie','Miles','','');
-insert into USERS values (7,3,'maria27g@artgallery.com','maria27','ArtPopos55','Maria','Garcia','','');
-insert into USERS values (8,3,'alexbrown@artgallery.com','alex22','BrownSugar22','Alexandar','Brown','','');
-insert into USERS values (9,3,'hern.eric85@artgallery.com','eric16','Mission16travel','Eric','Hernandez','','');
-insert into USERS values (10,3,'nancy1229@artgallery.com','nancy29','LordBlesseth92','Nancy','Kurian','','');
-insert into USERS values (11,3,'vineeth.krishnan@artgallery.com','vinukrishnan','VinuK30mallu','Vineeth','Krishnan','','');
-insert into USERS values (12,2,'thomas.shelby@artgallery.com','tomshelby','Coast23Love','Thomas','Shelby','Sketching','Scandinavian');
-insert into USERS values (13,2,'cooper.sheldon@artgallery.com','sheldon7mo','MoLove8Shel','Sheldon','Cooper','Mosaic','Brazilian');
-insert into USERS values (14,3,'hart.casie@artgallery.com','hart5ca','Belief1hart','Casie','hart','','');
-insert into USERS values (15,3,'lock.simone@artgallery.com','lockesi85','Key2Locke','Simone','Locke','','');
-insert into USERS values (16,2,'hardway.paige@artgallery.com','paigeway','Therasa4ever','Paige','Hardaway','Tapestry','Irish');
-insert into USERS values (17,3,'dobrev.nina@artgallery.com','nina22dob','Sweet89Little','Nina','Dobrev','','');
-insert into USERS values (18,2,'raja.zahid@artgallery.com','rajazahid','dragonlair69','Zahid','Raja','GlassArt','Moroccan');
-insert into USERS values (19,3,'gerard.marcel@artgallery.com','gerardmarc','Pro27gerard','Marcel','Gerard','','');
-insert into USERS values (20,2,'gardener.samuel@artgallery.com','gardenersam','Penguin4Sam','Samuel','Gardener','Sketching','American');
-insert into USERS values (21,2,'thyag.jaya21@artgallery.com','jayabheem55','47JayegaeBharath','Jaya','Thyagarajan','Painting','Indian');
-insert into USERS values (22,3,'guna.menula44@artgallery.com','menuguna44','Almighty4ever','Menula','Gunasekar','','');
-insert into USERS values (23,3,'pitt.brad@artgallery.com','pitt66brad','benevolentGoat1','Brad','Pitt','','');
-insert into USERS values (24,2,'hutch.fiona3@artgallery.com','fionahutch77','nbfajrg34r','Fiona','Hutchinson','Tapestry','Scottish');
-insert into USERS values (25,3,'smith39jamie@artgallery.com','smithjames','eeecool1234','Jamie','Smith','','');
-insert into USERS values (26,2,'chat30Anindhya@artgallery.com','anindchat45','Chakra65mela','Anindhya','Chattopadhyay','Wood Sculpture','Indian');
-insert into USERS values (27,3,'tony13manasa@artgallery.com','manasatony','samosa4life','Manasa','Tony','','');
-insert into USERS values (28,3,'conteadam1@artgallery.com','adamconte18','pasta7mammamia','Adam','Conte','','');
-insert into USERS values (29,3,'mullaisrinivasan@artgallery.com','mullaisri85','malar21mullai','Mullai','Srinivasan','','');
-insert into USERS values (30,2,'duss.jason4@artgallery.com','jasonduss','Jasonwill63Can','Jason','Dussault','Mosaic','Canadian');
+insert into USERS values (users_seq.NEXTVAL,1,'artgalleryadmin@artgallery.com','admin','ArtLoverAdmin2023','Admin','Admin','','');           
+insert into USERS values (users_seq.NEXTVAL,2,'sillyartist@artgallery.com','solomon25','SillySal23','Solomon','Williams','Sculpture','Australian');
+insert into USERS values (users_seq.NEXTVAL,2,'caseym15@artgallery.com','caseycool','Paint66Love','Casey','Miller','Painting','German');
+insert into USERS values (users_seq.NEXTVAL,2,'conte.antonio12@artgallery.com','joielepot','imperfect34Pot','Antonio','Conte','Pottery','Italian');
+insert into USERS values (users_seq.NEXTVAL,2,'adamcruz18@artgallery.com','adam18','Anime72Nation','Adam','Cruz','Digital','American');
+insert into USERS values (users_seq.NEXTVAL,3,'annie90miles@artgallery.com','annmiles','BitterSweetArt1990','Annie','Miles','','');
+insert into USERS values (users_seq.NEXTVAL,3,'maria27g@artgallery.com','maria27','ArtPopos55','Maria','Garcia','','');
+insert into USERS values (users_seq.NEXTVAL,3,'alexbrown@artgallery.com','alex22','BrownSugar22','Alexandar','Brown','','');
+insert into USERS values (users_seq.NEXTVAL,3,'hern.eric85@artgallery.com','eric16','Mission16travel','Eric','Hernandez','','');
+insert into USERS values (users_seq.NEXTVAL,3,'nancy1229@artgallery.com','nancy29','LordBlesseth92','Nancy','Kurian','','');
+insert into USERS values (users_seq.NEXTVAL,3,'vineeth.krishnan@artgallery.com','vinukrishnan','VinuK30mallu','Vineeth','Krishnan','','');
+insert into USERS values (users_seq.NEXTVAL,2,'thomas.shelby@artgallery.com','tomshelby','Coast23Love','Thomas','Shelby','Sketching','Scandinavian');
+insert into USERS values (users_seq.NEXTVAL,2,'cooper.sheldon@artgallery.com','sheldon7mo','MoLove8Shel','Sheldon','Cooper','Mosaic','Brazilian');
+insert into USERS values (users_seq.NEXTVAL,3,'hart.casie@artgallery.com','hart5ca','Belief1hart','Casie','hart','','');
+insert into USERS values (users_seq.NEXTVAL,3,'lock.simone@artgallery.com','lockesi85','Key2Locke','Simone','Locke','','');
+insert into USERS values (users_seq.NEXTVAL,2,'hardway.paige@artgallery.com','paigeway','Therasa4ever','Paige','Hardaway','Tapestry','Irish');
+insert into USERS values (users_seq.NEXTVAL,3,'dobrev.nina@artgallery.com','nina22dob','Sweet89Little','Nina','Dobrev','','');
+insert into USERS values (users_seq.NEXTVAL,2,'raja.zahid@artgallery.com','rajazahid','dragonlair69','Zahid','Raja','GlassArt','Moroccan');
+insert into USERS values (users_seq.NEXTVAL,3,'gerard.marcel@artgallery.com','gerardmarc','Pro27gerard','Marcel','Gerard','','');
+insert into USERS values (users_seq.NEXTVAL,2,'gardener.samuel@artgallery.com','gardenersam','Penguin4Sam','Samuel','Gardener','Sketching','American');
+insert into USERS values (users_seq.NEXTVAL,2,'thyag.jaya21@artgallery.com','jayabheem55','47JayegaeBharath','Jaya','Thyagarajan','Painting','Indian');
+insert into USERS values (users_seq.NEXTVAL,3,'guna.menula44@artgallery.com','menuguna44','Almighty4ever','Menula','Gunasekar','','');
+insert into USERS values (users_seq.NEXTVAL,3,'pitt.brad@artgallery.com','pitt66brad','benevolentGoat1','Brad','Pitt','','');
+insert into USERS values (users_seq.NEXTVAL,2,'hutch.fiona3@artgallery.com','fionahutch77','nbfajrg34r','Fiona','Hutchinson','Tapestry','Scottish');
+insert into USERS values (users_seq.NEXTVAL,3,'smith39jamie@artgallery.com','smithjames','eeecool1234','Jamie','Smith','','');
+insert into USERS values (users_seq.NEXTVAL,2,'chat30Anindhya@artgallery.com','anindchat45','Chakra65mela','Anindhya','Chattopadhyay','Wood Sculpture','Indian');
+insert into USERS values (users_seq.NEXTVAL,3,'tony13manasa@artgallery.com','manasatony','samosa4life','Manasa','Tony','','');
+insert into USERS values (users_seq.NEXTVAL,3,'conteadam1@artgallery.com','adamconte18','pasta7mammamia','Adam','Conte','','');
+insert into USERS values (users_seq.NEXTVAL,3,'mullaisrinivasan@artgallery.com','mullaisri85','malar21mullai','Mullai','Srinivasan','','');
+insert into USERS values (users_seq.NEXTVAL,2,'duss.jason4@artgallery.com','jasonduss','Jasonwill63Can','Jason','Dussault','Mosaic','Canadian');
 COMMIT;
 
 --insert values in table contact
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (1,1, 8572639860, '1575 Tremont street', 'APT 2', 'Boston', 'MA', 'USA', 02129);
+VALUES (contact_seq.NEXTVAL,1, 8572639860, '1575 Tremont street', 'APT 2', 'Boston', 'MA', 'USA', 02129);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (2,2, 8575689968, 'Roxbury crossing', 'APT 3', 'Boston', 'MA', 'USA', 02689);
+VALUES (contact_seq.NEXTVAL,2, 8575689968, 'Roxbury crossing', 'APT 3', 'Boston', 'MA', 'USA', 02689);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (3,3, 6975698560, '15 Malden', 'APT 8', 'Los angeles', 'CA', 'USA', 5972);
+VALUES (contact_seq.NEXTVAL,3, 6975698560, '15 Malden', 'APT 8', 'Los angeles', 'CA', 'USA', 5972);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (4,4, 5698742635, '1575 mango Street', 'APT 9', 'San Antonio', 'TX', 'USA', 8975);
+VALUES (contact_seq.NEXTVAL,4, 5698742635, '1575 mango Street', 'APT 9', 'San Antonio', 'TX', 'USA', 8975);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (5,5, 5697895620, '857 Hungtionton Ave', 'Boylston', 'Boston', 'MA', 'USA', 5698);
+VALUES (contact_seq.NEXTVAL,5, 5697895620, '857 Hungtionton Ave', 'Boylston', 'Boston', 'MA', 'USA', 5698);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (6,6, 5987895640, 'Newburg street', 'Dorchester', 'Dallas', 'TX', 'USA', 0219);
+VALUES (contact_seq.NEXTVAL,6, 5987895640, 'Newburg street', 'Dorchester', 'Dallas', 'TX', 'USA', 0219);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (7,7, 6987453026, '160 Alpine road', 'Brookline', 'Philadelphia', 'PA', 'USA', 2101);
+VALUES (contact_seq.NEXTVAL,7, 6987453026, '160 Alpine road', 'Brookline', 'Philadelphia', 'PA', 'USA', 2101);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (8,8, 5697854120, '12 Saint Fr. RD', 'Dorchester', 'San Diego', 'CA', 'USA', 9878);
+VALUES (contact_seq.NEXTVAL,8, 5697854120, '12 Saint Fr. RD', 'Dorchester', 'San Diego', 'CA', 'USA', 9878);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (9,9, 5669842635, '60 Spine Road', 'Cambriegde', 'Dallas', 'TX', 'USA', 1203);
+VALUES (contact_seq.NEXTVAL,9, 5669842635, '60 Spine Road', 'Cambriegde', 'Dallas', 'TX', 'USA', 1203);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (10,10, 5656942635, '23 Brookline', 'Newport', 'Boston', 'MA', 'USA', 06897);
+VALUES (contact_seq.NEXTVAL,10, 5656942635, '23 Brookline', 'Newport', 'Boston', 'MA', 'USA', 06897);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (11,11, 5698785063, '15 Cawfield street', 'Dorchester', 'Houston', 'TX', 'USA', 56890);
+VALUES (contact_seq.NEXTVAL,11, 5698785063, '15 Cawfield street', 'Dorchester', 'Houston', 'TX', 'USA', 56890);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (12,12, 5695692635, '36 Washignton street', 'Nubian', 'Chicago', 'IL', 'USA', 06923);
+VALUES (contact_seq.NEXTVAL,12, 5695692635, '36 Washignton street', 'Nubian', 'Chicago', 'IL', 'USA', 06923);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (13,13, 8975692031, 'Apple Street', 'Dustun', 'Phoenix', 'AZ', 'USA', 03689);
+VALUES (contact_seq.NEXTVAL,13, 8975692031, 'Apple Street', 'Dustun', 'Phoenix', 'AZ', 'USA', 03689);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (14,14, 6987894120, 'Manhatten street', 'George_mason RD', 'San Jose', 'CS', 'USA', 02369);
+VALUES (contact_seq.NEXTVAL,14, 6987894120, 'Manhatten street', 'George_mason RD', 'San Jose', 'CS', 'USA', 02369);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (15,15, 4895201698, 'Area 51', 'Washington square', 'Colrado', 'CO', 'USA', 03215);
+VALUES (contact_seq.NEXTVAL,15, 4895201698, 'Area 51', 'Washington square', 'Colrado', 'CO', 'USA', 03215);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (16,16, 6587420135, 'Swiss Street', 'Hartford', 'Buffalo', 'NY', 'USA', 04265);
+VALUES (contact_seq.NEXTVAL,16, 6587420135, 'Swiss Street', 'Hartford', 'Buffalo', 'NY', 'USA', 04265);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (17,17, 369750359, 'Phoenix street', 'Virginia', 'Hollywood', 'FL', 'USA', 03698);
+VALUES (contact_seq.NEXTVAL,17, 369750359, 'Phoenix street', 'Virginia', 'Hollywood', 'FL', 'USA', 03698);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (18,18, 3697851026, 'Virginia street', 'Enterprise RD', 'Kansas', 'KS', 'USA', 01597);
+VALUES (contact_seq.NEXTVAL,18, 3697851026, 'Virginia street', 'Enterprise RD', 'Kansas', 'KS', 'USA', 01597);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (19,19, 6987562100, 'Mission Hill', 'Park Drive', 'Wichita', 'KS', 'USA', 06986);
+VALUES (contact_seq.NEXTVAL,19, 6987562100, 'Mission Hill', 'Park Drive', 'Wichita', 'KS', 'USA', 06986);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (20,20, 3697895620, 'Mission Main', 'Dudely street', 'indianapolis', 'IN', 'USA', 03689);
+VALUES (contact_seq.NEXTVAL,20, 3697895620, 'Mission Main', 'Dudely street', 'indianapolis', 'IN', 'USA', 03689);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (21,21, 5698795210, 'Columbia Rd', 'Blue hill', 'Lowell', 'MA', 'USA', 12368);
+VALUES (contact_seq.NEXTVAL,21, 5698795210, 'Columbia Rd', 'Blue hill', 'Lowell', 'MA', 'USA', 12368);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (22,22, 7894561230, 'Becon street', 'Strand Theater', 'New Orleans', 'LA', 'USA', 35974);
+VALUES (contact_seq.NEXTVAL,22, 7894561230, 'Becon street', 'Strand Theater', 'New Orleans', 'LA', 'USA', 35974);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (23,23, 5789641203, 'Cooliegde Corner', 'Brookline', 'San Francisco', 'CA', 'USA', 57896);
+VALUES (contact_seq.NEXTVAL,23, 5789641203, 'Cooliegde Corner', 'Brookline', 'San Francisco', 'CA', 'USA', 57896);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (24,24, 5687410239, 'Tappan Street', 'clevanland Circle', 'Tucson', 'AZ', 'USA', 23697);
+VALUES (contact_seq.NEXTVAL,24, 5687410239, 'Tappan Street', 'clevanland Circle', 'Tucson', 'AZ', 'USA', 23697);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (25,25, 4597852013, 'Cambriedge', 'Bird St', 'Yonkers', 'NY', 'USA', 56974);
+VALUES (contact_seq.NEXTVAL,25, 4597852013, 'Cambriedge', 'Bird St', 'Yonkers', 'NY', 'USA', 56974);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (26,26, 6574520139, 'Mass Avenue', 'Saint francis St', 'Montgomery', 'AL', 'USA', 60210);
+VALUES (contact_seq.NEXTVAL,26, 6574520139, 'Mass Avenue', 'Saint francis St', 'Montgomery', 'AL', 'USA', 60210);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (27,27, 4578956210, 'Fields Corner', '19 St', 'Detroit', 'MI', 'USA', 44597);
+VALUES (contact_seq.NEXTVAL,27, 4578956210, 'Fields Corner', '19 St', 'Detroit', 'MI', 'USA', 44597);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (28,28, 1267894560, 'Albama St', 'Rodester Ave', 'Greeley', 'CO', 'USA', 21382);
+VALUES (contact_seq.NEXTVAL,28, 1267894560, 'Albama St', 'Rodester Ave', 'Greeley', 'CO', 'USA', 21382);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (29,29, 4578568920, 'Flemingo Circle', 'Red cherry Ave', 'Enterprise', 'NV', 'USA', 56875);
+VALUES (contact_seq.NEXTVAL,29, 4578568920, 'Flemingo Circle', 'Red cherry Ave', 'Enterprise', 'NV', 'USA', 56875);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (30,30, 5742368901, 'Oberoi Rd', 'Huntington Ave', 'joliet', 'IL', 'USA', 12345);
+VALUES (contact_seq.NEXTVAL,30, 5742368901, 'Oberoi Rd', 'Huntington Ave', 'joliet', 'IL', 'USA', 12345);
 COMMIT;
 
 --insert values in table shipper
@@ -521,65 +551,30 @@ insert into ARTWORK VALUES(75, 17, 2, NULL, NULL, 'The Whispere', 'a bronze scul
 insert into ARTWORK VALUES(76, 13, 4, NULL, 10, 'Elysium', 'A glass sculpture that features a series of overlapping, translucent layers that create a sense of depth and movement', 140, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 COMMIT;
 
---procedure to add user
-CREATE OR REPLACE PROCEDURE ADD_USER(
-  p_RoleID IN USERS.RoleID%TYPE,
-  p_EmailID IN USERS.EmailID%TYPE,
-  p_UserName IN USERS.UserName%TYPE,
-  p_Password IN USERS.Password%TYPE,
-  p_FirstName IN USERS.FirstName%TYPE,
-  p_LastName IN USERS.LastName%TYPE,
-  p_Speciality IN USERS.Speciality%TYPE,
-  p_Nationality IN USERS.Nationality%TYPE,
-  p_ContactNumber IN CONTACT.ContactNumber%TYPE,
-  p_AddressLine1 IN CONTACT.AddressLine1%TYPE,
-  p_AddressLine2 IN CONTACT.AddressLine2%TYPE,
-  p_City IN CONTACT.City%TYPE,
-  p_State IN CONTACT.State%TYPE,
-  p_Country IN CONTACT.Country%TYPE,
-  p_ZipCode IN CONTACT.ZipCode%TYPE
-)
-IS
-  v_UserID USERS.UserID%TYPE;
-  v_ContactID CONTACT.ContactID%TYPE;
-BEGIN
-  INSERT INTO USERS (RoleID, EmailID, UserName, Password, FirstName, LastName, Speciality, Nationality)
-  VALUES (p_RoleID, p_EmailID, p_UserName, p_Password, p_FirstName, p_LastName, p_Speciality, p_Nationality)
-  RETURNING UserID INTO v_UserID;
-  
-  INSERT INTO CONTACT (UserID, ContactNumber, AddressLine1, AddressLine2, City, State, Country, ZipCode)
-  VALUES (v_UserID, p_ContactNumber, p_AddressLine1, p_AddressLine2, p_City, p_State, p_Country, p_ZipCode)
-  RETURNING ContactID INTO v_ContactID;
-  
-  COMMIT;
-  
-  DBMS_OUTPUT.PUT_LINE('User added successfully with ID ' || v_UserID);
-END;
+-- Grant privileges to ADMIN role
+GRANT ALL PRIVILEGES ON USER_ROLE TO ADMIN;
+GRANT ALL PRIVILEGES ON USERS TO ADMIN;
+GRANT ALL PRIVILEGES ON CONTACT TO ADMIN;
+GRANT ALL PRIVILEGES ON SHIPPER TO ADMIN;
+GRANT ALL PRIVILEGES ON ONLINE_EXHIBITION TO ADMIN;
+GRANT ALL PRIVILEGES ON ORDERS TO ADMIN;
+GRANT ALL PRIVILEGES ON ORDER_ITEMS TO ADMIN;
+GRANT ALL PRIVILEGES ON ART_CATEGORY TO ADMIN;
+GRANT ALL PRIVILEGES ON ARTWORK TO ADMIN;
 
---procedure to update user contact
-CREATE OR REPLACE PROCEDURE UPDATE_USER_CONTACT(
-  p_UserID IN USERS.UserID%TYPE,
-  p_ContactNumber IN CONTACT.ContactNumber%TYPE,
-  p_AddressLine1 IN CONTACT.AddressLine1%TYPE,
-  p_AddressLine2 IN CONTACT.AddressLine2%TYPE,
-  p_City IN CONTACT.City%TYPE,
-  p_State IN CONTACT.State%TYPE,
-  p_Country IN CONTACT.Country%TYPE,
-  p_ZipCode IN CONTACT.ZipCode%TYPE
-)
-IS
-BEGIN
-  UPDATE CONTACT
-  SET ContactNumber = p_ContactNumber,
-      AddressLine1 = p_AddressLine1,
-      AddressLine2 = p_AddressLine2,
-      City = p_City,
-      State = p_State,
-      Country = p_Country,
-      ZipCode = p_ZipCode
-  WHERE UserID = p_UserID;
-  
-  COMMIT;
-  
-  DBMS_OUTPUT.PUT_LINE('User contact information updated successfully');
-END;
+-- Grant privileges to ARTIST role
+GRANT SELECT, INSERT, UPDATE ON USERS TO ARTIST;
+GRANT SELECT, INSERT, UPDATE ON CONTACT TO ARTIST;
+GRANT SELECT, INSERT, UPDATE ON ONLINE_EXHIBITION TO ARTIST;
+GRANT SELECT, INSERT, UPDATE ON ARTWORK TO ARTIST;
+
+-- Grant privileges to CUSTOMER role
+GRANT SELECT, INSERT, UPDATE ON USERS TO CUSTOMER;
+GRANT SELECT, INSERT, UPDATE ON CONTACT TO CUSTOMER;
+GRANT SELECT ON ONLINE_EXHIBITION TO CUSTOMER;
+GRANT SELECT, INSERT ON ORDERS TO CUSTOMER;
+GRANT SELECT, INSERT ON ORDER_ITEMS TO CUSTOMER;
+GRANT SELECT ON ART_CATEGORY TO CUSTOMER;
+GRANT SELECT ON ARTWORK TO CUSTOMER;
+
+
