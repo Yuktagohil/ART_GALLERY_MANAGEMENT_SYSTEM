@@ -1,7 +1,7 @@
 SET SERVEROUTPUT ON;
 
 BEGIN
-EXECUTE IMMEDIATE 'DROP ROLE artist CASCADE';
+EXECUTE IMMEDIATE 'DROP ROLE gallery_admin';
 dbms_output.put_line('Objects dropped');
 EXCEPTION
 WHEN OTHERS
@@ -10,21 +10,7 @@ END;
 / 
 
 BEGIN
-EXECUTE IMMEDIATE 'DROP ROLE customer CASCADE';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/ 
-
-CREATE ROLE artist IDENTIFIED BY artist004; 
-CREATE ROLE customer IDENTIFIED BY customer004;
-
-GRANT CREATE SESSION TO artist, customer;
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP USER arst CASCADE';
+EXECUTE IMMEDIATE 'DROP ROLE artist';
 dbms_output.put_line('Objects dropped');
 EXCEPTION
 WHEN OTHERS
@@ -33,7 +19,7 @@ END;
 / 
 
 BEGIN
-EXECUTE IMMEDIATE 'DROP USER cust CASCADE';
+EXECUTE IMMEDIATE 'DROP ROLE customer';
 dbms_output.put_line('Objects dropped');
 EXCEPTION
 WHEN OTHERS
@@ -41,11 +27,49 @@ THEN dbms_output.put_line('Objects not found');
 END;
 / 
 
-CREATE USER arst IDENTIFIED BY November2022; 
-GRANT CREATE SESSION TO arst;
-grant artist TO arst;
+CREATE ROLE gallery_admin IDENTIFIED BY April2023;
+CREATE ROLE artist IDENTIFIED BY April2023; 
+CREATE ROLE customer IDENTIFIED BY April2023;
 
-CREATE USER cust IDENTIFIED BY November2022; 
-GRANT CREATE SESSION TO cust;
-GRANT customer TO cust;
+GRANT CREATE SESSION TO gallery_admin, artist, customer;
 
+GRANT CREATE VIEW TO gallery_admin, artist, customer;
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP USER g_admin CASCADE';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP USER g_artist CASCADE';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/ 
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP USER g_customer CASCADE';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/ 
+
+CREATE USER g_admin IDENTIFIED BY Adminartgallery004; 
+CREATE USER g_artist IDENTIFIED BY Artistartgallery004; 
+CREATE USER g_customer IDENTIFIED BY Customerartgallery004; 
+
+GRANT CREATE SESSION TO g_admin;
+GRANT CREATE SESSION TO g_artist;
+GRANT CREATE SESSION TO g_customer;
+
+GRANT gallery_admin TO g_admin;
+GRANT artist TO g_artist;
+GRANT customer TO g_customer;
