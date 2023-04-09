@@ -194,8 +194,14 @@ truncate table ORDER_ITEMS;
 
 --insert constraints in tables
 --end date in exhibition table should be greater than start date
+alter table online_exhibition add constraint exhibition_date_constraint check (ExhibitionEndDateTime >=
+ExhibitionStartDateTime ) ;
 --rolename in user_role table should have only four values
+alter table user_role add constraint user_role_constraint check (RoleName in
+('Admin', 'Artist', 'Customer'));
 --contactnumber in contact table should be only 10 digits
+alter table contact add constraint contact_constraint CHECK
+(REGEXP_LIKE(ContactNumber, '^0\d{9}|\d{10}$'));
 --exhibitionstatus should be only three values in online_exhibition table
 --emailid syntax in user table should be proper
 
