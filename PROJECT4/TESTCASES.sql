@@ -1,4 +1,4 @@
-
+--TESTCASES FOR FUNCTION TO MANAGE USERS
 --test case 1: Add a new user
 DECLARE
     v_result VARCHAR2(200);
@@ -78,3 +78,28 @@ BEGIN
 END;
 /
 -- Expected output: Invalid action
+
+--TESTCASES FOR FUNCTION TO PURCHASE ARTWORK AND UPDATED ARTWORK STATUS
+--testcase1: artworkid 3 status is available
+DECLARE
+  v_result VARCHAR(50);
+BEGIN
+  v_result := purchase_artwork(p_UserID => 3, p_ArtworkID => 3);
+  DBMS_OUTPUT.PUT_LINE('Purchase result: ' || v_result);
+END;
+/
+select * from Artwork;
+--expected output: Your order is placed.(In artwork table, the status of artworkid 3 will be updated as 'Sold'
+
+--testcase2: artworkid 2 status is sold
+DECLARE
+  v_result VARCHAR(50);
+BEGIN
+  v_result := purchase_artwork(p_UserID => 3, p_ArtworkID => 2);
+  DBMS_OUTPUT.PUT_LINE('Purchase result: ' || v_result);
+END;
+/
+select * from Artwork;
+--expected output: The artwork is not available for purchase
+
+
