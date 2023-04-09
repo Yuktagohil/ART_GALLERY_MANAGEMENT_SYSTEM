@@ -698,4 +698,43 @@ BEGIN
 
     RETURN v_msg;
 END;
+/
+DROP SEQUENCE order_items_seq;
+CREATE SEQUENCE order_items_seq START WITH 1 INCREMENT BY 1;
 
+CREATE OR REPLACE FUNCTION purchase_artwork(p_UserID IN NUMBER, p_ArtworkID IN NUMBER)
+RETURN VARCHAR
+IS
+    v_Amount NUMBER;
+    v_Status VARCHAR2(10);
+    v_OrderItemsID NUMBER;
+    v_OrderID Number;
+BEGIN
+    SELECT Amount, Status INTO v_Amount, v_Status FROM artwork WHERE ArtworkID = p_ArtworkID;
+    
+    IF v_Status = 'Available' THEN
+        UPDATE artwork SET Status = 'Sold' WHERE ArtworkID = p_ArtworkID;
+        COMMIT;
+        RETURN 'Your order is placed';
+        
+        -- Generate a new order ID
+        SELECT order_items_seq.NEXTVAL INTO v_OrderID FROM dual;
+        
+        -- Insert the order details into order_items table
+        INSERT INTO order_items (OrderItemsID, OrderID)
+        VALUES (p_ArtworkID, order_items_seq.NEXTVAL);
+    ELSE
+        RAISE_APPLICATION_ERROR(-20001, 'The artwork is not available for purchase.');
+    END IF;
+END;
+/
+
+DECLARE
+  v_result VARCHAR(50);
+BEGIN
+  v_result := purchase_artwork(p_UserID => 3, p_ArtworkID => 1);
+  DBMS_OUTPUT.PUT_LINE('Purchase result: ' || v_result);
+END;
+/
+select * from Artwork;
+select * from order_items;
