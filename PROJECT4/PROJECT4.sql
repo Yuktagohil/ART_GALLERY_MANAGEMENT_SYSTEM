@@ -669,9 +669,16 @@ CREATE OR REPLACE FUNCTION manage_users (
 )
 RETURN VARCHAR2
 IS
+    v_user_id NUMBER(5);
     v_msg VARCHAR2(200);
 BEGIN
     IF (p_action = 'ADD') THEN
+            IF p_user_id IS NULL THEN
+            SELECT MAX(UserID) + 1 INTO v_user_id FROM USERS;
+        ELSE
+            v_user_id := p_user_id;
+        END IF;
+        
         INSERT INTO USERS (UserID, RoleID, EmailID, UserName, Password, FirstName, LastName, Speciality, Nationality)
         VALUES (users_seq.NEXTVAL, p_role_id, p_email_id, p_username, p_password, p_firstname, p_lastname, p_speciality, p_nationality);
 
@@ -699,6 +706,7 @@ BEGIN
     RETURN v_msg;
 END;
 /
+<<<<<<< HEAD
 DROP SEQUENCE order_items_seq;
 CREATE SEQUENCE order_items_seq START WITH 1 INCREMENT BY 1;
 
@@ -738,3 +746,5 @@ END;
 /
 select * from Artwork;
 select * from order_items;
+=======
+>>>>>>> fd6f92b08f0d5bfa5ff8842a90d5e246551c780c
