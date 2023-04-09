@@ -284,7 +284,13 @@ alter table user_role add constraint user_role_constraint check (RoleName in
 alter table contact add constraint contact_constraint CHECK
 (REGEXP_LIKE(ContactNumber, '^0\d{9}|\d{10}$'));
 --exhibitionstatus should be only three values in online_exhibition table
+alter table online_exhibition add CONSTRAINT Exhibition_status_Constraint check (ExhibitionStatus
+in ('Completed', 'Upcoming', 'Active'));
 --emailid syntax in user table should be proper
+alter table users add constraint EMAIL_SYNTAX CHECK
+(REGEXP_LIKE(EmailID,
+'^[A-Za-z]+[A-Za-z0-9.]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$'));
+
 
 --create sequence for roleid, usersid,contactid
 CREATE SEQUENCE user_role_seq START WITH 1 INCREMENT BY 1;
@@ -370,7 +376,7 @@ VALUES (contact_seq.NEXTVAL,15, 4895201698, 'Area 51', 'Washington square', 'Col
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
 VALUES (contact_seq.NEXTVAL,16, 6587420135, 'Swiss Street', 'Hartford', 'Buffalo', 'NY', 'USA', 04265);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-VALUES (contact_seq.NEXTVAL,17, 369750359, 'Phoenix street', 'Virginia', 'Hollywood', 'FL', 'USA', 03698);
+VALUES (contact_seq.NEXTVAL,17, 3697503590, 'Phoenix street', 'Virginia', 'Hollywood', 'FL', 'USA', 03698);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
 VALUES (contact_seq.NEXTVAL,18, 3697851026, 'Virginia street', 'Enterprise RD', 'Kansas', 'KS', 'USA', 01597);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
@@ -628,7 +634,8 @@ GRANT ALL PRIVILEGES ON ARTWORK TO ADMIN;
 GRANT SELECT, INSERT, UPDATE ON USERS TO ARTIST;
 GRANT SELECT, INSERT, UPDATE ON CONTACT TO ARTIST;
 GRANT SELECT, INSERT, UPDATE ON ONLINE_EXHIBITION TO ARTIST;
-GRANT SELECT, INSERT, UPDATE ON ARTWORK TO ARTIST;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ARTWORK TO ARTIST;
+GRANT SELECT ON ART_CATEGORY TO ARTIST;
 
 -- Grant privileges to CUSTOMER role
 GRANT SELECT, INSERT, UPDATE ON USERS TO CUSTOMER;
