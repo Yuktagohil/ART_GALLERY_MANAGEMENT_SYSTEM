@@ -192,6 +192,13 @@ truncate table ONLINE_EXHIBITION;
 truncate table ORDERS;
 truncate table ORDER_ITEMS;
 
+--insert constraints in tables
+--end date in exhibition table should be greater than start date
+--rolename in user_role table should have only four values
+--contactnumber in contact table should be only 10 digits
+--exhibitionstatus should be only three values in online_exhibition table
+--emailid syntax in user table should be proper
+
 --insert values in table USER_ROLE
 insert into USER_ROLE values (1,'Admin');
 insert into USER_ROLE values (2,'Artist');
