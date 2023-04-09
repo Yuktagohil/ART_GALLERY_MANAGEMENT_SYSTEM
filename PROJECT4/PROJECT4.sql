@@ -108,6 +108,60 @@ THEN dbms_output.put_line('Objects not found');
 END;
 /   
   
+BEGIN
+EXECUTE IMMEDIATE 'DROP SEQUENCE shipper_seq';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/  
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP SEQUENCE online_exhibition_seq';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/  
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP SEQUENCE orders_seq';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/  
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP SEQUENCE order_items_seq';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/  
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP SEQUENCE art_category_seq';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/  
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP SEQUENCE artwork_seq';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/  
+  
 Create table USER_ROLE(
 RoleID integer NOT NULL PRIMARY KEY,
 RoleName varchar(10) NOT NULL
@@ -237,9 +291,17 @@ alter table users add constraint EMAIL_SYNTAX CHECK
 (REGEXP_LIKE(EmailID,
 '^[A-Za-z]+[A-Za-z0-9.]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$'));
 
+
+--create sequence for roleid, usersid,contactid
 CREATE SEQUENCE user_role_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE users_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE contact_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE shipper_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE online_exhibition_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE orders_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE order_items_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE art_category_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE artwork_seq START WITH 1 INCREMENT BY 1;
 
 --insert values in table USER_ROLE
 insert into USER_ROLE values (user_role_seq.NEXTVAL,'Admin');
