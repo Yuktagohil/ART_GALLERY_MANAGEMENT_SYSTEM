@@ -233,15 +233,13 @@ alter table contact add constraint contact_constraint CHECK
 alter table online_exhibition add CONSTRAINT Exhibition_status_Constraint check (ExhibitionStatus
 in ('Completed', 'Upcoming', 'Active'));
 --emailid syntax in user table should be proper
-<<<<<<< HEAD
 alter table users add constraint EMAIL_SYNTAX CHECK
 (REGEXP_LIKE(EmailID,
 '^[A-Za-z]+[A-Za-z0-9.]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$'));
-=======
+
 CREATE SEQUENCE user_role_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE users_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE contact_seq START WITH 1 INCREMENT BY 1;
->>>>>>> bf86939c3b4b83608dbfd5db6f86bcbefec0cd8f
 
 --insert values in table USER_ROLE
 insert into USER_ROLE values (user_role_seq.NEXTVAL,'Admin');
@@ -316,11 +314,7 @@ VALUES (contact_seq.NEXTVAL,15, 4895201698, 'Area 51', 'Washington square', 'Col
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
 VALUES (contact_seq.NEXTVAL,16, 6587420135, 'Swiss Street', 'Hartford', 'Buffalo', 'NY', 'USA', 04265);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
-<<<<<<< HEAD
-VALUES (17,17, 3697503590, 'Phoenix street', 'Virginia', 'Hollywood', 'FL', 'USA', 03698);
-=======
-VALUES (contact_seq.NEXTVAL,17, 369750359, 'Phoenix street', 'Virginia', 'Hollywood', 'FL', 'USA', 03698);
->>>>>>> bf86939c3b4b83608dbfd5db6f86bcbefec0cd8f
+VALUES (contact_seq.NEXTVAL,17, 3697503590, 'Phoenix street', 'Virginia', 'Hollywood', 'FL', 'USA', 03698);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
 VALUES (contact_seq.NEXTVAL,18, 3697851026, 'Virginia street', 'Enterprise RD', 'Kansas', 'KS', 'USA', 01597);
 INSERT INTO CONTACT (Contactid, UserID, ContactNumber, Addressline1,Addressline2, city, state, country, zipcode)
