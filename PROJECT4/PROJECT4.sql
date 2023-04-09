@@ -508,3 +508,65 @@ insert into ARTWORK VALUES(75, 17, 2, NULL, NULL, 'The Whispere', 'a bronze scul
 insert into ARTWORK VALUES(76, 13, 4, NULL, 10, 'Elysium', 'A glass sculpture that features a series of overlapping, translucent layers that create a sense of depth and movement', 140, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 COMMIT;
 
+--procedure to add user
+CREATE OR REPLACE PROCEDURE ADD_USER(
+  p_RoleID IN USERS.RoleID%TYPE,
+  p_EmailID IN USERS.EmailID%TYPE,
+  p_UserName IN USERS.UserName%TYPE,
+  p_Password IN USERS.Password%TYPE,
+  p_FirstName IN USERS.FirstName%TYPE,
+  p_LastName IN USERS.LastName%TYPE,
+  p_Speciality IN USERS.Speciality%TYPE,
+  p_Nationality IN USERS.Nationality%TYPE,
+  p_ContactNumber IN CONTACT.ContactNumber%TYPE,
+  p_AddressLine1 IN CONTACT.AddressLine1%TYPE,
+  p_AddressLine2 IN CONTACT.AddressLine2%TYPE,
+  p_City IN CONTACT.City%TYPE,
+  p_State IN CONTACT.State%TYPE,
+  p_Country IN CONTACT.Country%TYPE,
+  p_ZipCode IN CONTACT.ZipCode%TYPE
+)
+IS
+  v_UserID USERS.UserID%TYPE;
+  v_ContactID CONTACT.ContactID%TYPE;
+BEGIN
+  INSERT INTO USERS (RoleID, EmailID, UserName, Password, FirstName, LastName, Speciality, Nationality)
+  VALUES (p_RoleID, p_EmailID, p_UserName, p_Password, p_FirstName, p_LastName, p_Speciality, p_Nationality)
+  RETURNING UserID INTO v_UserID;
+  
+  INSERT INTO CONTACT (UserID, ContactNumber, AddressLine1, AddressLine2, City, State, Country, ZipCode)
+  VALUES (v_UserID, p_ContactNumber, p_AddressLine1, p_AddressLine2, p_City, p_State, p_Country, p_ZipCode)
+  RETURNING ContactID INTO v_ContactID;
+  
+  COMMIT;
+  
+  DBMS_OUTPUT.PUT_LINE('User added successfully with ID ' || v_UserID);
+END;
+
+--procedure to update user contact
+CREATE OR REPLACE PROCEDURE UPDATE_USER_CONTACT(
+  p_UserID IN USERS.UserID%TYPE,
+  p_ContactNumber IN CONTACT.ContactNumber%TYPE,
+  p_AddressLine1 IN CONTACT.AddressLine1%TYPE,
+  p_AddressLine2 IN CONTACT.AddressLine2%TYPE,
+  p_City IN CONTACT.City%TYPE,
+  p_State IN CONTACT.State%TYPE,
+  p_Country IN CONTACT.Country%TYPE,
+  p_ZipCode IN CONTACT.ZipCode%TYPE
+)
+IS
+BEGIN
+  UPDATE CONTACT
+  SET ContactNumber = p_ContactNumber,
+      AddressLine1 = p_AddressLine1,
+      AddressLine2 = p_AddressLine2,
+      City = p_City,
+      State = p_State,
+      Country = p_Country,
+      ZipCode = p_ZipCode
+  WHERE UserID = p_UserID;
+  
+  COMMIT;
+  
+  DBMS_OUTPUT.PUT_LINE('User contact information updated successfully');
+END;
