@@ -88,7 +88,6 @@ BEGIN
   DBMS_OUTPUT.PUT_LINE('Purchase result: ' || v_result);
 END;
 /
-select * from Artwork;
 --expected output: Your order is placed.(In artwork table, the status of artworkid 3 will be updated as 'Sold'
 
 --testcase2: artworkid 2 status is sold
@@ -99,7 +98,6 @@ BEGIN
   DBMS_OUTPUT.PUT_LINE('Purchase result: ' || v_result);
 END;
 /
-select * from Artwork;
 --expected output: The artwork is not available for purchase
 
 
