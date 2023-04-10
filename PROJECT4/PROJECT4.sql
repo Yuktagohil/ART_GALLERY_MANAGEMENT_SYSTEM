@@ -735,3 +735,26 @@ BEGIN
 END;
 /
 
+
+--function to check the exhibition status
+CREATE OR REPLACE FUNCTION check_online_exhibition_status(
+    p_exhibition_id IN online_exhibition.exhibitionid%TYPE
+)
+RETURN VARCHAR2
+IS
+    v_status online_exhibition.exhibitionstatus%TYPE;
+    v_msg VARCHAR2(200);
+BEGIN
+    SELECT exhibitionstatus INTO v_status FROM online_exhibition WHERE exhibitionid = p_exhibition_id;
+    IF v_status = 'Active' THEN
+    v_msg := 'EXHIBITION IS ACTIVE NOW';
+        
+    ELSIF v_status = 'Upcoming' then 
+       v_msg := 'UPCOMING EXHIBITION'; 
+    ELSIF v_status = 'Completed' then
+        v_msg := 'EXHIBITION HAS BEEN COMPLETED';
+    END IF;
+    RETURN v_msg;
+END;
+/
+

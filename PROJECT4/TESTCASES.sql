@@ -101,3 +101,12 @@ END;
 --expected output: The artwork is not available for purchase
 
 
+
+--test case for function check_online_exhibition_status
+DECLARE
+    v_exhibition_status VARCHAR2(100);
+BEGIN
+    v_exhibition_status := check_online_exhibition_status(2);
+    DBMS_OUTPUT.PUT_LINE(v_exhibition_status);
+END;
+/
