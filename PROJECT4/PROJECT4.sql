@@ -592,10 +592,10 @@ insert into ARTWORK VALUES(artwork_seq.NEXTVAL,18, 7, 18, NULL, 'Waterfall Chand
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,30, 8, 19, NULL, 'Islamic Mosaic Art', 'A rich tradition of mosaic,featuring intricate geometric patterns and calligraphy', 250, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,18, 7, 20, 17, 'The Four Seasons', 'A series of stained-glass windows depicting scenes from the four seasons', 220, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,2, 2, NULL, 32, 'Venus de Milo', 'An ancient Greek statue believed to depict the goddess Aphrodite', 120, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(artwork_seq.NEXTVAL,16, 6, NULL, NULL, 'The Lady and the Unicorn', 'A series of six tapestries from the late Middle Ages depicting a lady and a unicorn', 100, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL,16, 6, NULL, NULL, 'The Lady and the Unicorn', 'A series of six tapestries from the late Middle Ages depicting a lady and a unicorn', 100, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,24, 6, NULL, 33, 'Autumn Landscape', 'a large tapestry that features a range of colors and textures, evoking the rich colors of fall foliage', 300, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,24, 6, NULL, 34, 'Beyond the Limit', 'a large-scale tapestry that features a grid of repeating patterns, evoking the idea of a labyrinth or maze', 290, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(artwork_seq.NEXTVAL,24, 6, NULL, NULL, 'Sea Change', 'a delicate tapestry that features undulating waves and swirling patterns, for the love of the ocean', 200, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL,24, 6, NULL, NULL, 'Sea Change', 'a delicate tapestry that features undulating waves and swirling patterns, for the love of the ocean', 200, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 1, 3, NULL, 'Ethereal Dreams', 'his painting features a whimsical, surrealistic landscape with floating islands and ethereal creatures', 167, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 15, 7, 3, NULL, 'Oceanic Currents', 'This glass sculpture features intricate swirls and curves reminiscent of ocean waves and currents', 250, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 12, 3, 3, NULL, 'Virtual Reality', 'his digital artwork explores the intersection of technology and the natural world, depicting a futuristic landscape with soaring skyscrapers and floating islands', 95, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
@@ -624,19 +624,22 @@ insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 13, 4, NULL, 24, 'Elysium', 'A g
 COMMIT;
 
 --updates total amount in orders based on artworks amounts
-UPDATE orders o
-SET o.totalamount = (
-  SELECT SUM(a.amount)
-  FROM artwork a
-  JOIN order_items oi ON oi.orderitemsid = a.orderitemsid
-  WHERE oi.orderid = o.orderid
-)
+UPDATE orders o SET o.totalamount = (
+  SELECT SUM(a.amount) FROM artwork a JOIN order_items oi ON oi.orderitemsid = a.orderitemsid WHERE oi.orderid = o.orderid)
 WHERE EXISTS (
-  SELECT 1
-  FROM artwork a
-  JOIN order_items oi ON oi.orderitemsid = a.orderitemsid
-  WHERE oi.orderid = o.orderid
-);
+  SELECT 1 FROM artwork a JOIN order_items oi ON oi.orderitemsid = a.orderitemsid WHERE oi.orderid = o.orderid);
+
+--update exhibition status in table online exhibition based on current date
+Update ONLINE_EXHIBITION OE SET OE.ExhibitionStatus = 'Completed' WHERE OE.ExhibitionStartDateTime < SYSDATE AND OE.ExhibitionEndDateTime < SYSDATE;
+COMMIT;
+Update ONLINE_EXHIBITION OE SET OE.ExhibitionStatus = 'Active'  WHERE OE.ExhibitionStartDateTime <= SYSDATE AND OE.ExhibitionEndDateTime >= SYSDATE;
+COMMIT;
+Update ONLINE_EXHIBITION OE SET OE.ExhibitionStatus = 'Upcoming'  WHERE OE.ExhibitionStartDateTime > SYSDATE;
+COMMIT;
+
+-- update artwork status for upcoming exhibitions
+UPDATE ARTWORK SET STATUS = 'Not available' WHERE ExhibitionID IN (
+SELECT ExhibitionID FROM ONLINE_EXHIBITION WHERE ExhibitionStatus = 'Upcoming');
 
 -- Grant privileges to ADMIN role
 GRANT ALL PRIVILEGES ON USER_ROLE TO ADMIN;
@@ -776,5 +779,4 @@ BEGIN
     RETURN v_msg;
 END;
 /
-
 
