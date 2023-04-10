@@ -73,3 +73,7 @@ GRANT CREATE SESSION TO g_customer;
 GRANT gallery_admin TO g_admin;
 GRANT artist TO g_artist;
 GRANT customer TO g_customer;
+
+grant connect to g_admin;
+grant resource to g_admin;
+alter user g_admin quota 500M on data;
