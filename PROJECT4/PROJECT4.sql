@@ -292,7 +292,7 @@ alter table users add constraint EMAIL_SYNTAX CHECK
 '^[A-Za-z]+[A-Za-z0-9.]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$'));
 
 
---create sequence for roleid, usersid,contactid
+--create sequence for all ids
 CREATE SEQUENCE user_role_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE users_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE contact_seq START WITH 1 INCREMENT BY 1;
@@ -706,10 +706,8 @@ BEGIN
     RETURN v_msg;
 END;
 /
-<<<<<<< HEAD
-DROP SEQUENCE order_items_seq;
-CREATE SEQUENCE order_items_seq START WITH 1 INCREMENT BY 1;
 
+--function to purchase artwork
 CREATE OR REPLACE FUNCTION purchase_artwork(p_UserID IN NUMBER, p_ArtworkID IN NUMBER)
 RETURN VARCHAR
 IS
@@ -737,14 +735,3 @@ BEGIN
 END;
 /
 
-DECLARE
-  v_result VARCHAR(50);
-BEGIN
-  v_result := purchase_artwork(p_UserID => 3, p_ArtworkID => 1);
-  DBMS_OUTPUT.PUT_LINE('Purchase result: ' || v_result);
-END;
-/
-select * from Artwork;
-select * from order_items;
-=======
->>>>>>> fd6f92b08f0d5bfa5ff8842a90d5e246551c780c
