@@ -628,6 +628,7 @@ UPDATE orders o SET o.totalamount = (
   SELECT SUM(a.amount) FROM artwork a JOIN order_items oi ON oi.orderitemsid = a.orderitemsid WHERE oi.orderid = o.orderid)
 WHERE EXISTS (
   SELECT 1 FROM artwork a JOIN order_items oi ON oi.orderitemsid = a.orderitemsid WHERE oi.orderid = o.orderid);
+COMMIT;
 
 --update exhibition status in table online exhibition based on current date
 Update ONLINE_EXHIBITION OE SET OE.ExhibitionStatus = 'Completed' WHERE OE.ExhibitionStartDateTime < SYSDATE AND OE.ExhibitionEndDateTime < SYSDATE;
@@ -640,6 +641,7 @@ COMMIT;
 -- update artwork status for upcoming exhibitions
 UPDATE ARTWORK SET STATUS = 'Not available' WHERE ExhibitionID IN (
 SELECT ExhibitionID FROM ONLINE_EXHIBITION WHERE ExhibitionStatus = 'Upcoming');
+COMMIT;
 
 -- Grant privileges to ADMIN role
 GRANT ALL PRIVILEGES ON USER_ROLE TO ADMIN;
@@ -670,7 +672,7 @@ GRANT SELECT ON ARTWORK TO CUSTOMER;
 
 
 --function to manage users
-CREATE OR REPLACE FUNCTION manage_users (
+CREATE OR REPLACE FUNCTION manage_users1 (
     p_user_id IN NUMBER DEFAULT NULL,
     p_role_id IN NUMBER,
     p_email_id IN VARCHAR2,
