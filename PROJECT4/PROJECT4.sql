@@ -780,3 +780,38 @@ BEGIN
 END;
 /
 
+--procedure to manage artwork
+CREATE OR REPLACE PROCEDURE manage_artwork (
+p_artwork_id IN NUMBER,
+p_art_category_id IN NUMBER,
+p_user_id IN NUMBER,
+p_exhibition_id IN NUMBER,
+p_order_items_id IN NUMBER,
+p_name IN VARCHAR2,
+p_description IN VARCHAR2,
+p_amount IN NUMBER,
+p_status IN VARCHAR2,
+p_artwork_image IN BLOB
+)
+AS
+BEGIN
+IF p_artwork_id IS NULL THEN
+-- Insert new artwork
+INSERT INTO ARTWORK (ArtworkID, ArtCategoryID, UserID, ExhibitionID, OrderItemsID, Name, Description, Amount, Status, ArtworkImage)
+VALUES (artwork_seq.NEXTVAL, p_art_category_id, p_user_id, p_exhibition_id, p_order_items_id, p_name, p_description, p_amount, p_status, p_artwork_image);
+ELSE
+-- Update existing artwork
+UPDATE ARTWORK
+SET ArtCategoryID = p_art_category_id,
+UserID = p_user_id,
+ExhibitionID = p_exhibition_id,
+OrderItemsID = p_order_items_id,
+Name = p_name,
+Description = p_description,
+Amount = p_amount,
+Status = p_status,
+ArtworkImage = p_artwork_image
+WHERE ArtworkID = p_artwork_id;
+END IF;
+END;
+/

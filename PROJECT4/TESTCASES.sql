@@ -110,3 +110,24 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE(v_exhibition_status);
 END;
 /
+
+--to add new artwork when artwork id is null
+BEGIN
+  manage_artwork(NULL , 2, 4, 7, 12, 'The Starry Night', 'A painting by vincent van gogh', 2500, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+END;
+/
+--to update existing artwork
+BEGIN
+  manage_artwork(8 , 3, 5, 10, 15, 'The Persistence of Memory', 'A painting by Salvador Dali', 5000, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+END;
+/
+--to update non-existing artwork
+BEGIN
+  manage_artwork(100 , 3, 5, 10, 15, 'The Persistence of Memory', 'A painting by Salvador Dali', 5000, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+END;
+/
+--Invalid Input
+BEGIN
+  manage_artwork(NULL , 2, 4, 7, 12, NULL, 'A painting by Salvador Dali', 5000, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+END;
+/
