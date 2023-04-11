@@ -150,23 +150,110 @@ BEGIN
 END;
 /
 
---to add new artwork when artwork id is null
+--adding artwork with artwork id as null
 BEGIN
-  manage_artwork(NULL , 2, 4, 7, 12, 'The Starry Night', 'A painting by vincent van gogh', 2500, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+   manage_artwork(
+      p_artwork_id => NULL,
+      p_art_category_id => 1,
+      p_user_id => 1,
+      p_exhibition_id => 2,
+      p_order_items_id => NULL,
+      p_name => 'Test Artwork',
+      p_description => 'This is a test artwork.',
+      p_amount => 100,
+      p_status => 'Available',
+      p_artwork_image => utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'),
+      p_action => 'ADD'
+   );
 END;
 /
---to update existing artwork
+
+--updating existing artwork
 BEGIN
-  manage_artwork(8 , 3, 5, 10, 15, 'The Persistence of Memory', 'A painting by Salvador Dali', 5000, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+   manage_artwork(
+      p_artwork_id => 1,
+      p_art_category_id => 2,
+      p_user_id => 2,
+      p_exhibition_id => 2,
+      p_order_items_id => 2,
+      p_name => 'Updated Test Artwork',
+      p_description => 'This is an updated test artwork.',
+      p_amount => 200,
+      p_status => 'Sold',
+      p_artwork_image => utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'),
+      p_action => 'UPDATE'
+   );
 END;
 /
---to update non-existing artwork
+
+--updating non existing artwork
 BEGIN
-  manage_artwork(100 , 3, 5, 10, 15, 'The Persistence of Memory', 'A painting by Salvador Dali', 5000, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+   manage_artwork(
+      p_artwork_id => 1000,
+      p_art_category_id => 2,
+      p_user_id => 2,
+      p_exhibition_id => 2,
+      p_order_items_id => 2,
+      p_name => 'Updated Test Artwork',
+      p_description => 'This is an updated test artwork.',
+      p_amount => 200,
+      p_status => 'Sold',
+      p_artwork_image => utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'),
+      p_action => 'UPDATE'
+   );
 END;
 /
---Invalid Input
+
+--deleting existing artwork id
 BEGIN
-  manage_artwork(NULL , 2, 4, 7, 12, NULL, 'A painting by Salvador Dali', 5000, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+   manage_artwork(
+      p_artwork_id => 1,
+      p_art_category_id => NULL,
+      p_user_id => NULL,
+      p_exhibition_id => NULL,
+      p_order_items_id => NULL,
+      p_name => NULL,
+      p_description => NULL,
+      p_amount => NULL,
+      p_status => NULL,
+      p_artwork_image => NULL,
+      p_action => 'DELETE'
+   );
+END;
+/
+
+--deleting nonexisting artwork
+BEGIN
+   manage_artwork(
+      p_artwork_id => 1000,
+      p_art_category_id => NULL,
+      p_user_id => NULL,
+      p_exhibition_id => NULL,
+      p_order_items_id => NULL,
+      p_name => NULL,
+      p_description => NULL,
+      p_amount => NULL,
+      p_status => NULL,
+      p_artwork_image => NULL,
+      p_action => 'DELETE'
+   );
+END;
+/
+
+--cannot insert NULL values
+BEGIN
+   manage_artwork(
+      p_artwork_id => NULL,
+      p_art_category_id => NULL,
+      p_user_id => 1,
+      p_exhibition_id => 2,
+      p_order_items_id => NULL,
+      p_name => 'Test Artwork',
+      p_description => 'This is a test artwork.',
+      p_amount => 100,
+      p_status => 'Available',
+      p_artwork_image => utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'),
+      p_action => 'ADD'
+   );
 END;
 /
