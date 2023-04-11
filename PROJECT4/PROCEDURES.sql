@@ -1,3 +1,21 @@
+BEGIN
+EXECUTE IMMEDIATE 'DROP PROCEDURE manage_artwork';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP PROCEDURE manage_users';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/
+
 --procedure to manage artwork
 CREATE OR REPLACE PROCEDURE manage_artwork (
 p_artwork_id IN NUMBER,
@@ -9,15 +27,17 @@ p_name IN VARCHAR2,
 p_description IN VARCHAR2,
 p_amount IN NUMBER,
 p_status IN VARCHAR2,
-p_artwork_image IN BLOB
+p_artwork_image IN BLOB,
+p_action IN VARCHAR2
 )
 AS
 BEGIN
-IF p_artwork_id IS NULL THEN
+IF p_action = 'ADD' THEN
 -- Insert new artwork
 INSERT INTO ARTWORK (ArtworkID, ArtCategoryID, UserID, ExhibitionID, OrderItemsID, Name, Description, Amount, Status, ArtworkImage)
 VALUES (artwork_seq.NEXTVAL, p_art_category_id, p_user_id, p_exhibition_id, p_order_items_id, p_name, p_description, p_amount, p_status, p_artwork_image);
-ELSE
+DBMS_OUTPUT.PUT_LINE('Artwork added successfully.');
+ELSIF p_action = 'UPDATE' THEN
 -- Update existing artwork
 UPDATE ARTWORK
 SET ArtCategoryID = p_art_category_id,
@@ -30,9 +50,29 @@ Amount = p_amount,
 Status = p_status,
 ArtworkImage = p_artwork_image
 WHERE ArtworkID = p_artwork_id;
+  IF SQL%ROWCOUNT = 0 THEN
+     DBMS_OUTPUT.PUT_LINE('Artwork not found.');
+  ELSE
+     DBMS_OUTPUT.PUT_LINE('Artwork updated successfully.');
+  END IF;
+ELSIF p_action = 'DELETE' THEN
+-- Delete artwork
+DELETE FROM ARTWORK
+WHERE ArtworkID = p_artwork_id;
+  IF SQL%ROWCOUNT = 0 THEN
+     DBMS_OUTPUT.PUT_LINE('Artwork not found.');
+  ELSE
+     DBMS_OUTPUT.PUT_LINE('Artwork deleted successfully.');
+  END IF;
+ELSE
+DBMS_OUTPUT.PUT_LINE('Invalid action specified.');
 END IF;
+EXCEPTION
+WHEN OTHERS THEN
+DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
 END;
 /
+
 
 --procedure to manage users
 CREATE OR REPLACE PROCEDURE manage_users (
