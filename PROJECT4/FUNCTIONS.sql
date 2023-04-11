@@ -5,7 +5,7 @@ EXCEPTION
 WHEN OTHERS
 THEN dbms_output.put_line('Objects not found');
 END;
-/ 
+/    
 
 BEGIN
 EXECUTE IMMEDIATE 'DROP FUNCTION check_online_exhibition_status';
@@ -14,8 +14,7 @@ EXCEPTION
 WHEN OTHERS
 THEN dbms_output.put_line('Objects not found');
 END;
-/  
-
+/    
 
 --function to purchase artwork
 CREATE OR REPLACE FUNCTION purchase_artwork(p_UserID IN NUMBER, p_ArtworkID IN NUMBER)
