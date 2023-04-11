@@ -27,14 +27,6 @@ THEN dbms_output.put_line('Objects not found');
 END;
 / 
 
-CREATE ROLE gallery_admin IDENTIFIED BY April2023;
-CREATE ROLE artist IDENTIFIED BY April2023; 
-CREATE ROLE customer IDENTIFIED BY April2023;
-
-GRANT CREATE SESSION TO gallery_admin, artist, customer;
-
-GRANT CREATE VIEW TO gallery_admin, artist, customer;
-
 BEGIN
 EXECUTE IMMEDIATE 'DROP USER g_admin CASCADE';
 dbms_output.put_line('Objects dropped');
@@ -62,6 +54,14 @@ THEN dbms_output.put_line('Objects not found');
 END;
 / 
 
+CREATE ROLE gallery_admin IDENTIFIED BY April2023;
+CREATE ROLE artist IDENTIFIED BY April2023; 
+CREATE ROLE customer IDENTIFIED BY April2023;
+
+GRANT CREATE SESSION TO gallery_admin, artist, customer;
+
+GRANT CREATE VIEW TO gallery_admin, artist, customer;
+
 CREATE USER g_admin IDENTIFIED BY Adminartgallery004; 
 CREATE USER g_artist IDENTIFIED BY Artistartgallery004; 
 CREATE USER g_customer IDENTIFIED BY Customerartgallery004; 
@@ -77,4 +77,3 @@ GRANT customer TO g_customer;
 grant connect to g_admin;
 grant resource to g_admin;
 alter user g_admin quota 500M on data;
-
