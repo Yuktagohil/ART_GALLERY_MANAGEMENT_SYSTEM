@@ -161,24 +161,6 @@ WHEN OTHERS
 THEN dbms_output.put_line('Objects not found');
 END;
 /  
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP FUNCTION check_online_exhibition_status';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/  
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP PROCEDURE manage_users';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/  
   
 Create table USER_ROLE(
 RoleID integer NOT NULL PRIMARY KEY,
