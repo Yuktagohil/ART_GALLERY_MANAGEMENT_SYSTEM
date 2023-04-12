@@ -62,13 +62,30 @@ GRANT CREATE SESSION TO gallery_admin, artist, customer;
 
 GRANT CREATE VIEW TO gallery_admin, artist, customer;
 
+
 CREATE USER g_admin IDENTIFIED BY Adminartgallery004; 
 CREATE USER g_artist IDENTIFIED BY Artistartgallery004; 
 CREATE USER g_customer IDENTIFIED BY Customerartgallery004; 
 
+
 GRANT CREATE SESSION TO g_admin;
 GRANT CREATE SESSION TO g_artist;
 GRANT CREATE SESSION TO g_customer;
+
+--artist user
+GRANT CONNECT TO g_artist;
+GRANT CREATE PROCEDURE TO g_artist;
+GRANT CREATE VIEW TO g_artist;
+GRANT EXECUTE ON MANAGE_ARTWORK TO g_artist;
+
+
+--admin user
+GRANT CONNECT TO art_gallery_admin WITH ADMIN OPTION;
+GRANT RESOURCE TO art_gallery_admin WITH ADMIN OPTION;
+GRANT CREATE VIEW TO art_gallery_admin WITH ADMIN OPTION;
+GRANT CREATE PROCEDURE TO art_gallery_admin WITH ADMIN OPTION;
+
+
 
 GRANT gallery_admin TO g_admin;
 GRANT artist TO g_artist;
