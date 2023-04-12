@@ -1,28 +1,38 @@
-CREATE OR REPLACE TRIGGER trg_order_items
-AFTER INSERT ON ORDER_ITEMS
+--trigger to update artwork status 
+CREATE OR REPLACE TRIGGER update_artwork_availability
+AFTER UPDATE OF exhibitionstatus ON online_exhibition
 FOR EACH ROW
 DECLARE
-  v_total_amount ORDERS.TOTALAMOUNT%TYPE;
-  v_order_id NUMBER;
-  v_OrderItemsID ORDER_ITEMS.ORDERITEMSID%TYPE;
-    v_ShipperID SHIPPER.SHIPPERID%TYPE := 1;
-    v_TransactionID ORDERS.TransactionID%TYPE;
-    v_TransactionMethod ORDERS.TransactionMethod%TYPE := 'credit card';
-    v_TransactionStatus ORDERS.TransactionStatus%TYPE := 'complete';
-    v_OrderStatus ORDERS.OrderStatus%TYPE := 'Confirmed';
-    v_ShippingStatus ORDERS.ShippingStatus%TYPE := 'Preparing to be Shipped';
-    v_ShippingAddress ORDERS.ShippingAddress%TYPE;
-    
+    artwork_id artwork.artworkid%TYPE;
+    artwork_status artwork.status%TYPE;
+    v_msg varchar(100);
 BEGIN
-    v_orderid := :NEW.orderid;
-  -- Calculate the total amount
-  v_total_amount := CALCULATE_TOTALAMOUNT(v_orderid);
-  
-  -- Generate a new order ID
-  SELECT order_seq.NEXTVAL INTO v_order_id FROM dual;
-  
-  -- Insert the new order
-  INSERT INTO ORDERS (OrderID, UserID, ShipperID, TransactionID, TransactionMethod, TransactionStatus, OrderStatus, ShippingStatus, ShippingAddress, OrderDateTime, TotalAmount)
-  VALUES (v_orderid, p_UserID, v_ShipperID, v_TransactionID, v_TransactionMethod, v_TransactionStatus, v_OrderStatus, v_ShippingStatus, v_ShippingAddress, SYSDATE, v_total_amount);
+    IF (:OLD.ExhibitionStatus = 'Upcoming' AND :NEW.ExhibitionStatus = 'Active' AND :NEW.ExhibitionStartDateTime = SYSDATE) THEN
+        UPDATE artwork SET status = 'Available' WHERE exhibitionid = :NEW.ExhibitionID;
+    END IF;
+    
+    SELECT artworkid, status INTO artwork_id, artwork_status FROM artwork WHERE exhibitionid = :NEW.ExhibitionID;
+    
+    IF artwork_status = 'Available' AND artwork_status != 'Sold' AND SYSDATE > :NEW.ExhibitionEndDateTime THEN
+        UPDATE artwork SET status = 'Not available' WHERE artworkid = artwork_id;
+    ELSE
+        v_msg := 'Artwork not updated because it is not available or it has already been sold';
+    END IF;
+END;
+/
+
+--check exhibition id when adding new artwork
+CREATE OR REPLACE TRIGGER check_exhibition_dates
+BEFORE INSERT ON ARTWORK
+FOR EACH ROW
+DECLARE
+    exhibition_end_date DATE;
+    v_msg varchar(100);
+BEGIN
+    SELECT ExhibitionEndDateTime INTO exhibition_end_date FROM ONLINE_EXHIBITION WHERE ExhibitionID = :NEW.ExhibitionID;
+    
+    IF exhibition_end_date < SYSDATE THEN
+    v_msg := 'Cannot add artwork to an exhibition that has already ended.';
+    END IF;
 END;
 /
