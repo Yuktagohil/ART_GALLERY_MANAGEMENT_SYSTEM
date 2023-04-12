@@ -96,4 +96,3 @@ BEGIN
   RETURN v_total_amount;
 END;
 /
-

@@ -77,3 +77,7 @@ GRANT customer TO g_customer;
 grant connect to g_admin;
 grant resource to g_admin;
 alter user g_admin quota 500M on data;
+
+grant execute on ADMIN_PACKAGE to gallery_admin;
+grant execute on ARTIST_PACKAGES to artist;
+grant execute on CUSTOMER_PACKAGES to customer;
