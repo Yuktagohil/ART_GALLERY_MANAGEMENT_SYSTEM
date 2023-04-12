@@ -94,3 +94,168 @@ BEGIN
     END LOOP;
 END;
 /
+
+CREATE OR REPLACE PACKAGE user_pkg IS
+
+  PROCEDURE insert_user (
+    p_userid     IN  USERS.userid%TYPE,
+    p_roleid     IN  USERS.roleid%TYPE,
+    p_username   IN  USERS.username%TYPE,
+    p_emailid    IN  USERS.emailid%TYPE,
+    p_password   IN  USERS.password%TYPE,
+    p_firstname  IN  USERS.firstname%TYPE,
+    p_lastname   IN  USERS.lastname%TYPE,
+    p_speciality IN  USERS.speciality%TYPE,
+    p_nationality IN USERS.nationality%TYPE
+  );
+
+  PROCEDURE update_user (
+    p_userid     IN  USERS.userid%TYPE,
+    p_roleid     IN  USERS.roleid%TYPE,
+    p_username   IN  USERS.username%TYPE,
+    p_emailid    IN  USERS.emailid%TYPE,
+    p_password   IN  USERS.password%TYPE,
+    p_firstname  IN  USERS.firstname%TYPE,
+    p_lastname   IN  USERS.lastname%TYPE,
+    p_speciality IN  USERS.speciality%TYPE,
+    p_nationality IN USERS.nationality%TYPE
+  );
+
+  PROCEDURE delete_user (
+    p_username IN USERS.username%TYPE
+  );
+
+END user_pkg;
+/
+
+CREATE OR REPLACE PACKAGE BODY user_pkg IS
+
+  PROCEDURE insert_user (
+    p_userid     IN  USERS.userid%TYPE,
+    p_roleid     IN  USERS.roleid%TYPE,
+    p_username   IN  USERS.username%TYPE,
+    p_emailid    IN  USERS.emailid%TYPE,
+    p_password   IN  USERS.password%TYPE,
+    p_firstname  IN  USERS.firstname%TYPE,
+    p_lastname   IN  USERS.lastname%TYPE,
+    p_speciality IN  USERS.speciality%TYPE,
+    p_nationality IN USERS.nationality%TYPE
+  ) AS
+  BEGIN
+    INSERT INTO USERS (
+      userid,
+      roleid,
+      username,
+      emailid,
+      password,
+      firstname,
+      lastname,
+      speciality,
+      nationality
+    ) VALUES (
+      p_userid,
+      p_roleid,
+      p_username,
+      p_emailid,
+      p_password,
+      p_firstname,
+      p_lastname,
+      p_speciality,
+      p_nationality
+    );
+    COMMIT;
+  END insert_user;
+
+  PROCEDURE update_user (
+    p_userid     IN  USERS.userid%TYPE,
+    p_roleid     IN  USERS.roleid%TYPE,
+    p_username   IN  USERS.username%TYPE,
+    p_emailid    IN  USERS.emailid%TYPE,
+    p_password   IN  USERS.password%TYPE,
+    p_firstname  IN  USERS.firstname%TYPE,
+    p_lastname   IN  USERS.lastname%TYPE,
+    p_speciality IN  USERS.speciality%TYPE,
+    p_nationality IN USERS.nationality%TYPE
+  ) AS
+  BEGIN
+    UPDATE USERS SET
+      roleid = p_roleid,
+      username = p_username,
+      emailid = p_emailid,
+      password = p_password,
+      firstname = p_firstname,
+      lastname = p_lastname,
+      speciality = p_speciality,
+      nationality = p_nationality
+    WHERE userid = p_userid;
+    COMMIT;
+  END update_user;
+
+  PROCEDURE delete_user (
+    p_username IN USERS.username%TYPE
+  ) AS
+  BEGIN
+    DELETE FROM USERS WHERE username = p_username;
+    COMMIT;
+  END delete_user;
+
+END user_pkg;
+/
+
+-- Create a new user
+BEGIN
+  user_pkg.insert_user(
+    p_userid => users_seq.NEXTVAL,
+    p_roleid => 1,
+    p_username => 'testuser',
+    p_emailid => 'testuser@test.com',
+    p_password => 'password',
+    p_firstname => 'Test',
+    p_lastname => 'User',
+    p_speciality => 'Software Engineer',
+    p_nationality => 'USA'
+  );
+END;
+/
+BEGIN
+user_pkg.insert_user(
+    p_userid => users_seq.NEXTVAL,
+    p_roleid => 1,
+    p_username => 'produser',
+    p_emailid => 'testuser@test.com',
+    p_password => 'password',
+    p_firstname => 'Test',
+    p_lastname => 'User',
+    p_speciality => 'Software Engineer',
+    p_nationality => 'USA'
+  );
+END;
+/
+-- Verify that the new user was created
+SELECT * FROM USERS WHERE username = 'testuser';
+
+-- Update the user's email address
+BEGIN
+  user_pkg.update_user(
+    p_userid => users_seq.NEXTVAL,
+    p_roleid => 2,
+    p_username => 'testuser',
+    p_emailid => 'updatedemail@test.com',
+    p_password => 'password',
+    p_firstname => 'Test',
+    p_lastname => 'User',
+    p_speciality => 'Software Engineer',
+    p_nationality => 'USA'
+  );
+END;
+/
+-- Verify that the user's email address was updated
+SELECT * FROM USERS WHERE username = 'testuser';
+
+-- Delete the user
+BEGIN
+  user_pkg.delete_user(p_username => 'testuser');
+END;
+/
+-- Verify that the user was deleted
+SELECT * FROM USERS;

@@ -278,8 +278,8 @@ truncate table ORDER_ITEMS;
 alter table online_exhibition add constraint exhibition_date_constraint check (ExhibitionEndDateTime >=
 ExhibitionStartDateTime ) ;
 --rolename in user_role table should have only four values
-alter table user_role add constraint user_role_constraint check (RoleName in
-('Admin', 'Artist', 'Customer'));
+--alter table user_role add constraint user_role_constraint check (RoleName in
+--('Admin', 'Artist', 'Customer'));
 --contactnumber in contact table should be only 10 digits
 alter table contact add constraint contact_constraint CHECK
 (REGEXP_LIKE(ContactNumber, '^0\d{9}|\d{10}$'));
@@ -711,3 +711,4 @@ GRANT SELECT, INSERT ON ORDER_ITEMS TO CUSTOMER;
 GRANT SELECT ON ART_CATEGORY TO CUSTOMER;
 GRANT SELECT ON ARTWORK TO CUSTOMER;
 COMMIT;
+
