@@ -224,7 +224,7 @@ TransactionMethod varchar(45) NOT NULL,
 TransactionStatus varchar(45) NOT NULL,
 OrderStatus varchar(45) NOT NULL,
 ShippingStatus varchar(80) NOT NULL,
-ShippingAddress varchar(150) NOT NULL,
+ShippingAddress varchar(300) NOT NULL,
 OrderDateTime DATE NOT NULL,
 TotalAmount number NOT NULL
 );
