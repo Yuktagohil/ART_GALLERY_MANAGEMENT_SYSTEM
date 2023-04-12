@@ -10,4 +10,17 @@ WITH ranked_artists AS (
 )
 SELECT total_artworks_sold, artist_name, artist_id
 FROM ranked_artists
-WHERE artist_rank <= 5;
+WHERE artist_rank <= 5; 
+
+--reports to generate trending artcategories
+WITH trending_artcategory AS (
+    SELECT ac.artcategory as artcategory_name, COUNT(a.artcategoryid) AS num_sold,
+        DENSE_RANK() OVER (ORDER BY COUNT(DISTINCT a.artworkid) DESC) AS artcategory_rank
+    FROM artwork a
+    LEFT JOIN art_category ac ON a.artcategoryid = ac.artcategoryid 
+    where a.status = 'Sold'
+    GROUP BY a.artcategoryid,ac.artcategory
+)
+select artcategory_name, artcategory_rank, num_sold
+from trending_artcategory
+where artcategory_rank <= 3;
