@@ -54,3 +54,20 @@ SELECT
   SUM(CASE WHEN ag.status = 'Sold' THEN ag.amount ELSE 0 END) AS Revenue
 FROM ARTWORK ag
 WHERE ag.status = 'Sold';
+
+--Report to generate top frequent customers
+WITH FREQUENT_CUSTOMERS AS (
+    SELECT u.USERID as customer_id,u.username AS customer_name, COUNT(oi.ORDERITEMSID) AS num_orders,
+    DENSE_RANK() OVER (ORDER BY COUNT(DISTINCT oi.ORDERITEMSID) DESC) AS customer_rank
+    FROM USERS u
+    JOIN USER_ROLE ur ON u.ROLEID = ur.ROLEID
+    JOIN ORDERS o ON u.USERID = o.USERID
+    JOIN ORDER_ITEMS oi ON o.ORDERID = oi.ORDERID
+    JOIN ARTWORK a ON oi.ORDERITEMSID = a.ORDERITEMSID
+    WHERE ur.ROLENAME = 'Customer' AND a.STATUS = 'Sold'
+    GROUP BY u.username, ur.rolename, u.userid, u.roleid
+)
+SELECT customer_name, customer_rank, num_orders
+FROM frequent_customers
+WHERE customer_rank <= 3;
+
