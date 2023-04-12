@@ -86,7 +86,7 @@ END;
 
 
 --procedure to manage users
-CREATE OR REPLACE PROCEDURE manage_users (
+CREATE OR REPLACE PROCEDURE manage_artgallery_users (
     p_user_id IN USERS.USERID%TYPE,
     p_role_id IN USERS.ROLEID%TYPE DEFAULT NULL,
     p_email_id IN USERS.EMAILID%TYPE DEFAULT NULL,

@@ -3,7 +3,7 @@
 DECLARE
     v_msg VARCHAR2(100);
 BEGIN
-    manage_users(
+    manage_artgallery_users(
         p_user_id => NULL,
         p_role_id => 1,
         p_email_id => 'johndoe@example.com',
@@ -33,7 +33,7 @@ END;
 DECLARE
     v_msg VARCHAR2(100);
 BEGIN
-    manage_users(
+    manage_artgallery_users(
         p_user_id => NULL,
         p_role_id => 3,
         p_email_id => 'testuser@example.com',
@@ -62,7 +62,7 @@ END;
 DECLARE
     v_msg VARCHAR2(100);
 BEGIN
-    manage_users(
+    manage_artgallery_users(
         p_user_id => NULL,
         p_role_id => 2,
         p_email_id => 'johndoe@example.com',
@@ -92,7 +92,7 @@ END;
 DECLARE
     v_msg VARCHAR2(100);
 BEGIN
-    manage_users(
+    manage_artgallery_users(
         p_user_id => 33,
         p_role_id => NULL,
         p_email_id => NULL,
