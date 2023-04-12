@@ -137,7 +137,6 @@ BEGIN
 END;
 /
 
-
 --test case for function check_online_exhibition_status
 DECLARE
     v_exhibition_status VARCHAR2(100);
