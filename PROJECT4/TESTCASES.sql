@@ -119,26 +119,23 @@ END;
 
 
 --TESTCASES FOR FUNCTION TO PURCHASE ARTWORK AND UPDATED ARTWORK STATUS
---testcase1: artworkid 3 status is available
+--testcase1: artworkid 22 status is available
 DECLARE
-  v_result VARCHAR(50);
+    v_purchase_artwork VARCHAR2(100);
 BEGIN
-  v_result := purchase_artwork(p_UserID => 3, p_ArtworkID => 3);
-  DBMS_OUTPUT.PUT_LINE('Purchase result: ' || v_result);
+    v_purchase_artwork := purchase_artwork(11, 22);
+    DBMS_OUTPUT.PUT_LINE(v_purchase_artwork);
 END;
 /
---expected output: Your order is placed.(In artwork table, the status of artworkid 3 will be updated as 'Sold'
 
---testcase2: artworkid 2 status is sold
+--testcase2: artworkid 30 status is sold
 DECLARE
-  v_result VARCHAR(50);
+    v_purchase_artwork VARCHAR2(100);
 BEGIN
-  v_result := purchase_artwork(p_UserID => 3, p_ArtworkID => 2);
-  DBMS_OUTPUT.PUT_LINE('Purchase result: ' || v_result);
+    v_purchase_artwork := purchase_artwork(11, 30);
+    DBMS_OUTPUT.PUT_LINE(v_purchase_artwork);
 END;
 /
---expected output: The artwork is not available for purchase
-
 
 
 --test case for function check_online_exhibition_status
@@ -255,5 +252,14 @@ BEGIN
       p_artwork_image => utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'),
       p_action => 'ADD'
    );
+END;
+/
+
+--test case to calculate total amount
+DECLARE
+    v_total_amount VARCHAR2(100);
+BEGIN
+    v_total_amount := CALCULATE_TOTALAMOUNT(5);
+    DBMS_OUTPUT.PUT_LINE('Total Amount:' || v_total_amount);
 END;
 /

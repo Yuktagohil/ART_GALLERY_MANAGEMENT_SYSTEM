@@ -302,6 +302,7 @@ CREATE SEQUENCE orders_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
 CREATE SEQUENCE order_items_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
 CREATE SEQUENCE art_category_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
 CREATE SEQUENCE artwork_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+COMMIT;
 
 --insert values in table USER_ROLE
 insert into USER_ROLE values (user_role_seq.NEXTVAL,'Admin');
@@ -469,29 +470,29 @@ VALUES (orders_seq.NEXTVAL, 7, 4, 567252464393, 'net banking', 'complete', 'Conf
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 8, 3, 545475937224, 'wire transfer', 'complete', 'Confirmed', 'Transit', '123 MNP street', TO_DATE('09-MAR-2023 12:54:40', 'DD-MON-YYYY HH24:MI:SS'), 60);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 9, 9, 527877595957, 'debit', 'complete', 'Confirmed', 'Shipped', '1 BC street', TO_DATE('08-MAR-2023 12:34:45', 'DD-MON-YYYY HH24:MI:SS'), 20);
+VALUES (orders_seq.NEXTVAL, 9, 9, 527877595957, 'debit card', 'complete', 'Confirmed', 'Shipped', '1 BC street', TO_DATE('08-MAR-2023 12:34:45', 'DD-MON-YYYY HH24:MI:SS'), 20);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 10, 1, 492865850176, 'wire transfer', 'complete', 'Confirmed', 'Transit', '30 ABC street', TO_DATE('07-JAN-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 45);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 11, 6, 401636848464, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('20-MAR-2023 16:33:44', 'DD-MON-YYYY HH24:MI:SS'), 150);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 14, 3, 3045975648585, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('16-MAR-2023 19:06:00', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (orders_seq.NEXTVAL, 14, 3, 3045975648585, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('16-MAR-2023 19:06:00', 'DD-MON-YYYY HH24:MI:SS'), 59);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 15, 1, 4874500235552, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('19-FEB-2023 09:00:06', 'DD-MON-YYYY HH24:MI:SS'), 150);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 17, 3, 3858060877590, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('09-MAR-2023 07:33:40', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (orders_seq.NEXTVAL, 17, 3, 3858060877590, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('09-MAR-2023 07:33:40', 'DD-MON-YYYY HH24:MI:SS'), 59);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 19, 3, 476567598877, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '9 NULL street',TO_DATE('21-MAR-2023 23:45:09', 'DD-MON-YYYY HH24:MI:SS'), 60);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 22, 5, 554685972838, 'debit', 'complete', 'Confirmed', 'Shipped', '8 ADC street', TO_DATE('08-MAR-2023 03:30:44', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (orders_seq.NEXTVAL, 22, 5, 554685972838, 'debit card', 'complete', 'Confirmed', 'Shipped', '8 ADC street', TO_DATE('08-MAR-2023 03:30:44', 'DD-MON-YYYY HH24:MI:SS'), 59);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 23, 7, 397978976870, 'net banking', 'complete', 'Confirmed', 'Shipped', '79 PEAK street', TO_DATE('20-FEB-2023 00:30:44', 'DD-MON-YYYY HH24:MI:SS'), 78);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 25, 2, 387970980824, 'debit', 'complete', 'Confirmed', 'Preparing to be Shipped', '134 SEEP street', TO_DATE('09-FEB-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 90);
+VALUES (orders_seq.NEXTVAL, 25, 2, 387970980824, 'debit card', 'complete', 'Confirmed', 'Preparing to be Shipped', '134 SEEP street', TO_DATE('09-FEB-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 90);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 27, 6, 198080453424, 'credit', 'complete', 'Confirmed', 'Shipped', '143 LOVE street',TO_DATE('22-MAR-2023 20:30:44', 'DD-MON-YYYY HH24:MI:SS'), 98);
+VALUES (orders_seq.NEXTVAL, 27, 6, 198080453424, 'credit card', 'complete', 'Confirmed', 'Shipped', '143 LOVE street',TO_DATE('22-MAR-2023 20:30:44', 'DD-MON-YYYY HH24:MI:SS'), 98);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 28, 5, 109904640844, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-MAR-2023 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+VALUES (orders_seq.NEXTVAL, 28, 5, 109904640844, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-MAR-2023 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 COMMIT;
 
 --insert values in table orderitems
@@ -669,4 +670,4 @@ GRANT SELECT, INSERT ON ORDERS TO CUSTOMER;
 GRANT SELECT, INSERT ON ORDER_ITEMS TO CUSTOMER;
 GRANT SELECT ON ART_CATEGORY TO CUSTOMER;
 GRANT SELECT ON ARTWORK TO CUSTOMER;
-
+COMMIT;
