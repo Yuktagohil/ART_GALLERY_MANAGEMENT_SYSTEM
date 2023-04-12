@@ -16,6 +16,17 @@ THEN dbms_output.put_line('Objects not found');
 END;
 /
 
+BEGIN
+EXECUTE IMMEDIATE 'DROP PROCEDURE manage_orders';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/
+
+
+
 --procedure to manage artwork
 CREATE OR REPLACE PROCEDURE manage_artwork (
 p_artwork_id IN NUMBER,
@@ -218,3 +229,67 @@ ELSE
 END IF;
 END;
 /
+
+--procedure to manage orders
+CREATE OR REPLACE PROCEDURE manage_orders(
+    p_order_id IN NUMBER,
+    p_user_id IN NUMBER,
+    p_shipper_id IN NUMBER,
+    p_transaction_id IN NUMBER,
+    p_transaction_method IN VARCHAR2,
+    p_transaction_status IN VARCHAR2,
+    p_order_status IN VARCHAR2,
+    p_shipping_status IN VARCHAR2,
+    p_shipping_address IN VARCHAR2,
+    p_order_date_time IN DATE,
+    p_total_amount IN NUMBER,
+    p_action IN VARCHAR2
+)
+IS
+    v_order_count NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_order_count FROM ORDERS WHERE OrderID = p_order_id;
+    
+    IF (p_action = 'ADD') THEN
+        INSERT INTO ORDERS(
+            OrderID, UserID, ShipperID, TransactionID, TransactionMethod, TransactionStatus,
+            OrderStatus, ShippingStatus, ShippingAddress, OrderDateTime, TotalAmount
+        )
+        VALUES (
+            orders_seq.NEXTVAL, p_user_id, p_shipper_id, p_transaction_id, p_transaction_method, p_transaction_status,
+            p_order_status, p_shipping_status, p_shipping_address, p_order_date_time, p_total_amount
+        );
+        DBMS_OUTPUT.PUT_LINE('Order ADDED successfully');
+    ELSIF (p_action = 'UPDATE') THEN
+        IF v_order_count > 0 THEN
+            UPDATE ORDERS
+            SET
+                UserID = p_user_id,
+                ShipperID = p_shipper_id,
+                TransactionID = p_transaction_id,
+                TransactionMethod = p_transaction_method,
+                TransactionStatus = p_transaction_status,
+                OrderStatus = p_order_status,
+                ShippingStatus = p_shipping_status,
+                ShippingAddress = p_shipping_address,
+                OrderDateTime = p_order_date_time,
+                TotalAmount = p_total_amount
+            WHERE OrderID = p_order_id;
+            DBMS_OUTPUT.PUT_LINE('Order UPDATED successfully');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('Error: Order not found');
+        END IF;
+    ELSIF (p_action = 'DELETE') THEN
+        DELETE FROM ORDERS WHERE OrderID = p_order_id;
+        DBMS_OUTPUT.PUT_LINE('Order DELETED successfully');
+    END IF;
+    
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('Error while ' || p_action || 'ing order: ' || SQLERRM);
+END;
+/
+
+

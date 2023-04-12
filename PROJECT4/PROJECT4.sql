@@ -302,6 +302,7 @@ CREATE SEQUENCE orders_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
 CREATE SEQUENCE order_items_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
 CREATE SEQUENCE art_category_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
 CREATE SEQUENCE artwork_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+COMMIT;
 
 --insert values in table USER_ROLE
 insert into USER_ROLE values (user_role_seq.NEXTVAL,'Admin');
@@ -469,29 +470,47 @@ VALUES (orders_seq.NEXTVAL, 7, 4, 567252464393, 'net banking', 'complete', 'Conf
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 8, 3, 545475937224, 'wire transfer', 'complete', 'Confirmed', 'Transit', '123 MNP street', TO_DATE('09-MAR-2023 12:54:40', 'DD-MON-YYYY HH24:MI:SS'), 60);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 9, 9, 527877595957, 'debit', 'complete', 'Confirmed', 'Shipped', '1 BC street', TO_DATE('08-MAR-2023 12:34:45', 'DD-MON-YYYY HH24:MI:SS'), 20);
+VALUES (orders_seq.NEXTVAL, 9, 9, 527877595957, 'debit card', 'complete', 'Confirmed', 'Shipped', '1 BC street', TO_DATE('08-MAR-2023 12:34:45', 'DD-MON-YYYY HH24:MI:SS'), 20);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 10, 1, 492865850176, 'wire transfer', 'complete', 'Confirmed', 'Transit', '30 ABC street', TO_DATE('07-JAN-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 45);
+VALUES (orders_seq.NEXTVAL, 10, 1, 492865850176, 'wire transfer', 'complete', 'Confirmed', 'Transit', '30 ABC street', TO_DATE('07-JAN-2022 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 45);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 11, 6, 401636848464, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('20-MAR-2023 16:33:44', 'DD-MON-YYYY HH24:MI:SS'), 150);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 14, 3, 3045975648585, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('16-MAR-2023 19:06:00', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (orders_seq.NEXTVAL, 14, 3, 304575648585, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('16-MAR-2023 19:06:00', 'DD-MON-YYYY HH24:MI:SS'), 59);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 15, 1, 4874500235552, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('19-FEB-2023 09:00:06', 'DD-MON-YYYY HH24:MI:SS'), 150);
+VALUES (orders_seq.NEXTVAL, 15, 1, 487450023552, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('19-FEB-2023 09:00:06', 'DD-MON-YYYY HH24:MI:SS'), 150);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 17, 3, 3858060877590, 'debit', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('09-MAR-2023 07:33:40', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (orders_seq.NEXTVAL, 17, 3, 385806087790, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('09-MAR-2023 07:33:40', 'DD-MON-YYYY HH24:MI:SS'), 59);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 19, 3, 476567598877, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '9 NULL street',TO_DATE('21-MAR-2023 23:45:09', 'DD-MON-YYYY HH24:MI:SS'), 60);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 22, 5, 554685972838, 'debit', 'complete', 'Confirmed', 'Shipped', '8 ADC street', TO_DATE('08-MAR-2023 03:30:44', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (orders_seq.NEXTVAL, 22, 5, 554685972838, 'debit card', 'complete', 'Confirmed', 'Shipped', '8 ADC street', TO_DATE('08-MAR-2023 03:30:44', 'DD-MON-YYYY HH24:MI:SS'), 59);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 23, 7, 397978976870, 'net banking', 'complete', 'Confirmed', 'Shipped', '79 PEAK street', TO_DATE('20-FEB-2023 00:30:44', 'DD-MON-YYYY HH24:MI:SS'), 78);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 25, 2, 387970980824, 'debit', 'complete', 'Confirmed', 'Preparing to be Shipped', '134 SEEP street', TO_DATE('09-FEB-2023 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 90);
+VALUES (orders_seq.NEXTVAL, 25, 2, 387970980824, 'debit card', 'complete', 'Confirmed', 'Preparing to be Shipped', '134 SEEP street', TO_DATE('09-FEB-2022 10:30:44', 'DD-MON-YYYY HH24:MI:SS'), 90);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 27, 6, 198080453424, 'credit', 'complete', 'Confirmed', 'Shipped', '143 LOVE street',TO_DATE('22-MAR-2023 20:30:44', 'DD-MON-YYYY HH24:MI:SS'), 98);
+VALUES (orders_seq.NEXTVAL, 27, 6, 198080453424, 'credit card', 'complete', 'Confirmed', 'Shipped', '143 LOVE street',TO_DATE('22-MAR-2022 20:30:44', 'DD-MON-YYYY HH24:MI:SS'), 98);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 28, 5, 109904640844, 'debit', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-MAR-2023 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+VALUES (orders_seq.NEXTVAL, 28, 5, 109904640844, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-MAR-2023 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+INSERT INTO ORDERS
+VALUES (orders_seq.NEXTVAL, 17, 5, 764830187414, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-APR-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+INSERT INTO ORDERS
+VALUES (orders_seq.NEXTVAL, 29, 3, 098409275954, 'credit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-MAY-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+INSERT INTO ORDERS
+VALUES (orders_seq.NEXTVAL, 11, 1, 974259934859, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-JUN-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+INSERT INTO ORDERS
+VALUES (orders_seq.NEXTVAL, 8, 5, 109384141644, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-JUL-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+INSERT INTO ORDERS
+VALUES (orders_seq.NEXTVAL, 19, 4, 089766532543, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-AUG-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+INSERT INTO ORDERS
+VALUES (orders_seq.NEXTVAL, 23, 5, 108452974294, 'credit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('22-SEP-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+INSERT INTO ORDERS
+VALUES (orders_seq.NEXTVAL, 27, 7, 098761345275, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-OCT-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+INSERT INTO ORDERS
+VALUES (orders_seq.NEXTVAL, 9, 5, 784905778019, 'credit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-NOV-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+INSERT INTO ORDERS
+VALUES (orders_seq.NEXTVAL, 25, 2, 038576746510, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('22-DEC-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 COMMIT;
 
 --insert values in table orderitems
@@ -529,6 +548,17 @@ INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,1
 INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,15);
 INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,15);
 INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,15);
+INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,16);
+INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,17);
+INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,17);
+INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,18);
+INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,19);
+INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,20);
+INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,21);
+INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,22);
+INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,22);
+INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,23);
+INSERT INTO ORDER_ITEMS (OrderItemsID, OrderID) VALUES(order_items_seq.NEXTVAL,24);
 COMMIT;
 
 --insert values in table artcategory
@@ -621,6 +651,17 @@ insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 5, 3, NULL, 20, 'The Electric Ga
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 4, 3, NULL, 21, 'Code Dreams', 'a digital painting of a woman dreaming in code, with lines of programming language flowing around her', 143, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 17, 2, NULL, NULL, 'The Whispere', 'a bronze sculpture of a woman with flowing hair, leaning in to listen to a small bird perched on her hand', 275, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 13, 4, NULL, 24, 'Elysium', 'A glass sculpture that features a series of overlapping, translucent layers that create a sense of depth and movement', 140, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 6, NULL, 35, 'A Forest in Bloom"', 'A vibrant forest scene, complete with blooming flowers and soaring birds', 320, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 6, NULL, 36, 'Sunflower Fields', 'A bright and cheerful tapestry showcases a field of sunflowers in full bloom', 210, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 6, NULL, 37, 'Mystical Mountains', 'A mystical landscape of rolling mountains and misty valleysUnderwater World', 230, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 6, NULL, 38, 'Underwater World', 'A vibrant underwater world, complete with colorful fish, coral, and sea plants', 180, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 6, NULL, 39, 'Jungle Paradise', 'A jungle scene with a variety of animals and plants', 165, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 6, NULL, 40, 'Nighttime Cityscape', 'magic and energy of a city at night', 222, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 6, NULL, 41, 'The Enchanted Garden', 'A beautiful garden scene with delicate flowers and a serene pond', 242, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 6, NULL, 42, 'The Secret Garden', 'A mystical garden with a hidden doorway', 140, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 6, NULL, 43, 'Bohemian Dream', 'A bohemian-inspired design with intricate patterns and colors', 165, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 6, NULL, 44, 'Moonlit Ocean', 'An ocean scene under the moonlight with a mix of blue and green colors', 95, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL, 16, 6, NULL, 45, 'Mediterranean Sunset', 'A beautiful sunset over the Mediterranean Sea', 119, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 COMMIT;
 
 --updates total amount in orders based on artworks amounts
@@ -669,4 +710,5 @@ GRANT SELECT, INSERT ON ORDERS TO CUSTOMER;
 GRANT SELECT, INSERT ON ORDER_ITEMS TO CUSTOMER;
 GRANT SELECT ON ART_CATEGORY TO CUSTOMER;
 GRANT SELECT ON ARTWORK TO CUSTOMER;
+COMMIT;
 

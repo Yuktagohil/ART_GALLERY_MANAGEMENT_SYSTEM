@@ -119,26 +119,23 @@ END;
 
 
 --TESTCASES FOR FUNCTION TO PURCHASE ARTWORK AND UPDATED ARTWORK STATUS
---testcase1: artworkid 3 status is available
+--testcase1: artworkid 22 status is available
 DECLARE
-  v_result VARCHAR(50);
+    v_purchase_artwork VARCHAR2(100);
 BEGIN
-  v_result := purchase_artwork(p_UserID => 3, p_ArtworkID => 3);
-  DBMS_OUTPUT.PUT_LINE('Purchase result: ' || v_result);
+    v_purchase_artwork := purchase_artwork(11, 22);
+    DBMS_OUTPUT.PUT_LINE(v_purchase_artwork);
 END;
 /
---expected output: Your order is placed.(In artwork table, the status of artworkid 3 will be updated as 'Sold'
 
---testcase2: artworkid 2 status is sold
+--testcase2: artworkid 30 status is sold
 DECLARE
-  v_result VARCHAR(50);
+    v_purchase_artwork VARCHAR2(100);
 BEGIN
-  v_result := purchase_artwork(p_UserID => 3, p_ArtworkID => 2);
-  DBMS_OUTPUT.PUT_LINE('Purchase result: ' || v_result);
+    v_purchase_artwork := purchase_artwork(11, 30);
+    DBMS_OUTPUT.PUT_LINE(v_purchase_artwork);
 END;
 /
---expected output: The artwork is not available for purchase
-
 
 
 --test case for function check_online_exhibition_status
@@ -150,6 +147,9 @@ BEGIN
 END;
 /
 
+
+--TEST CASES FOR MANAGE ARTWORK PROCEDURE
+--Test case 1: 
 --adding artwork with artwork id as null
 BEGIN
    manage_artwork(
@@ -167,7 +167,7 @@ BEGIN
    );
 END;
 /
-
+--Test case 2: 
 --updating existing artwork
 BEGIN
    manage_artwork(
@@ -185,7 +185,7 @@ BEGIN
    );
 END;
 /
-
+--Test case 3: 
 --updating non existing artwork
 BEGIN
    manage_artwork(
@@ -203,7 +203,7 @@ BEGIN
    );
 END;
 /
-
+--Test case 4: 
 --deleting existing artwork id
 BEGIN
    manage_artwork(
@@ -221,7 +221,7 @@ BEGIN
    );
 END;
 /
-
+--Test case 5: 
 --deleting nonexisting artwork
 BEGIN
    manage_artwork(
@@ -239,7 +239,7 @@ BEGIN
    );
 END;
 /
-
+--Test case 6: 
 --cannot insert NULL values
 BEGIN
    manage_artwork(
@@ -255,5 +255,90 @@ BEGIN
       p_artwork_image => utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'),
       p_action => 'ADD'
    );
+END;
+/
+
+--test case to calculate total amount
+DECLARE
+    v_total_amount VARCHAR2(100);
+BEGIN
+    v_total_amount := CALCULATE_TOTALAMOUNT(5);
+    DBMS_OUTPUT.PUT_LINE('Total Amount:' || v_total_amount);
+
+--TEST CASES FOR MANAGE ORDERS PROCEDURES
+--Test case 1: Add a new order
+-- Adding a new order
+BEGIN
+  manage_orders(
+    p_order_id => NULL,
+    p_user_id => 5,
+    p_shipper_id => NULL,
+    p_transaction_id => 654762839876,
+    p_transaction_method => 'Credit Card',
+    p_transaction_status => 'Complete',
+    p_order_status => 'Confirmed',
+    p_shipping_status => 'Transit',
+    p_shipping_address => '123 Main street',
+    p_order_date_time => TO_DATE('2023-04-12 10:30:00', 'YYYY-MM-DD HH24:MI:SS'),
+    p_total_amount => 559.00,
+    p_action => 'ADD'
+  );
+END;
+/
+--Test case 2: 
+--updating existing order
+BEGIN
+  manage_orders(
+    p_order_id => 11,
+    p_user_id => 5,
+    p_shipper_id => 6,
+    p_transaction_id => 654762839876,
+    p_transaction_method => 'Credit Card',
+    p_transaction_status => 'Complete',
+    p_order_status => 'Confirmed',
+    p_shipping_status => 'Shipped',
+    p_shipping_address => '123 Main street',
+    p_order_date_time => TO_DATE('2023-04-12 10:30:00', 'YYYY-MM-DD HH24:MI:SS'),
+    p_total_amount => 559.00,
+    p_action => 'UPDATE'
+  );
+END;
+/
+--Test case 3: 
+--updating non-existing order
+BEGIN
+  manage_orders(
+    p_order_id => 100,
+    p_user_id => 5,
+    p_shipper_id => 6,
+    p_transaction_id => 654762839876,
+    p_transaction_method => 'Credit Card',
+    p_transaction_status => 'Complete',
+    p_order_status => 'Confirmed',
+    p_shipping_status => 'Shipped',
+    p_shipping_address => '123 Main street',
+    p_order_date_time => TO_DATE('2023-04-12 10:30:00', 'YYYY-MM-DD HH24:MI:SS'),
+    p_total_amount => 559.00,
+    p_action => 'UPDATE'
+  );
+END;
+/
+--Test case 4: 
+--deleting an existing order
+BEGIN
+    manage_orders(
+        p_order_id => 19,
+        p_user_id => NULL,
+        p_shipper_id => NULL,
+        p_transaction_id => NULL,
+        p_transaction_method => NULL,
+        p_transaction_status => NULL,
+        p_order_status => NULL,
+        p_shipping_status => NULL,
+        p_shipping_address => NULL,
+        p_order_date_time => NULL,
+        p_total_amount => NULL,
+        p_action => 'DELETE'
+    );
 END;
 /
