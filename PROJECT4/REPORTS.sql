@@ -34,3 +34,40 @@ WHERE a.UserID = 16
 AND EXTRACT(YEAR FROM o.OrderDateTime) = 2022
 GROUP BY TRUNC(o.OrderDateTime, 'MONTH')
 ORDER BY TRUNC(o.OrderDateTime, 'MONTH') ASC;
+
+--Report to generate revenue for online_exhibition, artwork_in_general, total
+SELECT 
+  'online exhibition' AS Exhibition_Summary, 
+  COALESCE(SUM(CASE WHEN ag.exhibitionid IS NOT NULL THEN ag.amount ELSE 0 END), 0) AS Revenue
+FROM ARTWORK ag
+LEFT JOIN ONLINE_EXHIBITION oe ON ag.exhibitionid = oe.exhibitionid
+WHERE ag.status = 'Sold'
+UNION
+SELECT 
+  'artwork in general' AS Exhibition_Summary, 
+  SUM(CASE WHEN ag.exhibitionid IS NULL THEN ag.amount ELSE 0 END) AS Revenue
+FROM ARTWORK ag
+WHERE ag.status = 'Sold'
+UNION
+SELECT 
+  'total' AS Exhibition_Summary, 
+  SUM(CASE WHEN ag.status = 'Sold' THEN ag.amount ELSE 0 END) AS Revenue
+FROM ARTWORK ag
+WHERE ag.status = 'Sold';
+
+--Report to generate top frequent customers
+WITH FREQUENT_CUSTOMERS AS (
+    SELECT u.USERID as customer_id,u.username AS customer_name, COUNT(oi.ORDERITEMSID) AS num_orders,
+    DENSE_RANK() OVER (ORDER BY COUNT(DISTINCT oi.ORDERITEMSID) DESC) AS customer_rank
+    FROM USERS u
+    JOIN USER_ROLE ur ON u.ROLEID = ur.ROLEID
+    JOIN ORDERS o ON u.USERID = o.USERID
+    JOIN ORDER_ITEMS oi ON o.ORDERID = oi.ORDERID
+    JOIN ARTWORK a ON oi.ORDERITEMSID = a.ORDERITEMSID
+    WHERE ur.ROLENAME = 'Customer' AND a.STATUS = 'Sold'
+    GROUP BY u.username, ur.rolename, u.userid, u.roleid
+)
+SELECT customer_name, customer_rank, num_orders
+FROM frequent_customers
+WHERE customer_rank <= 3;
+
