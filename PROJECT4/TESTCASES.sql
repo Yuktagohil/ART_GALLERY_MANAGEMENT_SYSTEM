@@ -263,7 +263,8 @@ DECLARE
 BEGIN
     v_total_amount := CALCULATE_TOTALAMOUNT(5);
     DBMS_OUTPUT.PUT_LINE('Total Amount:' || v_total_amount);
-
+END;
+/
 --TEST CASES FOR MANAGE ORDERS PROCEDURES
 --Test case 1: Add a new order
 -- Adding a new order
@@ -271,7 +272,7 @@ BEGIN
   manage_orders(
     p_order_id => NULL,
     p_user_id => 5,
-    p_shipper_id => NULL,
+    p_shipper_id => 7,
     p_transaction_id => 654762839876,
     p_transaction_method => 'Credit Card',
     p_transaction_status => 'Complete',
@@ -326,7 +327,7 @@ END;
 --deleting an existing order
 BEGIN
     manage_orders(
-        p_order_id => 19,
+        p_order_id => 18,
         p_user_id => NULL,
         p_shipper_id => NULL,
         p_transaction_id => NULL,
@@ -339,5 +340,25 @@ BEGIN
         p_total_amount => NULL,
         p_action => 'DELETE'
     );
+END;
+/
+
+--Test  case 6:
+--trying to add null values error
+BEGIN
+  manage_orders(
+    p_order_id => NULL,
+    p_user_id => 5,
+    p_shipper_id => NULL,
+    p_transaction_id => 654762839876,
+    p_transaction_method => 'Credit Card',
+    p_transaction_status => 'Complete',
+    p_order_status => 'Confirmed',
+    p_shipping_status => 'Transit',
+    p_shipping_address => '123 Main street',
+    p_order_date_time => TO_DATE('2023-04-12 10:30:00', 'YYYY-MM-DD HH24:MI:SS'),
+    p_total_amount => 559.00,
+    p_action => 'ADD'
+  );
 END;
 /
