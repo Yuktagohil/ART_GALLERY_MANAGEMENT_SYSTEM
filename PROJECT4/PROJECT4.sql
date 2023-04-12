@@ -480,7 +480,7 @@ VALUES (orders_seq.NEXTVAL, 14, 3, 304575648585, 'debit card', 'complete', 'Conf
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 15, 1, 487450023552, 'Netbanking', 'complete', 'Confirmed', 'Preparing to be Shipped', '40 ION street', TO_DATE('19-FEB-2023 09:00:06', 'DD-MON-YYYY HH24:MI:SS'), 150);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 17, 3, 385806087790, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('09-MAR-2023 07:33:40', 'DD-MON-YYYY HH24:MI:SS'), 59);
+VALUES (orders_seq.NEXTVAL, 19, 3, 385806087790, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 NILL street', TO_DATE('09-MAR-2023 07:33:40', 'DD-MON-YYYY HH24:MI:SS'), 59);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 19, 3, 476567598877, 'wire transfer', 'complete', 'Confirmed', 'Shipped', '9 NULL street',TO_DATE('21-MAR-2023 23:45:09', 'DD-MON-YYYY HH24:MI:SS'), 60);
 INSERT INTO ORDERS
@@ -711,4 +711,3 @@ GRANT SELECT, INSERT ON ORDER_ITEMS TO CUSTOMER;
 GRANT SELECT ON ART_CATEGORY TO CUSTOMER;
 GRANT SELECT ON ARTWORK TO CUSTOMER;
 COMMIT;
-
