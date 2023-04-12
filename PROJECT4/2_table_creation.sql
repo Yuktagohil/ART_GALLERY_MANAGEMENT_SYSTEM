@@ -1,42 +1,6 @@
 SET SERVEROUTPUT ON;
 
 BEGIN
-EXECUTE IMMEDIATE 'DROP ROLE ArtistRole';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP ROLE CustomerRole';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/ 
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP USER g_artist CASCADE';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/ 
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP USER g_customer CASCADE';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/ 
-
-BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE USER_ROLE CASCADE CONSTRAINTS';
 dbms_output.put_line('Objects dropped');
 EXCEPTION
@@ -197,31 +161,7 @@ WHEN OTHERS
 THEN dbms_output.put_line('Objects not found');
 END;
 /  
-CREATE ROLE ArtistRole IDENTIFIED BY April2023; 
-CREATE ROLE CustomerRole IDENTIFIED BY April2023;
-
-GRANT CREATE SESSION TO ArtistRole, CustomerRole;
-
-GRANT CREATE VIEW TO artist, customer;
-
-CREATE USER g_artist IDENTIFIED BY Artistartgallery004; 
-CREATE USER g_customer IDENTIFIED BY Customerartgallery004; 
-
-GRANT CREATE SESSION TO g_artist;
-GRANT CREATE SESSION TO g_customer;
-
---artist user
-GRANT CONNECT TO g_artist;
-GRANT CREATE PROCEDURE TO g_artist;
-GRANT CREATE VIEW TO g_artist;
-GRANT EXECUTE ON MANAGE_ARTWORK TO g_artist;
-
-GRANT ArtistRole TO g_artist;
-GRANT CustomerRole TO g_customer;
-
---grant execute on ARTIST_PACKAGES to artist;
---grant execute on CUSTOMER_PACKAGES to customer;
-
+  
 Create table USER_ROLE(
 RoleID integer NOT NULL PRIMARY KEY,
 RoleName varchar(10) NOT NULL
@@ -350,6 +290,10 @@ in ('Completed', 'Upcoming', 'Active'));
 alter table users add constraint EMAIL_SYNTAX CHECK
 (REGEXP_LIKE(EmailID,
 '^[A-Za-z]+[A-Za-z0-9.]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$'));
+ALTER TABLE ORDERS
+ADD CONSTRAINT transactionid_constraint
+CHECK (REGEXP_LIKE(TransactionID, '^[0-9]{12}$'));
+
 
 
 --create sequence for all ids
@@ -482,12 +426,12 @@ COMMIT;
 --insert values in table online_exhibition
 insert into ONLINE_EXHIBITION VALUES(online_exhibition_seq.NEXTVAL, 2, TO_DATE('2023/05/03 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/05/06 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
-insert into ONLINE_EXHIBITION VALUES(online_exhibition_seq.NEXTVAL, 3, TO_DATE('2023/03/21 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
-TO_DATE('2023/03/26 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
-insert into ONLINE_EXHIBITION VALUES(online_exhibition_seq.NEXTVAL, 3, TO_DATE('2023/04/28 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+insert into ONLINE_EXHIBITION VALUES(online_exhibition_seq.NEXTVAL, 3, TO_DATE('2023/06/21 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/06/26 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
+insert into ONLINE_EXHIBITION VALUES(online_exhibition_seq.NEXTVAL, 3, TO_DATE('2023/04/14 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/05/02 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
-insert into ONLINE_EXHIBITION VALUES(online_exhibition_seq.NEXTVAL, 2, TO_DATE('2023/03/20 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
-TO_DATE('2023/04/05 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
+insert into ONLINE_EXHIBITION VALUES(online_exhibition_seq.NEXTVAL, 3, TO_DATE('2023/04/20 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
+TO_DATE('2023/04/25 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Active');
 insert into ONLINE_EXHIBITION VALUES(online_exhibition_seq.NEXTVAL, 4, TO_DATE('2023/05/20 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
 TO_DATE('2023/05/25 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),'Upcoming');
 insert into ONLINE_EXHIBITION VALUES(online_exhibition_seq.NEXTVAL, 5, TO_DATE('2023/03/18 14:02:44', 'yyyy/mm/ddhh24:mi:ss'),
@@ -556,21 +500,21 @@ VALUES (orders_seq.NEXTVAL, 28, 5, 109904640844, 'debit card', 'complete', 'Conf
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 17, 5, 764830187414, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-APR-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 29, 3, 098409275954, 'credit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-MAY-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+VALUES (orders_seq.NEXTVAL, 29, 3, 984092750954, 'credit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-MAY-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 11, 1, 974259934859, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-JUN-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 8, 5, 109384141644, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-JUL-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 19, 4, 089766532543, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-AUG-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+VALUES (orders_seq.NEXTVAL, 19, 4, 897665302543, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-AUG-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 23, 5, 108452974294, 'credit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('22-SEP-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 27, 7, 098761345275, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-OCT-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+VALUES (orders_seq.NEXTVAL, 27, 7, 987613245275, 'debit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-OCT-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 INSERT INTO ORDERS
 VALUES (orders_seq.NEXTVAL, 9, 5, 784905778019, 'credit card', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('11-NOV-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 INSERT INTO ORDERS
-VALUES (orders_seq.NEXTVAL, 25, 2, 038576746510, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('22-DEC-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
+VALUES (orders_seq.NEXTVAL, 25, 2, 385767465310, 'Netbanking', 'complete', 'Confirmed', 'Shipped', '98 MON street', TO_DATE('22-DEC-2022 18:03:44', 'DD-MON-YYYY HH24:MI:SS'), 56);
 COMMIT;
 
 --insert values in table orderitems
@@ -654,7 +598,7 @@ insert into ARTWORK VALUES(artwork_seq.NEXTVAL,4, 10, 5, NULL, 'Rustic Charm', '
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,5, 3, 6, 25, 'Digital Dreamscape', 'A digital painting of a dreamlike landscape with surreal colors and shapes', 110, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,13, 8, 10, 26, 'The Dance of Life', 'A mosaic artwork with a vibrant design of swirling colors and figures', 199, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,21, 9, 15, 1, 'Spirit of the Forest', 'A wood sculpture depicting a tree with a sense of life and energy', 142, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(artwork_seq.NEXTVAL,2, 2, 1, NULL, 'Cosmic Ocean', 'A sculpture of a swirling galaxy made from wire and lights', 139, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL,2, 2, NULL, NULL, 'Cosmic Ocean', 'A sculpture of a swirling galaxy made from wire and lights', 139, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,5, 3, 6, 27, 'Pixelated Paradise', 'A digital artwork with a retro, pixelated aesthetic of a tropical island scene', 135, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,21, 1, NULL, NULL, 'A Beautiful Mess', 'An abstract painting with vibrant colors and dynamic brushstrokes', 150, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,30, 8, 14, NULL, 'The Enchanted Forest', 'A mosaic artwork depicting a magical forest with trees and animals', 99, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
@@ -664,7 +608,7 @@ insert into ARTWORK VALUES(artwork_seq.NEXTVAL,21, 1, 16, 5, 'Dark Horizons', 'A
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,13, 8, 10, 29, 'Celestial Wonder', 'A mosaic artwork with an abstract design of stars and planets', 85, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,24, 3, 11, NULL, 'Rustic Charm', 'A tapestry with a cozy design of a cabin in the woods with trees and animals', 150, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,18, 7, 13, NULL, 'Rainbow Vortex', 'A glass sculpture of a swirling vortex with multiple colors and patterns', 221, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(artwork_seq.NEXTVAL,26, 9, NULL, NULL, 'The Beauty of Chaos', 'A wood sculpture with a chaotic design of intersecting shapes and forms', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL,2, 9, NULL, NULL, 'The Beauty of Chaos', 'A wood sculpture with a chaotic design of intersecting shapes and forms', 65, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,2, 2, 1, NULL, 'Glimmering Sea', 'A sculpture of a school of fish made from polished metal', 175, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,16, 6, 12, 30, 'Spectral Symphony', 'A tapestry with a colorful abstract design reminiscent of stained glass windows', 95, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,24, 3, 11, NULL, 'Tribal Rhythms', 'A tapestry with a bold pattern inspired by tribal designs in black and white', 80, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
@@ -675,7 +619,7 @@ insert into ARTWORK VALUES(artwork_seq.NEXTVAL,26, 9, 15, 2, 'Nature Symphony', 
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,12, 5, 9, NULL, 'The City at Night', 'A sketch of a city skyline at night with a sense of energy and excitement', 143, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,20, 5, NULL, 13, 'The Wonder of Wildlife', 'A sketch of an animal with a sense of curiosity and wildness', 120, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,30, 8, 14, NULL, 'Alexander Mosaic', 'A famous Roman mosaic depicting the Battle of Issus between Alexander the Great', 184, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
-insert into ARTWORK VALUES(artwork_seq.NEXTVAL,26, 9, 15, NULL, 'Dainichi Nyorai', 'A wooden sculpture of the Buddhist deity Dainichi Nyorai', 104, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
+insert into ARTWORK VALUES(artwork_seq.NEXTVAL,3, 9, 15, NULL, 'Dainichi Nyorai', 'A wooden sculpture of the Buddhist deity Dainichi Nyorai', 104, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,21, 1, 16, 6, 'The Creation of Adam', 'A fresco painting by Michelangelo depicting the biblical scene of God creating Adam', 120, 'Sold', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,20, 5, 17, NULL, 'The Human Condition', 'A sketch depicting a figure standing in front of a painting of a landscape', 95, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
 insert into ARTWORK VALUES(artwork_seq.NEXTVAL,18, 7, 18, NULL, 'Waterfall Chandelier', 'A grand chandelier made of crystal glass beads that simulate a waterfall', 50, 'Available', utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'));
@@ -751,717 +695,5 @@ WHERE ArtworkID IN (
     SELECT ExhibitionID FROM ONLINE_EXHIBITION WHERE ExhibitionStatus = 'Active'
   ))
 );
-
--- Grant privileges to ARTIST role
-GRANT SELECT, INSERT, UPDATE ON USERS TO g_artist;
-GRANT SELECT, INSERT, UPDATE ON CONTACT TO g_artist;
-GRANT SELECT, INSERT, UPDATE ON ONLINE_EXHIBITION TO g_artist;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ARTWORK TO g_artist;
-GRANT SELECT ON ART_CATEGORY TO g_artist;
-GRANT SELECT, ALTER ON artwork_seq TO g_artist;
-
--- Grant privileges to CUSTOMER role
-GRANT SELECT, INSERT, UPDATE ON USERS TO CUSTOMER;
-GRANT SELECT, INSERT, UPDATE ON CONTACT TO CUSTOMER;
-GRANT SELECT ON ONLINE_EXHIBITION TO CUSTOMER;
-GRANT SELECT, INSERT ON ORDERS TO CUSTOMER;
-GRANT SELECT, INSERT ON ORDER_ITEMS TO CUSTOMER;
-GRANT SELECT ON ART_CATEGORY TO CUSTOMER;
-GRANT SELECT ON ARTWORK TO CUSTOMER;
 COMMIT;
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP FUNCTION purchase_artwork';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/    
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP FUNCTION check_online_exhibition_status';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/    
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP FUNCTION CALCULATE_TOTALAMOUNT';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/    
-
-
---function to purchase artwork
-CREATE OR REPLACE FUNCTION purchase_artwork(p_UserID IN NUMBER, p_ArtworkID IN NUMBER)
-RETURN VARCHAR
-IS
-    v_Amount ARTWORK.AMOUNT%TYPE;
-    v_Status ARTWORK.STATUS%TYPE;
-    v_OrderID ORDERS.ORDERID%TYPE;
-    v_OrderItemsID ORDER_ITEMS.ORDERITEMSID%TYPE;
-    v_msg VARCHAR2(200);
-BEGIN
-    SELECT Amount, Status INTO v_Amount, v_Status FROM artwork WHERE ArtworkID = p_ArtworkID;
-    
-    IF v_Status = 'Available' THEN
-        UPDATE artwork SET Status = 'Sold' WHERE ArtworkID = p_ArtworkID;
-        COMMIT;
-        RETURN 'Your order is placed';
-        
-        -- Generate a new order ID
-
-        SELECT orders_seq.NEXTVAL INTO v_OrderID FROM dual;
-        SELECT order_items_seq.NEXTVAL INTO v_OrderItemsID FROM dual;
-        
-        -- Insert the order details into order_items table
-        INSERT INTO order_items (OrderItemsID, OrderID)
-        VALUES (v_OrderItemsID, v_OrderID);
-        v_msg := 'Your order is placed';
-    ELSE
-     v_msg := 'The artwork is not available for purchase.';
-    END IF;
-    RETURN v_msg;
-END;
-/
-
-
---function to check the exhibition status
-CREATE OR REPLACE FUNCTION check_online_exhibition_status(
-    p_exhibition_id IN online_exhibition.exhibitionid%TYPE
-)
-RETURN VARCHAR2
-IS
-    v_status online_exhibition.exhibitionstatus%TYPE;
-    v_msg VARCHAR2(200);
-BEGIN
-    SELECT exhibitionstatus INTO v_status FROM online_exhibition WHERE exhibitionid = p_exhibition_id;
-    IF v_status = 'Active' THEN
-    v_msg := 'EXHIBITION IS ACTIVE NOW';
-        
-    ELSIF v_status = 'Upcoming' then 
-       v_msg := 'UPCOMING EXHIBITION'; 
-    ELSIF v_status = 'Completed' then
-        v_msg := 'EXHIBITION HAS BEEN COMPLETED';
-    END IF;
-    RETURN v_msg;
-END;
-/
-
---function to calculate total amount in order
-CREATE OR REPLACE FUNCTION CALCULATE_TOTALAMOUNT(p_order_id IN ORDERS.ORDERID%TYPE)
-RETURN NUMBER
-IS
-  v_total_amount NUMBER := 0;
-BEGIN
-  SELECT SUM(A.Amount) INTO v_total_amount
-  FROM ORDER_ITEMS OI
-  JOIN ARTWORK A ON OI.OrderItemsID = A.OrderItemsID
-  WHERE OI.OrderID = p_order_id;
-  
-  RETURN v_total_amount;
-END;
-/
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP PROCEDURE manage_artwork';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP PROCEDURE manage_users';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/
-
-BEGIN
-EXECUTE IMMEDIATE 'DROP PROCEDURE manage_orders';
-dbms_output.put_line('Objects dropped');
-EXCEPTION
-WHEN OTHERS
-THEN dbms_output.put_line('Objects not found');
-END;
-/
-
-
-
---procedure to manage artwork
-CREATE OR REPLACE PROCEDURE manage_artwork (
-p_artwork_id IN NUMBER,
-p_art_category_id IN NUMBER,
-p_user_id IN NUMBER,
-p_exhibition_id IN NUMBER,
-p_order_items_id IN NUMBER,
-p_name IN VARCHAR2,
-p_description IN VARCHAR2,
-p_amount IN NUMBER,
-p_status IN VARCHAR2,
-p_artwork_image IN BLOB,
-p_action IN VARCHAR2
-)
-AS
-BEGIN
-IF p_action = 'ADD' THEN
--- Insert new artwork
-INSERT INTO ARTWORK (ArtworkID, ArtCategoryID, UserID, ExhibitionID, OrderItemsID, Name, Description, Amount, Status, ArtworkImage)
-VALUES (artwork_seq.NEXTVAL, p_art_category_id, p_user_id, p_exhibition_id, p_order_items_id, p_name, p_description, p_amount, p_status, p_artwork_image);
-DBMS_OUTPUT.PUT_LINE('Artwork added successfully.');
-ELSIF p_action = 'UPDATE' THEN
--- Update existing artwork
-UPDATE ARTWORK
-SET ArtCategoryID = p_art_category_id,
-UserID = p_user_id,
-ExhibitionID = p_exhibition_id,
-OrderItemsID = p_order_items_id,
-Name = p_name,
-Description = p_description,
-Amount = p_amount,
-Status = p_status,
-ArtworkImage = p_artwork_image
-WHERE ArtworkID = p_artwork_id;
-  IF SQL%ROWCOUNT = 0 THEN
-     DBMS_OUTPUT.PUT_LINE('Artwork not found.');
-  ELSE
-     DBMS_OUTPUT.PUT_LINE('Artwork updated successfully.');
-  END IF;
-ELSIF p_action = 'DELETE' THEN
--- Delete artwork
-DELETE FROM ARTWORK
-WHERE ArtworkID = p_artwork_id;
-  IF SQL%ROWCOUNT = 0 THEN
-     DBMS_OUTPUT.PUT_LINE('Artwork not found.');
-  ELSE
-     DBMS_OUTPUT.PUT_LINE('Artwork deleted successfully.');
-  END IF;
-ELSE
-DBMS_OUTPUT.PUT_LINE('Invalid action specified.');
-END IF;
-EXCEPTION
-WHEN OTHERS THEN
-DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
-END;
-/
-
-
---procedure to manage users
-CREATE OR REPLACE PROCEDURE manage_artgallery_users (
-    p_user_id IN USERS.USERID%TYPE,
-    p_role_id IN USERS.ROLEID%TYPE DEFAULT NULL,
-    p_email_id IN USERS.EMAILID%TYPE DEFAULT NULL,
-    p_user_name IN USERS.USERNAME%TYPE DEFAULT NULL,
-    p_password IN USERS.PASSWORD%TYPE DEFAULT NULL,
-    p_first_name IN USERS.FIRSTNAME%TYPE DEFAULT NULL,
-    p_last_name IN USERS.LastName%TYPE DEFAULT NULL,
-    p_speciality IN USERS.SPECIALITY%TYPE DEFAULT NULL,
-    p_nationality IN USERS.NATIONALITY%TYPE DEFAULT NULL,
-    p_contact_id IN CONTACT.CONTACTID%TYPE DEFAULT NULL,
-    p_contact_number IN CONTACT.CONTACTNUMBER%TYPE DEFAULT NULL,
-    p_address_line1 IN CONTACT.ADDRESSLINE1%TYPE DEFAULT NULL,
-    p_address_line2 IN CONTACT.ADDRESSLINE2%TYPE DEFAULT NULL,
-    p_city IN CONTACT.CITY%TYPE DEFAULT NULL,
-    p_state IN CONTACT.STATE%TYPE DEFAULT NULL,
-    p_country IN CONTACT.COUNTRY%TYPE DEFAULT NULL,
-    p_zipcode IN CONTACT.ZIPCODE%TYPE DEFAULT NULL,
-    p_action IN VARCHAR2,
-    p_msg OUT VARCHAR2
-)
-IS
-    a_user_id NUMBER(5);
-    v_user_id NUMBER(5);
-    v_email_exists NUMBER(1) := 0;
-BEGIN
-    IF (p_action = 'ADD') THEN
-        -- Check for duplicate email
-        SELECT COUNT(*) INTO v_email_exists FROM USERS WHERE EmailID = p_email_id;
-        IF v_email_exists > 0 THEN
-            p_msg := 'Email already exists';
-            RETURN;
-        END IF;
-        IF LENGTH(p_contact_number) != 10 THEN
-            p_msg := 'Mobile Number should be 10 digits';
-            RETURN;
-        END IF;
-        IF p_role_id IS NULL THEN
-            p_msg := 'Role cannot be null';
-            RETURN;
-        END IF;
-        IF p_email_id IS NULL THEN
-            p_msg := 'Email id cannot be null';
-            RETURN;
-        END IF;
-        IF p_user_name IS NULL THEN
-            p_msg := 'Username cannot be null';
-            RETURN;
-        END IF;
-        IF p_password IS NULL THEN
-            p_msg := 'Password cannot be null';
-            RETURN;
-        END IF;
-        IF p_first_name IS NULL THEN
-            p_msg := 'Firstname cannot be null';
-            RETURN;
-        END IF;
-        IF p_last_name IS NULL THEN
-            p_msg := 'Lastname cannot be null';
-            RETURN;
-        END IF;
-        IF p_contact_id IS NOT NULL THEN
-            p_msg := 'Contact id should be null for add action';
-            RETURN;
-        END IF;
-        IF p_contact_number IS NULL THEN
-            p_msg := 'Mobile Number cannot be null';
-            RETURN;
-        END IF;
-        IF p_address_line1 IS NULL THEN
-            p_msg := 'Address line 1  cannot be null';
-            RETURN;
-        END IF;
-        IF p_address_line2 IS NULL THEN
-            p_msg := 'Address line 2 cannot be null';
-            RETURN;
-        END IF;
-        IF p_city IS NULL THEN
-            p_msg := 'City cannot be null';
-            RETURN;
-        END IF;
-        IF p_state IS NULL THEN
-            p_msg := 'State cannot be null';
-            RETURN;
-        END IF;
-        IF p_country IS NULL THEN
-            p_msg := 'Country cannot be null';
-            RETURN;
-        END IF;
-        IF p_zipcode IS NULL THEN
-            p_msg := 'Zipcode cannot be null';
-            RETURN;
-        END IF;
-        
-        
-        -- Generate new user ID if not provided
-        IF p_user_id IS NULL THEN
-            SELECT MAX(UserID) + 1 INTO v_user_id FROM USERS;
-        ELSE
-            v_user_id := p_user_id;
-        END IF;
-
-        -- Insert new user and contact information
-        INSERT INTO USERS (UserID, RoleID, EmailID, UserName, Password, FirstName, LastName, Speciality, Nationality)
-        VALUES (users_seq.NEXTVAL, p_role_id, p_email_id, p_user_name, p_password, p_first_name, p_last_name, p_speciality, p_nationality);
-
-        INSERT INTO CONTACT (ContactID, UserID, ContactNumber, AddressLine1, AddressLine2, City, State, Country, ZipCode)
-        VALUES (contact_seq.NEXTVAL, users_seq.CURRVAL, p_contact_number, p_address_line1, p_address_line2, p_city, p_state, p_country, p_zipcode);
-
-        p_msg := 'User added successfully';
-        
-    ELSIF (p_action = 'UPDATE') THEN
-        IF p_user_id IS NULL THEN
-            SELECT UserID INTO a_user_id FROM USERS WHERE EmailID = p_email_id;
-            
-        END IF;
-        IF p_contact_id IS NOT NULL THEN
-            p_msg := 'Contact id should be null for update action';
-            RETURN;
-        END IF;
-       
-        -- Update user and contact information
-        UPDATE USERS SET RoleID = p_role_id, UserName = p_user_name, Password = p_password, FirstName = p_first_name, LastName = p_last_name, Speciality = p_speciality, Nationality = p_nationality
-        WHERE UserID = a_user_id and  EmailID = p_email_id;
-
-        UPDATE CONTACT SET ContactID = contact_seq.NEXTVAL, ContactNumber = p_contact_number, AddressLine1 = p_address_line1, AddressLine2 = p_address_line2, City = p_city, State = p_state, Country = p_country, ZipCode = p_zipcode
-        WHERE UserID = a_user_id;
-
-        p_msg := 'User updated successfully';
-ELSIF (p_action = 'DELETE') THEN
-    IF p_user_id IS NULL THEN
-            p_msg := 'User id cannot be null';
-            RETURN;
-        END IF;
-    
-    DELETE FROM CONTACT WHERE UserID = p_user_id;
-    DELETE FROM USERS WHERE UserID = p_user_id;
-    p_msg := 'User deleted successfully';
-ELSE
-    p_msg := 'Invalid action';
-END IF;
-END;
-/
-
---procedure to manage orders
-CREATE OR REPLACE PROCEDURE manage_orders(
-    p_order_id IN NUMBER,
-    p_user_id IN NUMBER,
-    p_shipper_id IN NUMBER,
-    p_transaction_id IN NUMBER,
-    p_transaction_method IN VARCHAR2,
-    p_transaction_status IN VARCHAR2,
-    p_order_status IN VARCHAR2,
-    p_shipping_status IN VARCHAR2,
-    p_shipping_address IN VARCHAR2,
-    p_order_date_time IN DATE,
-    p_total_amount IN NUMBER,
-    p_action IN VARCHAR2
-)
-IS
-    v_order_count NUMBER;
-BEGIN
-    SELECT COUNT(*) INTO v_order_count FROM ORDERS WHERE OrderID = p_order_id;
-    
-    IF (p_action = 'ADD') THEN
-        INSERT INTO ORDERS(
-            OrderID, UserID, ShipperID, TransactionID, TransactionMethod, TransactionStatus,
-            OrderStatus, ShippingStatus, ShippingAddress, OrderDateTime, TotalAmount
-        )
-        VALUES (
-            orders_seq.NEXTVAL, p_user_id, p_shipper_id, p_transaction_id, p_transaction_method, p_transaction_status,
-            p_order_status, p_shipping_status, p_shipping_address, p_order_date_time, p_total_amount
-        );
-        DBMS_OUTPUT.PUT_LINE('Order ADDED successfully');
-    ELSIF (p_action = 'UPDATE') THEN
-        IF v_order_count > 0 THEN
-            UPDATE ORDERS
-            SET
-                UserID = p_user_id,
-                ShipperID = p_shipper_id,
-                TransactionID = p_transaction_id,
-                TransactionMethod = p_transaction_method,
-                TransactionStatus = p_transaction_status,
-                OrderStatus = p_order_status,
-                ShippingStatus = p_shipping_status,
-                ShippingAddress = p_shipping_address,
-                OrderDateTime = p_order_date_time,
-                TotalAmount = p_total_amount
-            WHERE OrderID = p_order_id;
-            DBMS_OUTPUT.PUT_LINE('Order UPDATED successfully');
-        ELSE
-            DBMS_OUTPUT.PUT_LINE('Error: Order not found');
-        END IF;
-    ELSIF (p_action = 'DELETE') THEN
-        DELETE FROM ORDERS WHERE OrderID = p_order_id;
-        DBMS_OUTPUT.PUT_LINE('Order DELETED successfully');
-    END IF;
-    
-    COMMIT;
-EXCEPTION
-    WHEN OTHERS THEN
-        ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE('Error while ' || p_action || 'ing order: ' || SQLERRM);
-END;
-/
-
---trigger to update artwork status 
-CREATE OR REPLACE TRIGGER update_artwork_availability
-AFTER UPDATE OF exhibitionstatus ON online_exhibition
-FOR EACH ROW
-DECLARE
-    artwork_id artwork.artworkid%TYPE;
-    artwork_status artwork.status%TYPE;
-    v_msg varchar(100);
-BEGIN
-    IF (:OLD.ExhibitionStatus = 'Upcoming' AND :NEW.ExhibitionStatus = 'Active' AND :NEW.ExhibitionStartDateTime = SYSDATE) THEN
-        UPDATE artwork SET status = 'Available' WHERE exhibitionid = :NEW.ExhibitionID;
-    END IF;
-    
-    SELECT artworkid, status INTO artwork_id, artwork_status FROM artwork WHERE exhibitionid = :NEW.ExhibitionID;
-    
-    IF artwork_status = 'Available' AND artwork_status != 'Sold' AND SYSDATE > :NEW.ExhibitionEndDateTime THEN
-        UPDATE artwork SET status = 'Not available' WHERE artworkid = artwork_id;
-    ELSE
-        v_msg := 'Artwork not updated because it is not available or it has already been sold';
-    END IF;
-END;
-/
-
---check exhibition id when adding new artwork
-CREATE OR REPLACE TRIGGER check_exhibition_dates
-BEFORE INSERT ON ARTWORK
-FOR EACH ROW
-DECLARE
-    exhibition_end_date DATE;
-    v_msg varchar(100);
-BEGIN
-    SELECT ExhibitionEndDateTime INTO exhibition_end_date FROM ONLINE_EXHIBITION WHERE ExhibitionID = :NEW.ExhibitionID;
-    
-    IF exhibition_end_date < SYSDATE THEN
-    v_msg := 'Cannot add artwork to an exhibition that has already ended.';
-    END IF;
-END;
-/
-
-CREATE OR REPLACE PACKAGE user_role_pkg IS
-    -- Procedure to create a new user role
-    PROCEDURE create_user_role(
-        p_roleid IN NUMBER,
-        p_rolename IN VARCHAR2
-    );
-
-    -- Procedure to update an existing user role
-    PROCEDURE update_user_role(
-        p_roleid IN NUMBER,
-        p_rolename IN VARCHAR2
-    );
-
-    -- Procedure to delete an existing user role
-    PROCEDURE delete_user_role(
-        p_roleid IN NUMBER
-    );
-
-    -- Function to get all user roles
-    FUNCTION get_user_roles
-        RETURN SYS_REFCURSOR;
-END user_role_pkg;
-/
-
-CREATE OR REPLACE PACKAGE BODY user_role_pkg IS
-    -- Procedure to create a new user role
-    PROCEDURE create_user_role(
-        p_roleid IN NUMBER,
-        p_rolename IN VARCHAR2
-    ) AS
-    BEGIN
-        INSERT INTO user_role (roleid,rolename)
-        VALUES (p_roleid,p_rolename);
-        COMMIT;
-    END create_user_role;
-
-    -- Procedure to update an existing user role
-    PROCEDURE update_user_role(
-        p_roleid IN NUMBER,
-        p_rolename IN VARCHAR2
-    ) AS
-    BEGIN
-        UPDATE user_role
-        SET rolename = p_rolename
-        WHERE roleid = p_roleid;
-        COMMIT;
-    END update_user_role;
-
-    -- Procedure to delete an existing user role
-    PROCEDURE delete_user_role(
-        p_roleid IN NUMBER
-    ) AS
-    BEGIN
-        DELETE FROM user_role
-        WHERE roleid = p_roleid;
-        COMMIT;
-    END delete_user_role;
-
-    -- Function to get all user roles
-    FUNCTION get_user_roles
-        RETURN SYS_REFCURSOR AS
-        l_cur SYS_REFCURSOR;
-    BEGIN
-        OPEN l_cur FOR
-        SELECT roleid, rolename
-        FROM user_role;
-        RETURN l_cur;
-    END get_user_roles;
-END user_role_pkg;
-/
---testcase
-DECLARE
-    -- Declare variables for the test case
-    l_roleid NUMBER;
-    l_rolename VARCHAR2(50);
-    l_cur SYS_REFCURSOR;
-BEGIN
-    -- Test creating a new user role
-    user_role_pkg.create_user_role(user_role_seq.NEXTVAL, 'Organizer');
-    
-    -- Test updating an existing user role
-    user_role_pkg.update_user_role(1, 'Supervisor');
-    
-    -- Test deleting an existing user role
-    user_role_pkg.delete_user_role(5);
-    
-    -- Test getting all user roles again to confirm the changes
-    l_cur := user_role_pkg.get_user_roles;
-    DBMS_OUTPUT.PUT_LINE('All User Roles after update and delete:');
-    LOOP
-        FETCH l_cur INTO l_roleid, l_rolename;
-        EXIT WHEN l_cur%NOTFOUND;
-        DBMS_OUTPUT.PUT_LINE(l_roleid || ' - ' || l_rolename);
-    END LOOP;
-END;
-/
-
-CREATE OR REPLACE PACKAGE user_pkg IS
-
-  PROCEDURE insert_user (
-    p_userid     IN  USERS.userid%TYPE,
-    p_roleid     IN  USERS.roleid%TYPE,
-    p_username   IN  USERS.username%TYPE,
-    p_emailid    IN  USERS.emailid%TYPE,
-    p_password   IN  USERS.password%TYPE,
-    p_firstname  IN  USERS.firstname%TYPE,
-    p_lastname   IN  USERS.lastname%TYPE,
-    p_speciality IN  USERS.speciality%TYPE,
-    p_nationality IN USERS.nationality%TYPE
-  );
-
-  PROCEDURE update_user (
-    p_userid     IN  USERS.userid%TYPE,
-    p_roleid     IN  USERS.roleid%TYPE,
-    p_username   IN  USERS.username%TYPE,
-    p_emailid    IN  USERS.emailid%TYPE,
-    p_password   IN  USERS.password%TYPE,
-    p_firstname  IN  USERS.firstname%TYPE,
-    p_lastname   IN  USERS.lastname%TYPE,
-    p_speciality IN  USERS.speciality%TYPE,
-    p_nationality IN USERS.nationality%TYPE
-  );
-
-  PROCEDURE delete_user (
-    p_username IN USERS.username%TYPE
-  );
-
-END user_pkg;
-/
-
-CREATE OR REPLACE PACKAGE BODY user_pkg IS
-
-  PROCEDURE insert_user (
-    p_userid     IN  USERS.userid%TYPE,
-    p_roleid     IN  USERS.roleid%TYPE,
-    p_username   IN  USERS.username%TYPE,
-    p_emailid    IN  USERS.emailid%TYPE,
-    p_password   IN  USERS.password%TYPE,
-    p_firstname  IN  USERS.firstname%TYPE,
-    p_lastname   IN  USERS.lastname%TYPE,
-    p_speciality IN  USERS.speciality%TYPE,
-    p_nationality IN USERS.nationality%TYPE
-  ) AS
-  BEGIN
-    INSERT INTO USERS (
-      userid,
-      roleid,
-      username,
-      emailid,
-      password,
-      firstname,
-      lastname,
-      speciality,
-      nationality
-    ) VALUES (
-      p_userid,
-      p_roleid,
-      p_username,
-      p_emailid,
-      p_password,
-      p_firstname,
-      p_lastname,
-      p_speciality,
-      p_nationality
-    );
-    COMMIT;
-  END insert_user;
-
-  PROCEDURE update_user (
-    p_userid     IN  USERS.userid%TYPE,
-    p_roleid     IN  USERS.roleid%TYPE,
-    p_username   IN  USERS.username%TYPE,
-    p_emailid    IN  USERS.emailid%TYPE,
-    p_password   IN  USERS.password%TYPE,
-    p_firstname  IN  USERS.firstname%TYPE,
-    p_lastname   IN  USERS.lastname%TYPE,
-    p_speciality IN  USERS.speciality%TYPE,
-    p_nationality IN USERS.nationality%TYPE
-  ) AS
-  BEGIN
-    UPDATE USERS SET
-      roleid = p_roleid,
-      username = p_username,
-      emailid = p_emailid,
-      password = p_password,
-      firstname = p_firstname,
-      lastname = p_lastname,
-      speciality = p_speciality,
-      nationality = p_nationality
-    WHERE userid = p_userid;
-    COMMIT;
-  END update_user;
-
-  PROCEDURE delete_user (
-    p_username IN USERS.username%TYPE
-  ) AS
-  BEGIN
-    DELETE FROM USERS WHERE username = p_username;
-    COMMIT;
-  END delete_user;
-
-END user_pkg;
-/
-
--- Create a new user
-BEGIN
-  user_pkg.insert_user(
-    p_userid => users_seq.NEXTVAL,
-    p_roleid => 1,
-    p_username => 'testuser',
-    p_emailid => 'testuser@test.com',
-    p_password => 'password',
-    p_firstname => 'Test',
-    p_lastname => 'User',
-    p_speciality => 'Software Engineer',
-    p_nationality => 'USA'
-  );
-END;
-/
-BEGIN
-user_pkg.insert_user(
-    p_userid => users_seq.NEXTVAL,
-    p_roleid => 1,
-    p_username => 'produser',
-    p_emailid => 'testuser@test.com',
-    p_password => 'password',
-    p_firstname => 'Test',
-    p_lastname => 'User',
-    p_speciality => 'Software Engineer',
-    p_nationality => 'USA'
-  );
-END;
-/
--- Verify that the new user was created
-SELECT * FROM USERS WHERE username = 'testuser';
-
--- Update the user's email address
-BEGIN
-  user_pkg.update_user(
-    p_userid => users_seq.NEXTVAL,
-    p_roleid => 2,
-    p_username => 'testuser',
-    p_emailid => 'updatedemail@test.com',
-    p_password => 'password',
-    p_firstname => 'Test',
-    p_lastname => 'User',
-    p_speciality => 'Software Engineer',
-    p_nationality => 'USA'
-  );
-END;
-/
--- Verify that the user's email address was updated
-SELECT * FROM USERS WHERE username = 'testuser';
-
--- Delete the user
-BEGIN
-  user_pkg.delete_user(p_username => 'testuser');
-END;
-/
--- Verify that the user was deleted
-SELECT * FROM USERS;
-
 
