@@ -679,10 +679,19 @@ COMMIT;
 Update ONLINE_EXHIBITION OE SET OE.ExhibitionStatus = 'Upcoming'  WHERE OE.ExhibitionStartDateTime > SYSDATE;
 COMMIT;
 
--- update artwork status for upcoming exhibitions
+-- update artwork status based on exhibitions and orderitems
 UPDATE ARTWORK SET STATUS = 'Not available' WHERE ExhibitionID IN (
 SELECT ExhibitionID FROM ONLINE_EXHIBITION WHERE ExhibitionStatus = 'Upcoming');
 COMMIT;
+
+UPDATE ARTWORK SET Status = 'Available' 
+WHERE ArtworkID IN (
+  SELECT ArtworkID FROM ORDER_ITEMS WHERE OrderItemsID IS NULL 
+  AND (ExhibitionID IS NULL OR ExhibitionID IN (
+    SELECT ExhibitionID FROM ONLINE_EXHIBITION WHERE ExhibitionStatus = 'Active'
+  ))
+);
+
 
 -- Grant privileges to ADMIN role
 GRANT ALL PRIVILEGES ON USER_ROLE TO ADMIN;
