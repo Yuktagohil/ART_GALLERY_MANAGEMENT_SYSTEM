@@ -150,6 +150,9 @@ BEGIN
 END;
 /
 
+
+--TEST CASES FOR MANAGE ARTWORK PROCEDURE
+--Test case 1: 
 --adding artwork with artwork id as null
 BEGIN
    manage_artwork(
@@ -167,7 +170,7 @@ BEGIN
    );
 END;
 /
-
+--Test case 2: 
 --updating existing artwork
 BEGIN
    manage_artwork(
@@ -185,7 +188,7 @@ BEGIN
    );
 END;
 /
-
+--Test case 3: 
 --updating non existing artwork
 BEGIN
    manage_artwork(
@@ -203,7 +206,7 @@ BEGIN
    );
 END;
 /
-
+--Test case 4: 
 --deleting existing artwork id
 BEGIN
    manage_artwork(
@@ -221,7 +224,7 @@ BEGIN
    );
 END;
 /
-
+--Test case 5: 
 --deleting nonexisting artwork
 BEGIN
    manage_artwork(
@@ -239,7 +242,7 @@ BEGIN
    );
 END;
 /
-
+--Test case 6: 
 --cannot insert NULL values
 BEGIN
    manage_artwork(
@@ -255,5 +258,84 @@ BEGIN
       p_artwork_image => utl_raw.cast_to_raw('/Users/bunny/DMDD_PROJECT/Images/tanner.webp'),
       p_action => 'ADD'
    );
+END;
+/
+
+
+--TEST CASES FOR MANAGE ORDERS PROCEDURES
+--Test case 1: Add a new order
+-- Adding a new order
+BEGIN
+  manage_orders(
+    p_order_id => NULL,
+    p_user_id => 5,
+    p_shipper_id => NULL,
+    p_transaction_id => 654762839876,
+    p_transaction_method => 'Credit Card',
+    p_transaction_status => 'Complete',
+    p_order_status => 'Confirmed',
+    p_shipping_status => 'Transit',
+    p_shipping_address => '123 Main street',
+    p_order_date_time => TO_DATE('2023-04-12 10:30:00', 'YYYY-MM-DD HH24:MI:SS'),
+    p_total_amount => 559.00,
+    p_action => 'ADD'
+  );
+END;
+/
+--Test case 2: 
+--updating existing order
+BEGIN
+  manage_orders(
+    p_order_id => 11,
+    p_user_id => 5,
+    p_shipper_id => 6,
+    p_transaction_id => 654762839876,
+    p_transaction_method => 'Credit Card',
+    p_transaction_status => 'Complete',
+    p_order_status => 'Confirmed',
+    p_shipping_status => 'Shipped',
+    p_shipping_address => '123 Main street',
+    p_order_date_time => TO_DATE('2023-04-12 10:30:00', 'YYYY-MM-DD HH24:MI:SS'),
+    p_total_amount => 559.00,
+    p_action => 'UPDATE'
+  );
+END;
+/
+--Test case 3: 
+--updating non-existing order
+BEGIN
+  manage_orders(
+    p_order_id => 100,
+    p_user_id => 5,
+    p_shipper_id => 6,
+    p_transaction_id => 654762839876,
+    p_transaction_method => 'Credit Card',
+    p_transaction_status => 'Complete',
+    p_order_status => 'Confirmed',
+    p_shipping_status => 'Shipped',
+    p_shipping_address => '123 Main street',
+    p_order_date_time => TO_DATE('2023-04-12 10:30:00', 'YYYY-MM-DD HH24:MI:SS'),
+    p_total_amount => 559.00,
+    p_action => 'UPDATE'
+  );
+END;
+/
+--Test case 4: 
+--deleting an existing order
+BEGIN
+    manage_orders(
+        p_order_id => 19,
+        p_user_id => NULL,
+        p_shipper_id => NULL,
+        p_transaction_id => NULL,
+        p_transaction_method => NULL,
+        p_transaction_status => NULL,
+        p_order_status => NULL,
+        p_shipping_status => NULL,
+        p_shipping_address => NULL,
+        p_order_date_time => NULL,
+        p_total_amount => NULL,
+        p_action => 'DELETE'
+    );
 END;
 /
