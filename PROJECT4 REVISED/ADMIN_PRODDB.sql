@@ -1,0 +1,54 @@
+SET SERVEROUTPUT ON;
+BEGIN
+EXECUTE IMMEDIATE 'DROP ROLE AdminRole';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/ 
+
+BEGIN
+EXECUTE IMMEDIATE 'DROP USER g_admin CASCADE';
+dbms_output.put_line('Objects dropped');
+EXCEPTION
+WHEN OTHERS
+THEN dbms_output.put_line('Objects not found');
+END;
+/
+
+CREATE ROLE AdminRole IDENTIFIED BY April2023;
+
+CREATE USER g_admin IDENTIFIED BY Adminartgallery004; 
+
+GRANT CREATE SESSION TO g_admin;
+
+GRANT CREATE VIEW TO g_admin WITH ADMIN OPTION;
+
+
+GRANT DBA TO g_admin;
+SELECT * FROM DBA_ROLE_PRIVS WHERE GRANTEE = 'g_admin' AND GRANTED_ROLE = 'DBA';
+
+
+GRANT CREATE SESSION TO g_admin WITH ADMIN OPTION;
+GRANT CREATE ROLE TO g_admin WITH ADMIN OPTION;
+GRANT CREATE PROCEDURE TO g_admin WITH ADMIN OPTION;
+GRANT CREATE USER to g_admin;
+
+GRANT gallery_admin TO g_admin WITH ADMIN OPTION;
+grant connect to g_admin WITH ADMIN OPTION;
+grant resource to g_admin;
+alter user g_admin quota 500M on data;
+
+
+-- Grant privileges to ADMIN role
+GRANT ALL PRIVILEGES ON USER_ROLE TO g_admin;
+GRANT ALL PRIVILEGES ON USERS TO g_admin;
+GRANT ALL PRIVILEGES ON CONTACT TO g_admin;
+GRANT ALL PRIVILEGES ON SHIPPER TO g_admin;
+GRANT ALL PRIVILEGES ON ONLINE_EXHIBITION TO g_admin;
+GRANT ALL PRIVILEGES ON ORDERS TO g_admin;
+GRANT ALL PRIVILEGES ON ORDER_ITEMS TO g_admin;
+GRANT ALL PRIVILEGES ON ART_CATEGORY TO g_admin;
+GRANT ALL PRIVILEGES ON ARTWORK TO g_admin;
+
